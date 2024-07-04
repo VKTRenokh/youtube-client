@@ -4,6 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "youtube": {
+      "changeDetection": "OnPush",
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
