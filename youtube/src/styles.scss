@@ -1,1 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+
+$light-grey-100: #f8f9fa;
+$light-grey-200: #e9ecef;
+$light-grey-300: #dee2e6;
+$light-grey-400: #ced4da;
+$light-grey-500: #adb5bd;
+$light-grey-600: #6c757d;
+$light-grey-700: #495057;
+$light-grey-800: #343a40;
+$light-grey-900: #212529;
+
+$green: #b8e0b8;
+
+@mixin light-grey-palette {
+  --color-light-grey-100: #{$light-grey-100};
+  --color-light-grey-200: #{$light-grey-200};
+  --color-light-grey-300: #{$light-grey-300};
+  --color-light-grey-400: #{$light-grey-400};
+  --color-light-grey-500: #{$light-grey-500};
+  --color-light-grey-600: #{$light-grey-600};
+  --color-light-grey-700: #{$light-grey-700};
+  --color-light-grey-800: #{$light-grey-800};
+  --color-light-grey-900: #{$light-grey-900};
+}
+
+$accent-color: $green;
+
+body {
+  @include light-grey-palette;
+  background-color: var(--color-light-grey-100);
+  color: var(--color-light-grey-900);
+
+  a {
+    color: $accent-color;
+    &:hover {
+      color: darken($accent-color, 10%);
+    }
+  }
+}

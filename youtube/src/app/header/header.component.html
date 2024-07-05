@@ -1,1 +1,7 @@
-<p>header works!</p>
+<header class="youtube-header">
+  <img ngSrc="/logo.webp" alt="youtube logo" width="50" height="50" class="logo">
+  <figure class="youtube-header-search">
+    <input id="search-input" type="text" [(ngModel)]="searchValue" placeholder="Enter a request">
+    <button (click)="onSearch()">search</button>
+  </figure>
+</header>
