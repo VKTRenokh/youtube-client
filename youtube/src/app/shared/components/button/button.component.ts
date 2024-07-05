@@ -19,7 +19,13 @@ export class ButtonComponent {
 
   @Input('aria-label') public ariaLabel!: string
 
+  @Input() public type: 'unstyled' | 'default' = 'default'
+
   public onClick(event: Event) {
     this.press.emit(event)
+  }
+
+  public isStyled() {
+    return this.type !== 'unstyled'
   }
 }

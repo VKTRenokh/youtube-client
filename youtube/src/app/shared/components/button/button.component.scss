@@ -1,18 +1,21 @@
 .youtube-button {
-  background-color: var(--color-accent);
   border: none;
   outline: none;
-  color: var(--color-light-grey-900);
-  padding: 0.5rem 1rem;
-  text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  margin: 0.25rem;
-  cursor: pointer;
-  border-radius: 4px;
 
-  &:hover {
-    background-color: var(--color-accent-darker);
+  & .styled {
+    background-color: var(--color-accent);
+    color: var(--color-light-grey-900);
+    padding: 0.5rem 1rem;
+    text-align: center;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0.25rem;
+    cursor: pointer;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: var(--color-accent-darker);
+    }
   }
 }
