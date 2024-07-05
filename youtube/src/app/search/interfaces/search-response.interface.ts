@@ -1,4 +1,4 @@
-import { SearchItem } from './search-item.interface';
+import { SearchItem } from './search-item.interface'
 
 export interface PageInfo {
   totalResults: number;

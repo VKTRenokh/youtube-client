@@ -5,6 +5,9 @@ const angular = require("angular-eslint");
 
 module.exports = tseslint.config(
   {
+    plugins: {
+      "@typescript-eslint": tseslint.plugin,
+    },
     files: ["**/*.ts"],
     extends: [
       eslint.configs.recommended,
@@ -29,6 +32,11 @@ module.exports = tseslint.config(
           prefix: "yt",
           style: "kebab-case",
         },
+      ],
+      semi: ["error", "never"],
+      "@typescript-eslint/explicit-member-accessibility": [
+        "error",
+        { accessibility: "explicit" },
       ],
     },
   },

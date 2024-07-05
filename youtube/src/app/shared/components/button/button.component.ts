@@ -3,7 +3,7 @@ import {
   Component,
   EventEmitter,
   Output,
-} from '@angular/core';
+} from '@angular/core'
 
 @Component({
   selector: 'yt-button',
@@ -14,9 +14,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Output() public press = new EventEmitter<Event>();
+  @Output() public press = new EventEmitter<Event>()
 
   public onClick(event: Event) {
-    this.press.emit(event);
+    this.press.emit(event)
   }
 }
