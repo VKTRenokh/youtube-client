@@ -1,5 +1,5 @@
 .youtube-header {
-  padding: 10px 50px;
+  padding: 5px 50px;
   background-color: var(--color-light-grey-200);
   width: 100%;
   display: flex;
@@ -7,7 +7,12 @@
   align-items: center;
 
   & .logo {
-    filter: invert(65%) sepia(80%) saturate(500%) hue-rotate(80deg)
-      brightness(90%) contrast(85%);
+    filter: invert(65%) sepia(80%) saturate(500%)
+      hue-rotate(80deg) brightness(90%) contrast(85%);
+  }
+
+  & .user {
+    display: flex;
+    flex-direction: row;
   }
 }

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   Output,
 } from '@angular/core'
 
@@ -15,6 +16,8 @@ import {
 })
 export class ButtonComponent {
   @Output() public press = new EventEmitter<Event>()
+
+  @Input('aria-label') public ariaLabel!: string
 
   public onClick(event: Event) {
     this.press.emit(event)

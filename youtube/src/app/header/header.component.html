@@ -2,6 +2,12 @@
   <img ngSrc="/logo.webp" alt="youtube logo" width="50" height="50" class="logo">
   <figure class="youtube-header-search">
     <input id="search-input" type="text" [(ngModel)]="searchValue" placeholder="Enter a request">
-    <yt-button (click)="onSearch()">Search</yt-button>
+    <yt-button (click)="onSearch()" aria-label="search">Search</yt-button>
+  </figure>
+  <figure class="youtube-header-user">
+    <p>Your Name</p>
+    <yt-button aria-label="profile">
+      a
+    </yt-button>
   </figure>
 </header>
