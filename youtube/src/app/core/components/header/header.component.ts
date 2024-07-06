@@ -26,4 +26,8 @@ export class HeaderComponent {
   public onSearch() {
     console.log(this.searchValue)
   }
+
+  public onOpenFiltersButtonClick() {
+    console.log('filters :)')
+  }
 }
