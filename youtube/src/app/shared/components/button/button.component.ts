@@ -17,9 +17,14 @@ import {
 export class ButtonComponent {
   @Output() public press = new EventEmitter<Event>()
 
-  @Input('aria-label') public ariaLabel!: string
+  @Input({
+    required: true,
+    alias: 'aria-label',
+  })
+  public ariaLabel!: string
 
-  @Input() public type: 'unstyled' | 'default' = 'default'
+  @Input()
+  public type!: 'unstyled' | 'default'
 
   public onClick(event: Event) {
     this.press.emit(event)
