@@ -11,8 +11,9 @@
       hue-rotate(80deg) brightness(90%) contrast(85%);
   }
 
-  & .user {
+  .user-info {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 }

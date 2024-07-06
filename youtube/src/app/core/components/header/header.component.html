@@ -1,13 +1,13 @@
 <header class="youtube-header">
   <img ngSrc="/logo.webp" alt="youtube logo" width="50" height="50" class="logo">
-  <figure class="youtube-header-search">
+  <div class="youtube-header-search">
     <input id="search-input" type="text" [(ngModel)]="searchValue" placeholder="Enter a request">
     <yt-button (click)="onSearch()" aria-label="search">Search</yt-button>
-  </figure>
-  <figure class="youtube-header-user">
+  </div>
+  <div class="user-info">
     <p>Your Name</p>
     <yt-button aria-label="profile" type="unstyled">
       <img ngSrc="/login.webp" alt="profile icon" width="31" height="32">
     </yt-button>
-  </figure>
+  </div>
 </header>
