@@ -5,11 +5,17 @@ import {
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
+import { UserInfoComponent } from '../user-info/user-info.component'
 
 @Component({
   selector: 'yt-header',
   standalone: true,
-  imports: [NgOptimizedImage, FormsModule, ButtonComponent],
+  imports: [
+    NgOptimizedImage,
+    FormsModule,
+    ButtonComponent,
+    UserInfoComponent,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
