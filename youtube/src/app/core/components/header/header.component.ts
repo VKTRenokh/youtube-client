@@ -4,7 +4,7 @@ import {
   Component,
 } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { ButtonComponent } from '../shared/components/button/button.component'
+import { ButtonComponent } from '../../../shared/components/button/button.component'
 
 @Component({
   selector: 'yt-header',
