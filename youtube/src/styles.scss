@@ -40,4 +40,8 @@ body {
       color: darken($accent-color, 10%);
     }
   }
+
+  p {
+    color: $light-grey-700;
+  }
 }
