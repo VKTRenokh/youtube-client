@@ -31,7 +31,7 @@ $accent-color: $green;
 
 body {
   @include light-grey-palette;
-  background-color: var(--color-light-grey-100);
+  background-color: var(--color-light-grey-100); // meh
   color: var(--color-light-grey-900);
 
   a {

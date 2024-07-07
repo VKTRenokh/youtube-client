@@ -1,6 +1,7 @@
-<div class="test">
-@if (getDidSearch()) {
-  <p>search-results works!</p>
-}
+<div class="search-results">
+  @if (didSearch() && videos()) {
+  @for (video of videos(); track video) {
+  <yt-search-item [item]="video" />
+  }
+  }
 </div>
-

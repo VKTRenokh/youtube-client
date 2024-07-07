@@ -1,0 +1,14 @@
+<figure class="youtube-video">
+  <div>
+    <img [src]="smallThumbnail().url" alt="Video Thumbnail" [width]="smallThumbnail().width"
+      [height]="smallThumbnail().height">
+    <h4>{{snippet().title}}</h4>
+    <p>{{snippet().description}}</p>
+  </div>
+  <div class="video-statistics">
+    <span>likes: {{item().statistics.likeCount}}</span>
+    <span>views: {{item().statistics.viewCount}}</span>
+    <span>comments: {{item().statistics.commentCount}}</span>
+    <span>dislikes: {{item().statistics.dislikeCount}}</span>
+  </div>
+</figure>

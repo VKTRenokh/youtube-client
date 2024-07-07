@@ -8,14 +8,11 @@ import { VideosResponse } from '../../interfaces/response'
 export class SearchService {
   public didSearch = false
   private videos = signal<VideosResponse | null>(null)
+  public data = this.videos.asReadonly()
 
   public search() {
     this.didSearch = true
 
     this.videos.set(videosMock)
-  }
-
-  public getVideos() {
-    return this.videos.asReadonly()
   }
 }

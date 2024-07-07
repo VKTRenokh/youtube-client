@@ -1,5 +1,6 @@
+<!-- TODO: Break this into smaller components -->
 <header class="youtube-header">
-  <img ngSrc="/logo.webp" alt="youtube logo" width="50" height="50" class="logo">
+  <img ngSrc="/logo.webp" alt="youtube logo" width="50" height="50" class="logo" priority>
   <div class="youtube-header-search">
     <input id="search-input" type="text" [(ngModel)]="searchValue" placeholder="Enter a request">
     <yt-button (click)="onSearch()" aria-label="search">Search</yt-button>

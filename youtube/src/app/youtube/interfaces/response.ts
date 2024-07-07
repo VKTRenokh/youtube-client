@@ -1,37 +1,37 @@
-export interface Thumbnail {
+export interface VideoThumbnail {
   url: string
   width: number
   height: number
 }
 
-export interface Thumbnails {
-  default: Thumbnail
-  medium: Thumbnail
-  high: Thumbnail
-  standard: Thumbnail
-  maxres: Thumbnail
+export interface VideoThumbnails {
+  default: VideoThumbnail
+  medium: VideoThumbnail
+  high: VideoThumbnail
+  standard: VideoThumbnail
+  maxres: VideoThumbnail
 }
 
-export interface Localized {
+export interface VideoLocalization {
   title: string
   description: string
 }
 
-export interface Snippet {
+export interface VideoSnippet {
   publishedAt: string
   channelId: string
   title: string
   description: string
-  thumbnails: Thumbnails
+  thumbnails: VideoThumbnails
   channelTitle: string
   tags: string[]
   categoryId: string
   liveBroadcastContent: string
-  localized: Localized
+  localized: VideoLocalization
   defaultAudioLanguage: string
 }
 
-export interface Statistics {
+export interface VideoStatistics {
   viewCount: string
   likeCount: string
   dislikeCount: string
@@ -39,12 +39,12 @@ export interface Statistics {
   commentCount: string
 }
 
-export interface Item {
+export interface VideoItem {
   kind: string
   etag: string
   id: string
-  snippet: Snippet
-  statistics: Statistics
+  snippet: VideoSnippet
+  statistics: VideoStatistics
 }
 
 export interface PageInfo {
@@ -56,5 +56,5 @@ export interface VideosResponse {
   kind: string
   etag: string
   pageInfo: PageInfo
-  items: Item[]
+  items: VideoItem[]
 }
