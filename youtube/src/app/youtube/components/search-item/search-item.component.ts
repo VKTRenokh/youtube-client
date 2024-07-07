@@ -7,11 +7,12 @@ import {
 } from '@angular/core'
 import { VideoItem } from '../../interfaces/response'
 import { NgOptimizedImage } from '@angular/common'
+import { ButtonComponent } from '../../../shared/components/button/button.component'
 
 @Component({
   selector: 'yt-search-item',
   standalone: true,
-  imports: [NgOptimizedImage],
+  imports: [NgOptimizedImage, ButtonComponent],
   templateUrl: './search-item.component.html',
   styleUrl: './search-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
