@@ -1,9 +1,10 @@
 import {
   Directive,
   ElementRef,
-  Input,
   OnInit,
   Renderer2,
+  inject,
+  input,
 } from '@angular/core'
 
 const oneWeek = 604800000
@@ -19,14 +20,13 @@ const enum Colors {
 
 @Directive({
   selector: '[ytColoredBorder]',
+  standalone: true,
 })
 export class ColoredBorderDirective implements OnInit {
-  @Input('ytColoredBorder') public date!: string
+  public date = input<string>()
 
-  private constructor(
-    public renderer: Renderer2,
-    public elementRef: ElementRef,
-  ) {}
+  private renderer = inject(Renderer2)
+  private elementRef = inject(ElementRef)
 
   public getColor(publishedAt: Date): Colors {
     const date = Date.now() - publishedAt.getTime()
@@ -45,15 +45,16 @@ export class ColoredBorderDirective implements OnInit {
   }
 
   public ngOnInit(): void {
-    if (!this.date) {
+    const date = this.date()
+
+    if (!date) {
       throw new Error('no date')
     }
-    const date = new Date(this.date)
 
     this.renderer.setStyle(
       this.elementRef.nativeElement,
       'border-bottom',
-      `${this.getColor(date)} 5px solid`,
+      `${this.getColor(new Date(date))} 5px solid`,
     )
   }
 }
