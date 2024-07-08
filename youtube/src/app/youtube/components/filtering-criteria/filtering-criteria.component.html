@@ -1,0 +1,10 @@
+<div class="filtering-criteria">
+  <div class="sorting">
+    @for (criteria of filteringCriteria; track criteria) {
+      <yt-button [aria-label]="criteria">
+        {{ criteria }}
+      </yt-button>
+    }
+  </div>
+  <input type="text" placeholder="type to filter" />
+</div>

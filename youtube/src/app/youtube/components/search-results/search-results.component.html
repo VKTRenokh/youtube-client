@@ -1,7 +1,11 @@
 <div class="search-results">
-  @if (didSearch() && videos()) {
-  @for (video of videos(); track video) {
-  <yt-search-item [item]="video" />
+  @if (isFilteringShown()) {
+    <yt-filtering-criteria />
   }
+
+  @if (didSearch() && videos()) {
+    @for (video of videos(); track video) {
+      <yt-search-item [item]="video" />
+    }
   }
 </div>

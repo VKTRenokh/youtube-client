@@ -32,7 +32,6 @@ export class HeaderComponent {
   }
 
   public onOpenFiltersButtonClick() {
-    // TODO: implement filters
-    console.log('filters :)')
+    this.searchService.toggleFilteringShown()
   }
 }

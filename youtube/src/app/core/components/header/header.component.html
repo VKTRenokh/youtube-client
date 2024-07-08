@@ -1,13 +1,36 @@
 <!-- TODO: Break this into smaller components -->
 <header class="youtube-header">
-  <img ngSrc="/logo.webp" alt="youtube logo" width="50" height="50" class="logo" priority>
+  <img
+    ngSrc="/logo.webp"
+    alt="youtube logo"
+    width="50"
+    height="50"
+    class="logo"
+    priority
+  />
   <div class="youtube-header-search">
-    <input id="search-input" type="text" [(ngModel)]="searchValue" placeholder="Enter a request">
-    <yt-button (click)="onSearch()" aria-label="search">Search</yt-button>
+    <input
+      id="search-input"
+      type="text"
+      [(ngModel)]="searchValue"
+      placeholder="Enter a request"
+    />
+    <yt-button (click)="onSearch()" aria-label="search"
+      >Search</yt-button
+    >
   </div>
   <div>
-    <yt-button aria-label="open filters" type="unstyled" (press)="onOpenFiltersButtonClick()">
-      <img ngSrc="/search_settings.webp" alt="parameters icon" width="24" height="24">
+    <yt-button
+      aria-label="open filters"
+      type="unstyled"
+      (press)="onOpenFiltersButtonClick()"
+    >
+      <img
+        ngSrc="/search_settings.webp"
+        alt="parameters icon"
+        width="24"
+        height="24"
+      />
     </yt-button>
   </div>
   <yt-user-info />

@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   input,
 } from '@angular/core'
 import { VideoItem } from '../../interfaces/response'
@@ -29,6 +28,4 @@ export class SearchItemComponent {
   public smallThumbnail = computed(
     () => this.snippet().thumbnails.default,
   )
-
-  private logItem = effect(() => console.log(this.item()))
 }
