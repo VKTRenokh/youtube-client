@@ -4,10 +4,10 @@ import {
   computed,
   input,
 } from '@angular/core'
-import { VideoItem } from '../../interfaces/response'
 import { NgOptimizedImage } from '@angular/common'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
+import { VideoItem } from '../../models/response.model'
 
 @Component({
   selector: 'yt-search-item',

@@ -3,9 +3,9 @@ import {
   SortCriteria,
   SortOptions,
 } from '../../../shared/models/sort-options.model'
-import { VideoItem } from '../../interfaces/response'
 import { getPublishDate } from '../../utils/get-publish-date'
 import { getViewsCount } from '../../utils/get-views-count'
+import { VideoItem } from '../../models/response.model'
 
 type SortMap = Record<
   SortCriteria,

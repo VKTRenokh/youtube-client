@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
-import { VideosResponse } from '../../interfaces/response'
 import { not } from '../../../utils/not'
+import { VideosResponse } from '../../models/response.model'
 
 @Injectable({
   providedIn: 'root',
