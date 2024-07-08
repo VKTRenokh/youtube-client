@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { VideoItem } from '../interfaces/response'
-import { getPublishDate } from '../utils/get-publish-date'
-import { getViewsCount } from '../utils/get-views-count'
 import {
-  SortOptions,
   SortCriteria,
-} from '../../shared/models/sort-options.model'
+  SortOptions,
+} from '../../../shared/models/sort-options.model'
+import { VideoItem } from '../../interfaces/response'
+import { getPublishDate } from '../../utils/get-publish-date'
+import { getViewsCount } from '../../utils/get-views-count'
 
 type SortMap = Record<
   SortCriteria,

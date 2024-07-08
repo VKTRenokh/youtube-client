@@ -2,8 +2,8 @@ import { Component, computed, inject } from '@angular/core'
 import { SearchService } from '../../services/search/search.service'
 import { SearchItemComponent } from '../search-item/search-item.component'
 import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-criteria.component'
-import { SortPipe } from '../../pipes/sort.pipe'
 import { SortOptions } from '../../../shared/models/sort-options.model'
+import { SortPipe } from '../../pipes/sort/sort.pipe'
 
 @Component({
   selector: 'yt-search-results',
