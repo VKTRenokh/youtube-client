@@ -13,9 +13,11 @@ export class WordPipe implements PipeTransform {
   }
 
   public transform(
-    items: VideoItem[],
+    items: VideoItem[] | null,
     filterWord: string | null,
   ): VideoItem[] {
-    return items.filter(this.createFilter(filterWord))
+    return items
+      ? items.filter(this.createFilter(filterWord))
+      : []
   }
 }

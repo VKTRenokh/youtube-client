@@ -4,6 +4,7 @@ import { SearchItemComponent } from '../search-item/search-item.component'
 import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-criteria.component'
 import { SortOptions } from '../../../shared/models/sort-options.model'
 import { SortPipe } from '../../pipes/sort/sort.pipe'
+import { WordPipe } from '../../pipes/word/word.pipe'
 
 @Component({
   selector: 'yt-search-results',
@@ -11,6 +12,7 @@ import { SortPipe } from '../../pipes/sort/sort.pipe'
   imports: [
     SearchItemComponent,
     FilteringCriteriaComponent,
+    WordPipe,
     SortPipe,
   ],
   templateUrl: './search-results.component.html',
@@ -20,6 +22,7 @@ export class SearchResultsComponent {
   private searchService = inject(SearchService)
 
   public currentCriteria: SortOptions | null = null
+  public currentWord = ''
   public isFilteringShown =
     this.searchService.isFilteringShown
   public videos = computed(() => {
@@ -38,5 +41,9 @@ export class SearchResultsComponent {
 
   public updateSortingCriteria(newCriteria: SortOptions) {
     this.currentCriteria = newCriteria
+  }
+
+  public updateByWordFilter(newWord: string) {
+    this.currentWord = newWord
   }
 }

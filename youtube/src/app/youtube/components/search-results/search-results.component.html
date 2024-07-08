@@ -2,12 +2,15 @@
   @if (isFilteringShown()) {
     <yt-filtering-criteria
       (onCriteriaUpdate)="updateSortingCriteria($event)"
+      (onByWordUpdate)="updateByWordFilter($event)"
     />
   }
 
   @if (didSearch() && videos()) {
     @for (
-      video of videos() | sort: currentCriteria;
+      video of videos()
+        | word: currentWord
+        | sort: currentCriteria;
       track video
     ) {
       <yt-search-item [item]="video" />
