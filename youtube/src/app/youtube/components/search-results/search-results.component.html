@@ -1,10 +1,15 @@
 <div class="search-results">
   @if (isFilteringShown()) {
-    <yt-filtering-criteria />
+    <yt-filtering-criteria
+      (onCriteriaUpdate)="updateSortingCriteria($event)"
+    />
   }
 
   @if (didSearch() && videos()) {
-    @for (video of videos(); track video) {
+    @for (
+      video of videos() | sort: currentCriteria;
+      track video
+    ) {
       <yt-search-item [item]="video" />
     }
   }

@@ -1,8 +1,15 @@
 <div class="filtering-criteria">
   <div class="sorting">
-    @for (criteria of filteringCriteria; track criteria) {
-      <yt-button [aria-label]="criteria">
-        {{ criteria }}
+    @for (criteria of criterias; track criteria) {
+      <yt-button
+        [aria-label]="criteria.criteria"
+        (press)="onCriteriaClick(criteria)"
+      >
+        {{
+          criteria.criteria +
+            ' ' +
+            (criteria.direction === -1 ? 'desc' : 'asc')
+        }}
       </yt-button>
     }
   </div>

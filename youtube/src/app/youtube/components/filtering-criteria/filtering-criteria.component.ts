@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  output,
 } from '@angular/core'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
+import { SortOptions } from '../../../shared/models/sort-options.model'
 
 @Component({
   selector: 'yt-filtering-criteria',
@@ -13,10 +15,28 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilteringCriteriaComponent {
-  public filteringCriteria = [
-    'date asc',
-    'date desc',
-    'views asc',
-    'views desc',
+  public onCriteriaUpdate = output<SortOptions>()
+
+  public criterias: SortOptions[] = [
+    {
+      criteria: 'date',
+      direction: 1,
+    },
+    {
+      criteria: 'date',
+      direction: -1,
+    },
+    {
+      criteria: 'views',
+      direction: 1,
+    },
+    {
+      criteria: 'views',
+      direction: -1,
+    },
   ]
+
+  public onCriteriaClick(criteria: SortOptions) {
+    this.onCriteriaUpdate.emit(criteria)
+  }
 }

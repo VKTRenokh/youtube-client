@@ -2,6 +2,8 @@ import { Component, computed, inject } from '@angular/core'
 import { SearchService } from '../../services/search/search.service'
 import { SearchItemComponent } from '../search-item/search-item.component'
 import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-criteria.component'
+import { SortPipe } from '../../pipes/sort.pipe'
+import { SortOptions } from '../../../shared/models/sort-options.model'
 
 @Component({
   selector: 'yt-search-results',
@@ -9,6 +11,7 @@ import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-crit
   imports: [
     SearchItemComponent,
     FilteringCriteriaComponent,
+    SortPipe,
   ],
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.scss',
@@ -16,12 +19,7 @@ import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-crit
 export class SearchResultsComponent {
   private searchService = inject(SearchService)
 
-  public filteringCriteria = [
-    'date asc',
-    'date desc',
-    'view asc',
-    'view desc',
-  ]
+  public currentCriteria: SortOptions | null = null
   public isFilteringShown =
     this.searchService.isFilteringShown
   public videos = computed(() => {
@@ -36,5 +34,9 @@ export class SearchResultsComponent {
 
   public didSearch() {
     return this.searchService.didSearch
+  }
+
+  public updateSortingCriteria(newCriteria: SortOptions) {
+    this.currentCriteria = newCriteria
   }
 }
