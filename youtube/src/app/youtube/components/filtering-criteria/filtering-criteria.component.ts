@@ -4,7 +4,10 @@ import {
   output,
 } from '@angular/core'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
-import { SortOptions } from '../../../shared/models/sort-options.model'
+import {
+  Directions,
+  SortOptions,
+} from '../../../shared/models/sort-options.model'
 
 @Component({
   selector: 'yt-filtering-criteria',
@@ -20,19 +23,19 @@ export class FilteringCriteriaComponent {
   public criterias: SortOptions[] = [
     {
       criteria: 'date',
-      direction: 1,
+      direction: Directions.Ascending,
     },
     {
       criteria: 'date',
-      direction: -1,
+      direction: Directions.Descending,
     },
     {
       criteria: 'views',
-      direction: 1,
+      direction: Directions.Ascending,
     },
     {
       criteria: 'views',
-      direction: -1,
+      direction: Directions.Descending,
     },
   ]
 
