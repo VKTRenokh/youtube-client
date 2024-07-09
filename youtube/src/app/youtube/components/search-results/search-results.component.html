@@ -6,7 +6,7 @@
     />
   }
 
-  @if (didSearch() && videos()) {
+  @if (shouldShowVideos()) {
     @for (
       video of videos()
         | word: currentWord()

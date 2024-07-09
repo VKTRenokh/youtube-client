@@ -31,6 +31,10 @@ export class SearchResultsComponent {
   public isFilteringShown =
     this.searchService.isFilteringShown
   public didSearch = this.searchService.didSearch
+  public shouldShowVideos = computed(
+    () => this.didSearch() && this.videos(),
+  )
+
   public videos = computed(() => {
     const data = this.searchService.data()
 
