@@ -9,8 +9,8 @@
   @if (didSearch() && videos()) {
     @for (
       video of videos()
-        | word: currentWord
-        | sort: currentCriteria;
+        | word: currentWord()
+        | sort: currentCriteria();
       track video
     ) {
       <yt-search-item [item]="video" />

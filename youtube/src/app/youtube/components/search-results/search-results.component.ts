@@ -1,4 +1,9 @@
-import { Component, computed, inject } from '@angular/core'
+import {
+  Component,
+  computed,
+  inject,
+  signal,
+} from '@angular/core'
 import { SearchService } from '../../services/search/search.service'
 import { SearchItemComponent } from '../search-item/search-item.component'
 import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-criteria.component'
@@ -21,8 +26,8 @@ import { WordPipe } from '../../pipes/word/word.pipe'
 export class SearchResultsComponent {
   private searchService = inject(SearchService)
 
-  public currentCriteria: SortOptions | null = null
-  public currentWord = ''
+  public currentCriteria = signal<SortOptions | null>(null)
+  public currentWord = signal<string>('')
   public isFilteringShown =
     this.searchService.isFilteringShown
   public videos = computed(() => {
@@ -40,10 +45,10 @@ export class SearchResultsComponent {
   }
 
   public updateSortingCriteria(newCriteria: SortOptions) {
-    this.currentCriteria = newCriteria
+    this.currentCriteria.set(newCriteria)
   }
 
   public updateByWordFilter(newWord: string) {
-    this.currentWord = newWord
+    this.currentWord.set(newWord)
   }
 }
