@@ -30,7 +30,8 @@ export class SearchResultsComponent {
   public currentWord = signal<string>('')
   public isFilteringShown =
     this.searchService.isFilteringShown
-  public didSearch = this.searchService.didSearch
+  public didSearch = this.searchService.getDidSearch()
+
   public shouldShowVideos = computed(
     () => this.didSearch() && this.videos(),
   )

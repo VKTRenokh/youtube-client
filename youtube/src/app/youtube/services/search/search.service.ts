@@ -10,7 +10,8 @@ export class SearchService {
   private videos = signal<VideosResponse | null>(null)
   private _isFilteringShown = signal(false)
 
-  public didSearch = signal(false)
+  private didSearch = signal(false)
+
   public data = this.videos.asReadonly()
   public isFilteringShown =
     this._isFilteringShown.asReadonly()
@@ -23,5 +24,9 @@ export class SearchService {
 
   public toggleFilteringShown() {
     this._isFilteringShown.update(not)
+  }
+
+  public getDidSearch() {
+    return this.didSearch.asReadonly()
   }
 }
