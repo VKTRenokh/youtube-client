@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@import './styles/colorscheme.scss';
+
+body {
+  @include light-grey-palette;
+  background-color: var(--color-light-grey-100); // meh
+  color: var(--color-light-grey-900);
+
+  a {
+    color: $accent-color;
+    &:hover {
+      color: darken($accent-color, 10%);
+    }
+  }
+
+  p {
+    color: $light-grey-700;
+  }
+}
