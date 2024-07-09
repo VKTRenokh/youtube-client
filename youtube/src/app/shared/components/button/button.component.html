@@ -2,7 +2,7 @@
   class="youtube-button"
   [class.styled]="isStyled()"
   (click)="onClick($event)"
-  [ariaLabel]="ariaLabel"
+  [attr.aria-label]="ariaLabel"
 >
   <ng-content></ng-content>
 </button>
