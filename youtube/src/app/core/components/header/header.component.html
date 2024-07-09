@@ -1,13 +1,19 @@
 <!-- TODO: Break this into smaller components -->
 <header class="youtube-header">
-  <img
-    ngSrc="/logo.webp"
-    alt="youtube logo"
-    width="50"
-    height="50"
-    class="logo"
-    priority
-  />
+  <yt-button
+    type="unstyled"
+    aria-label="Goto main page"
+    (press)="navigate()"
+  >
+    <img
+      ngSrc="/logo.webp"
+      alt="youtube logo"
+      width="50"
+      height="50"
+      class="logo"
+      priority
+    />
+  </yt-button>
   <div class="youtube-header-search">
     <input
       id="search-input"
