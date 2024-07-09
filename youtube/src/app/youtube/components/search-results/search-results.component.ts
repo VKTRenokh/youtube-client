@@ -30,6 +30,7 @@ export class SearchResultsComponent {
   public currentWord = signal<string>('')
   public isFilteringShown =
     this.searchService.isFilteringShown
+  public didSearch = this.searchService.didSearch
   public videos = computed(() => {
     const data = this.searchService.data()
 
@@ -39,10 +40,6 @@ export class SearchResultsComponent {
 
     return data.items
   })
-
-  public didSearch() {
-    return this.searchService.didSearch
-  }
 
   public updateSortingCriteria(newCriteria: SortOptions) {
     this.currentCriteria.set(newCriteria)

@@ -10,13 +10,13 @@ export class SearchService {
   private videos = signal<VideosResponse | null>(null)
   private _isFilteringShown = signal(false)
 
-  public didSearch = false
+  public didSearch = signal(false)
   public data = this.videos.asReadonly()
   public isFilteringShown =
     this._isFilteringShown.asReadonly()
 
   public search() {
-    this.didSearch = true
+    this.didSearch.set(true)
 
     this.videos.set(videosMock)
   }
