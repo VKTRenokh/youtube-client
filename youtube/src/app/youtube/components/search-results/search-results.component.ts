@@ -10,6 +10,7 @@ import { FilteringCriteriaComponent } from '../filtering-criteria/filtering-crit
 import { SortOptions } from '../../../shared/models/sort-options.model'
 import { SortPipe } from '../../pipes/sort/sort.pipe'
 import { WordPipe } from '../../pipes/word/word.pipe'
+import { FilterService } from '../../services/filter/filter.service'
 
 @Component({
   selector: 'yt-search-results',
@@ -25,11 +26,12 @@ import { WordPipe } from '../../pipes/word/word.pipe'
 })
 export class SearchResultsComponent {
   private searchService = inject(SearchService)
+  private filterService = inject(FilterService)
 
   public currentCriteria = signal<SortOptions | null>(null)
   public currentWord = signal<string>('')
   public isFilteringShown =
-    this.searchService.isFilteringShown
+    this.filterService.getIsFilteringShown()
   public didSearch = this.searchService.getDidSearch()
 
   public shouldShowVideos = computed(

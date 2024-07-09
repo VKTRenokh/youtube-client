@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { UserInfoComponent } from '../user-info/user-info.component'
 import { SearchService } from '../../../youtube/services/search/search.service'
+import { FilterService } from '../../../youtube/services/filter/filter.service'
 
 @Component({
   selector: 'yt-header',
@@ -24,6 +25,7 @@ import { SearchService } from '../../../youtube/services/search/search.service'
 })
 export class HeaderComponent {
   private searchService = inject(SearchService)
+  private filterService = inject(FilterService)
 
   public searchValue = ''
 
@@ -32,6 +34,6 @@ export class HeaderComponent {
   }
 
   public onOpenFiltersButtonClick() {
-    this.searchService.toggleFilteringShown()
+    this.filterService.toggleIsFilteringShown()
   }
 }
