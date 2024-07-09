@@ -9,8 +9,14 @@ export const routes: Routes = [
       ).then((M) => M.SearchResultsComponent),
   },
   {
+    path: 'login',
+    loadComponent: () =>
+      import(
+        './auth/components/login/login.component.js'
+      ).then((M) => M.LoginComponent),
+  },
+  {
     path: '**',
-    pathMatch: 'full',
     loadComponent: () =>
       import(
         './core/components/not-found/not-found.component.js'
