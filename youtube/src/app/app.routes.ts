@@ -4,11 +4,17 @@ import { authGuard } from './core/guards/auth.guard.js'
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: '/main',
+  },
+  {
+    path: 'main',
+    canMatch: [authGuard],
+    pathMatch: 'full',
     loadComponent: () =>
       import(
         './youtube/components/search-results/search-results.component.js'
       ).then((M) => M.SearchResultsComponent),
-    canActivate: [authGuard],
   },
   {
     path: 'login',
@@ -19,10 +25,11 @@ export const routes: Routes = [
   },
   {
     path: '**',
+    pathMatch: 'full',
     loadComponent: () =>
       import(
         './core/components/not-found/not-found.component.js'
       ).then((M) => M.NotFoundComponent),
-    canActivate: [authGuard],
+    canMatch: [authGuard],
   },
 ]

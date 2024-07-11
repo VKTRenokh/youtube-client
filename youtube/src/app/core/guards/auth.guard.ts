@@ -1,10 +1,10 @@
 import { inject } from '@angular/core'
-import { CanActivateFn, Router } from '@angular/router'
+import { CanMatchFn, Router } from '@angular/router'
 import { AuthService } from '../../auth/services/auth/auth.service'
 import { createLoginUrlTree } from '../utils/create-login-url-tree'
 
 const guard = (router: Router, authService: AuthService) =>
-  !authService ? createLoginUrlTree(router) : false
+  !authService.isLogined() && createLoginUrlTree(router)
 
-export const authGuard: CanActivateFn = () =>
+export const authGuard: CanMatchFn = () =>
   guard(inject(Router), inject(AuthService))

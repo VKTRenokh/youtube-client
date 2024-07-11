@@ -1,6 +1,15 @@
-<div>
-  <input type="email" placeholder="email" />
-  <input type="password" placeholder="password" />
+<div class="login">
+  <h2>Login</h2>
+  <input
+    type="email"
+    placeholder="email"
+    [(ngModel)]="email"
+  />
+  <input
+    type="password"
+    placeholder="password"
+    [(ngModel)]="password"
+  />
   <yt-button aria-label="Login" (press)="login()"
     >Login</yt-button
   >
