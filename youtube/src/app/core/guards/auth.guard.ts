@@ -4,7 +4,9 @@ import { AuthService } from '../../auth/services/auth/auth.service'
 import { createLoginUrlTree } from '../utils/create-login-url-tree'
 
 const guard = (router: Router, authService: AuthService) =>
-  !authService.isLogined() && createLoginUrlTree(router)
+  !authService.isLogined()
+    ? createLoginUrlTree(router)
+    : true
 
 export const authGuard: CanMatchFn = () =>
   guard(inject(Router), inject(AuthService))

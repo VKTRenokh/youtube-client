@@ -4,11 +4,6 @@ import { authGuard } from './core/guards/auth.guard.js'
 export const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: '/main',
-  },
-  {
-    path: 'main',
     canMatch: [authGuard],
     pathMatch: 'full',
     loadComponent: () =>
