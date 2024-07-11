@@ -3,7 +3,7 @@
   <yt-button
     type="unstyled"
     aria-label="Goto main page"
-    (press)="navigate()"
+    (press)="navigateToMainPage()"
   >
     <img
       ngSrc="/logo.webp"
@@ -37,6 +37,9 @@
         width="24"
         height="24"
       />
+    </yt-button>
+    <yt-button aria-label="Logout" (press)="logout()">
+      Logout
     </yt-button>
   </div>
   <yt-user-info />

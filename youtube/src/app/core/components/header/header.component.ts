@@ -10,6 +10,7 @@ import { UserInfoComponent } from '../user-info/user-info.component'
 import { SearchService } from '../../../youtube/services/search/search.service'
 import { FilterService } from '../../../youtube/services/filter/filter.service'
 import { Router } from '@angular/router'
+import { AuthService } from '../../../auth/services/auth/auth.service'
 
 @Component({
   selector: 'yt-header',
@@ -27,6 +28,7 @@ import { Router } from '@angular/router'
 export class HeaderComponent {
   private searchService = inject(SearchService)
   private filterService = inject(FilterService)
+  private authService = inject(AuthService)
   private router = inject(Router)
 
   public searchValue = ''
@@ -39,7 +41,12 @@ export class HeaderComponent {
     this.filterService.toggleIsFilteringShown()
   }
 
-  public navigate() {
+  public navigateToMainPage() {
     this.router.navigate(['/'])
+  }
+
+  public logout() {
+    this.authService.logout()
+    this.router.navigate(['/login'])
   }
 }
