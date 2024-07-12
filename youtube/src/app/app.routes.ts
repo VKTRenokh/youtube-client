@@ -19,6 +19,13 @@ export const routes: Routes = [
       ).then((M) => M.LoginComponent),
   },
   {
+    path: ':id',
+    loadComponent: () =>
+      import(
+        './youtube/components/video-detailed-info/video-detailed-info.component.js'
+      ).then((M) => M.VideoDetailedInfoComponent),
+  },
+  {
     path: '**',
     pathMatch: 'full',
     loadComponent: () =>
