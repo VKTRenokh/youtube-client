@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
-import { LOGGER_TOKEN } from '../../../core/services/logger/logger.service'
+import { LOGGER_TOKEN } from '../../../core/providers/logger/logger.provider'
 
 @Injectable({
   providedIn: 'root',
