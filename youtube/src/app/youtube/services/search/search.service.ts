@@ -1,7 +1,6 @@
-import { Injectable, inject, signal } from '@angular/core'
+import { Injectable, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
-import { LOGGER_TOKEN } from '../../../core/providers/logger/logger.provider'
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,6 @@ import { LOGGER_TOKEN } from '../../../core/providers/logger/logger.provider'
 export class SearchService {
   private videos = signal<VideosResponse | null>(null)
   public data = this.videos.asReadonly()
-  private logger = inject(LOGGER_TOKEN)
 
   private didSearch = signal(false)
 
@@ -17,8 +15,6 @@ export class SearchService {
     this.didSearch.set(true)
 
     this.videos.set(videosMock)
-
-    this.logger.log('search')
   }
 
   public getDidSearch() {
