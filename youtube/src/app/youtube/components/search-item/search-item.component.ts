@@ -36,6 +36,6 @@ export class SearchItemComponent {
   )
 
   public navigateToDetailedPage() {
-    this.router.navigate([this.item().id])
+    this.router.navigate(['/video', this.item().id])
   }
 }

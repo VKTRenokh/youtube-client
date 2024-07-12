@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
+  input,
   signal,
 } from '@angular/core'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
@@ -20,6 +22,8 @@ import { Router } from '@angular/router'
 export class LoginComponent {
   private authService = inject(AuthService)
   private router = inject(Router)
+
+  public rederictTo = input.required<string>()
   public password = signal('')
   public email = signal('')
 
@@ -33,6 +37,7 @@ export class LoginComponent {
     }
 
     this.authService.login()
-    this.router.navigate(['/'])
+    // NOTE: for the future
+    this.router.navigate([this.rederictTo() || '/'])
   }
 }
