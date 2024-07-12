@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core'
-import { LocalStorageService } from '../../../core/services/local-storage.service'
 import { generateToken } from '../../utils/generate-token'
+import { LocalStorageService } from '../../../core/services/local-storage/local-storage.service'
 
 @Injectable({
   providedIn: 'root',

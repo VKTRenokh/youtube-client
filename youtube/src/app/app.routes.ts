@@ -24,6 +24,7 @@ export const routes: Routes = [
       import(
         './youtube/components/video-detailed-info/video-detailed-info.component.js'
       ).then((M) => M.VideoDetailedInfoComponent),
+    canMatch: [authGuard],
   },
   {
     path: '**',
