@@ -1,9 +1,15 @@
 .video-statistics {
   display: flex;
   flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
 
-  span {
-    margin-top: 5px;
-    text-transform: capitalize;
+  li {
+    span {
+      margin-top: 5px;
+      text-transform: capitalize;
+    }
   }
 }
