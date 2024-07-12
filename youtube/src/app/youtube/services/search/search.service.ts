@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core'
+import { Injectable, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
 
@@ -22,8 +22,8 @@ export class SearchService {
   }
 
   public getVideoById(id: string) {
-    return computed(() =>
-      this.data()?.items.find((video) => video.id === id),
-    )
+    const videos = this.videos() ?? videosMock
+
+    return videos.items.find((video) => video.id === id)
   }
 }

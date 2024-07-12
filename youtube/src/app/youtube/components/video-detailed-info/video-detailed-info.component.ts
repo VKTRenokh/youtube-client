@@ -1,45 +1,46 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
-  OnInit,
+  computed,
   inject,
+  input,
 } from '@angular/core'
 import { SearchService } from '../../services/search/search.service'
-import { ActivatedRoute } from '@angular/router'
-import { Subscription, filter, map, mergeMap } from 'rxjs'
-import { getId } from '../../utils/get-id'
-import { isNotNullable } from '../../utils/is-not-nullable'
-import { VideoItem } from '../../models/response.model'
+import { NgOptimizedImage } from '@angular/common'
+import { ButtonComponent } from '../../../shared/components/button/button.component'
+import { Router } from '@angular/router'
+import { ColoredBorderDirective } from '../../directives/colored-border.directive'
 
 @Component({
   selector: 'yt-video-detailed-info',
   standalone: true,
-  imports: [],
+  imports: [
+    NgOptimizedImage,
+    ButtonComponent,
+    ColoredBorderDirective,
+  ],
   templateUrl: './video-detailed-info.component.html',
   styleUrl: './video-detailed-info.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VideoDetailedInfoComponent
-  implements OnInit, OnDestroy
-{
+export class VideoDetailedInfoComponent {
   private searchService = inject(SearchService)
-  private route = inject(ActivatedRoute)
-  private subscriptions = new Subscription()
+  private router = inject(Router)
 
-  public videoInfo$ = this.route.params.pipe(
-    map(getId),
-    filter(isNotNullable),
-    map((id) => this.searchService.getVideoById(id)),
+  public id = input.required<string>()
+
+  public video = computed(() =>
+    this.searchService.getVideoById(this.id()),
+  )
+  public snippet = computed(() => this.video()?.snippet)
+  public thumbnail = computed(
+    () => this.snippet()?.thumbnails.high,
+  )
+  public statistics = computed(
+    () => this.video()?.statistics,
   )
 
-  public videoInfo: VideoItem | null = null
-
-  public ngOnInit(): void {
-    this.searchService.getVideoById('')
-  }
-
-  public ngOnDestroy(): void {
-    this.subscriptions.unsubscribe()
+  public navigateToTheMainPage() {
+    this.router.navigate(['/'])
   }
 }

@@ -1,1 +1,42 @@
-<p>video-detailed-info works!</p>
+@if (video()) {
+  <figure
+    class="detailed-info"
+    [ytColoredBorder]="snippet()!.publishedAt"
+  >
+    <img
+      [ngSrc]="thumbnail()!.url"
+      alt="Video thumbnail"
+      [width]="thumbnail()!.width"
+      [height]="thumbnail()!.height"
+    />
+    <figcaption>{{ video()!.snippet.title }}</figcaption>
+    <p>{{ snippet()!.description }}</p>
+    <ul>
+      <li>
+        <span>Likes: {{ statistics()!.likeCount }}</span>
+      </li>
+      <li>
+        <span
+          >Dislikes: {{ statistics()!.dislikeCount }}</span
+        >
+      </li>
+      <li>
+        <span>Views: {{ statistics()!.viewCount }}</span>
+      </li>
+      <li>
+        <span
+          >Comments: {{ statistics()!.commentCount }}</span
+        >
+      </li>
+    </ul>
+  </figure>
+} @else {
+  <div>
+    <h2>Video Not Found</h2>
+  </div>
+}
+<yt-button
+  aria-label="Go to the main page"
+  (press)="navigateToTheMainPage()"
+  >Go To The Main Page</yt-button
+>

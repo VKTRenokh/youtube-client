@@ -34,7 +34,6 @@ export class SearchItemComponent {
   )
 
   public navigateToDetailedPage() {
-    console.log('navigate')
     this.router.navigate([this.item().id])
   }
 }
