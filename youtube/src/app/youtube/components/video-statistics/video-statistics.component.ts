@@ -3,6 +3,7 @@ import {
   Component,
   input,
 } from '@angular/core'
+import { VideoStatistics } from '../../models/response.model'
 
 @Component({
   selector: 'yt-video-statistics',
@@ -13,5 +14,5 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoStatisticsComponent {
-  public statistics = input.required()
+  public statistics = input.required<VideoStatistics>()
 }

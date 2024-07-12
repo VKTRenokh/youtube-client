@@ -10,6 +10,7 @@ import { DatePipe, NgOptimizedImage } from '@angular/common'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { Router } from '@angular/router'
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
+import { VideoStatisticsComponent } from '../video-statistics/video-statistics.component'
 
 @Component({
   selector: 'yt-video-detailed-info',
@@ -19,6 +20,7 @@ import { ColoredBorderDirective } from '../../directives/colored-border.directiv
     ButtonComponent,
     ColoredBorderDirective,
     DatePipe,
+    VideoStatisticsComponent,
   ],
   templateUrl: './video-detailed-info.component.html',
   styleUrl: './video-detailed-info.component.scss',

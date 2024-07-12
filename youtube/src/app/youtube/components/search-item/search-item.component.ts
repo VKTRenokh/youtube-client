@@ -10,6 +10,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
 import { VideoItem } from '../../models/response.model'
 import { Router } from '@angular/router'
+import { VideoStatisticsComponent } from '../video-statistics/video-statistics.component'
 
 @Component({
   selector: 'yt-search-item',
@@ -18,6 +19,7 @@ import { Router } from '@angular/router'
     NgOptimizedImage,
     ButtonComponent,
     ColoredBorderDirective,
+    VideoStatisticsComponent,
   ],
   templateUrl: './search-item.component.html',
   styleUrl: './search-item.component.scss',

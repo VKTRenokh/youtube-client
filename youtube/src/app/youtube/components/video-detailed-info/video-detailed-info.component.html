@@ -14,25 +14,9 @@
     <span>
       {{ snippet()!.publishedAt | date: 'fullDate' }}
     </span>
-    <ul>
-      <!-- TODO: Object keys usage? -->
-      <li>
-        <span>Likes: {{ statistics()!.likeCount }}</span>
-      </li>
-      <li>
-        <span
-          >Dislikes: {{ statistics()!.dislikeCount }}</span
-        >
-      </li>
-      <li>
-        <span>Views: {{ statistics()!.viewCount }}</span>
-      </li>
-      <li>
-        <span
-          >Comments: {{ statistics()!.commentCount }}</span
-        >
-      </li>
-    </ul>
+    <yt-video-statistics
+      [statistics]="video()!.statistics"
+    />
   </figure>
 } @else {
   <div>
