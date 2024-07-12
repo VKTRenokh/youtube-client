@@ -6,7 +6,7 @@ import {
   input,
 } from '@angular/core'
 import { SearchService } from '../../services/search/search.service'
-import { NgOptimizedImage } from '@angular/common'
+import { DatePipe, NgOptimizedImage } from '@angular/common'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { Router } from '@angular/router'
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
@@ -18,6 +18,7 @@ import { ColoredBorderDirective } from '../../directives/colored-border.directiv
     NgOptimizedImage,
     ButtonComponent,
     ColoredBorderDirective,
+    DatePipe,
   ],
   templateUrl: './video-detailed-info.component.html',
   styleUrl: './video-detailed-info.component.scss',

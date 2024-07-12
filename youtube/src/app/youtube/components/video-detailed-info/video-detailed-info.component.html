@@ -11,6 +11,9 @@
     />
     <figcaption>{{ video()!.snippet.title }}</figcaption>
     <p>{{ snippet()!.description }}</p>
+    <span>
+      {{ snippet()!.publishedAt | date: 'fullDate' }}
+    </span>
     <ul>
       <li>
         <span>Likes: {{ statistics()!.likeCount }}</span>
