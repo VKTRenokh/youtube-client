@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core'
+import { Injectable, computed, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
 
@@ -7,10 +7,9 @@ import { VideosResponse } from '../../models/response.model'
 })
 export class SearchService {
   private videos = signal<VideosResponse | null>(null)
+  public data = this.videos.asReadonly()
 
   private didSearch = signal(false)
-
-  public data = this.videos.asReadonly()
 
   public search() {
     this.didSearch.set(true)
@@ -20,5 +19,11 @@ export class SearchService {
 
   public getDidSearch() {
     return this.didSearch.asReadonly()
+  }
+
+  public getVideoById(id: string) {
+    return computed(() =>
+      this.data()?.items.find((video) => video.id === id),
+    )
   }
 }
