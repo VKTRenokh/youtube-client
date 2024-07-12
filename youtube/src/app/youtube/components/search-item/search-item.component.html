@@ -21,5 +21,9 @@
       >dislikes: {{ item().statistics.dislikeCount }}</span
     >
   </div>
-  <yt-button aria-label="More button">more</yt-button>
+  <yt-button
+    aria-label="More button"
+    (press)="navigateToDetailedPage()"
+    >more</yt-button
+  >
 </figure>
