@@ -10,7 +10,7 @@
       [height]="thumbnail()!.height"
     />
     <figcaption>{{ video()!.snippet.title }}</figcaption>
-    <p>{{ snippet()!.description }}</p>
+    <p>Description: {{ snippet()!.description }}</p>
     <span>
       {{ snippet()!.publishedAt | date: 'fullDate' }}
     </span>
