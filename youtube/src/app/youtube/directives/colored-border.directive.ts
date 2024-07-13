@@ -1,5 +1,11 @@
-import { Directive, Input } from '@angular/core'
-import { getTimeFromString } from '../utils/get-time-from-string'
+import {
+  Directive,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  inject,
+} from '@angular/core'
 
 const oneWeek = 604800000
 const oneMonth = 2628002880
@@ -15,16 +21,15 @@ const enum Colors {
 @Directive({
   selector: '[ytColoredBorder]',
   standalone: true,
-  host: {
-    '[style.border-bottom-color]': 'borderColor',
-    '[style.border-bottom-style]': '"solid"',
-    '[style.border-bottom-width]': '"5px"',
-  },
 })
-export class ColoredBorderDirective {
+export class ColoredBorderDirective implements OnInit {
   @Input({ alias: 'ytColoredBorder' }) public date!: string
-  public get borderColor(): Colors {
-    const date = Date.now() - getTimeFromString(this.date)
+
+  private renderer = inject(Renderer2)
+  private elementRef = inject(ElementRef)
+
+  public getColor(publishedAt: Date): Colors {
+    const date = Date.now() - publishedAt.getTime()
 
     if (date <= oneWeek) {
       return Colors.Blue
@@ -37,5 +42,17 @@ export class ColoredBorderDirective {
     }
 
     return Colors.Red
+  }
+
+  public ngOnInit(): void {
+    if (!this.date) {
+      throw new Error('no date')
+    }
+
+    this.renderer.setStyle(
+      this.elementRef.nativeElement,
+      'border-bottom',
+      `${this.getColor(new Date(this.date))} 5px solid`,
+    )
   }
 }
