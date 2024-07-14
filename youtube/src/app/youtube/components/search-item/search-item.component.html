@@ -10,17 +10,11 @@
       [height]="smallThumbnail().height"
     />
     <h4>{{ snippet().title }}</h4>
-    <p>{{ snippet().description }}</p>
   </div>
-  <div class="video-statistics">
-    <span>likes: {{ item().statistics.likeCount }}</span>
-    <span>views: {{ item().statistics.viewCount }}</span>
-    <span
-      >comments: {{ item().statistics.commentCount }}</span
-    >
-    <span
-      >dislikes: {{ item().statistics.dislikeCount }}</span
-    >
-  </div>
-  <yt-button aria-label="More button">more</yt-button>
+  <yt-video-statistics [statistics]="item().statistics" />
+  <yt-button
+    aria-label="More button"
+    (press)="navigateToDetailedPage()"
+    >more</yt-button
+  >
 </figure>

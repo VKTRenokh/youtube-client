@@ -1,7 +1,13 @@
 .youtube-video {
   border: var(--color-light-grey-600) solid 2px;
-  // box-shadow: pink 10px 5px 100px;
   padding: 10px 10px;
+  max-width: 263px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 
   .video-statistics {
     display: flex;

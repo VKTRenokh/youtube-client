@@ -6,14 +6,16 @@
     />
   }
 
-  @if (shouldShowVideos()) {
-    @for (
-      video of videos()
-        | word: currentWord()
-        | sort: currentCriteria();
-      track video
-    ) {
-      <yt-search-item [item]="video" />
+  <div class="search-items">
+    @if (shouldShowVideos()) {
+      @for (
+        video of videos()
+          | word: currentWord()
+          | sort: currentCriteria();
+        track video
+      ) {
+        <yt-search-item [item]="video" />
+      }
     }
-  }
+  </div>
 </div>

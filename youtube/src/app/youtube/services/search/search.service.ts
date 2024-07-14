@@ -7,10 +7,9 @@ import { VideosResponse } from '../../models/response.model'
 })
 export class SearchService {
   private videos = signal<VideosResponse | null>(null)
+  public data = this.videos.asReadonly()
 
   private didSearch = signal(false)
-
-  public data = this.videos.asReadonly()
 
   public search() {
     this.didSearch.set(true)
@@ -20,5 +19,11 @@ export class SearchService {
 
   public getDidSearch() {
     return this.didSearch.asReadonly()
+  }
+
+  public getVideoById(id: string) {
+    const videos = this.videos() ?? videosMock
+
+    return videos.items.find((video) => video.id === id)
   }
 }
