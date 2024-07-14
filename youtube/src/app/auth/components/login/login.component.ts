@@ -37,7 +37,6 @@ export class LoginComponent {
     }
 
     this.authService.login()
-    // NOTE: for the future
     this.router.navigate([this.rederictTo() || '/'])
   }
 }
