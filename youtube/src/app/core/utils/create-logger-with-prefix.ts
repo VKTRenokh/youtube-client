@@ -9,7 +9,7 @@ export interface Logger {
 export const createLoggerWithPrefix = (prefix: string) => {
   return class Logger implements Logger {
     public log(...data: unknown[]) {
-      console.log.call(console.log, `[${prefix}]`, ...data)
+      console.log(`[${prefix}]`, ...data)
     }
 
     public warn(...data: unknown[]) {
