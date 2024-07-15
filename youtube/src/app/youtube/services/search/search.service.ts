@@ -1,7 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
-import { map, tap } from 'rxjs'
+import { map, switchMap, tap } from 'rxjs'
 import { validateSearchResponse } from '../../utils/validate-search-response'
 import { HttpService } from '../http/http.service'
 
@@ -17,11 +17,16 @@ export class SearchService {
   public data = this.videos.asReadonly()
 
   public search(search: string) {
-    return this.http.getVideos(search).pipe(
+    return this.http.search(search).pipe(
       map(validateSearchResponse),
-      tap(response => {
+      map(response =>
+        response.items.map(item => item.id.videoId),
+      ),
+      switchMap(ids => this.http.getWithStatistics(ids)),
+      map(validateSearchResponse),
+      tap(value => {
         this.didSearch.set(true)
-        this.videos.set(response)
+        this.videos.set(value)
       }),
     )
   }

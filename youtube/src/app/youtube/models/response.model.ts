@@ -39,10 +39,15 @@ export interface VideoStatistics {
   commentCount: string
 }
 
+export interface VideoId {
+  kind: string
+  videoId: string
+}
+
 export interface VideoItem {
   kind: string
   etag: string
-  id: string
+  id: VideoId
   snippet: VideoSnippet
   statistics: VideoStatistics
 }

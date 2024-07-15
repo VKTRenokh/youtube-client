@@ -8,8 +8,17 @@ import { createSearchParams } from '../../utils/create-search-params'
 export class HttpService {
   private http = inject(HttpClient)
 
-  public getVideos(search: string) {
+  public getWithStatistics(ids: string[]) {
     return this.http.get('/videos', {
+      params: {
+        part: 'snippet,statistics',
+        id: ids.join(','),
+      },
+    })
+  }
+
+  public search(search: string) {
+    return this.http.get('/search', {
       params: createSearchParams(search),
     })
   }
