@@ -14,9 +14,10 @@ import { SearchService } from '../../../youtube/services/search/search.service'
 import { FilterService } from '../../../youtube/services/filter/filter.service'
 import { Router } from '@angular/router'
 import { AuthService } from '../../../auth/services/auth/auth.service'
-import { debounceTime } from 'rxjs'
+import { debounceTime, filter, switchMap } from 'rxjs'
 import { searchTimeout } from '../../constants/search-timeout.constant'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 
 @Component({
   selector: 'yt-header',
@@ -42,11 +43,16 @@ export class HeaderComponent {
   public constructor() {
     this.searchString.valueChanges
       .pipe(
+        filter(isNotNullable),
         debounceTime(searchTimeout),
+        switchMap(search =>
+          this.searchService.search(search),
+        ),
         takeUntilDestroyed(),
       )
-      .subscribe(() => {
-        this.searchService.search()
+      .subscribe({
+        next: console.log,
+        error: console.error,
       })
   }
 

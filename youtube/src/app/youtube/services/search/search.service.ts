@@ -2,6 +2,9 @@ import { Injectable, inject, signal } from '@angular/core'
 import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
 import { HttpClient } from '@angular/common/http'
+import { map, tap } from 'rxjs'
+import { validateSearchResponse } from '../../utils/validate-search-response'
+import { createSearchParams } from '../../utils/create-search-params'
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +17,18 @@ export class SearchService {
 
   public data = this.videos.asReadonly()
 
-  public search() {
-    this.didSearch.set(true)
-
-    this.videos.set(videosMock)
-
-    this.http.get('/').subscribe(console.log)
+  public search(search: string) {
+    return this.http
+      .get('/search', {
+        params: createSearchParams(search),
+      })
+      .pipe(
+        map(validateSearchResponse),
+        tap(response => {
+          this.didSearch.set(true)
+          this.videos.set(response)
+        }),
+      )
   }
 
   public getDidSearch() {
