@@ -4,20 +4,26 @@ import {
   Component,
   inject,
 } from '@angular/core'
-import { FormsModule } from '@angular/forms'
+import {
+  FormControl,
+  ReactiveFormsModule,
+} from '@angular/forms'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { UserInfoComponent } from '../user-info/user-info.component'
 import { SearchService } from '../../../youtube/services/search/search.service'
 import { FilterService } from '../../../youtube/services/filter/filter.service'
 import { Router } from '@angular/router'
 import { AuthService } from '../../../auth/services/auth/auth.service'
+import { debounceTime } from 'rxjs'
+import { searchTimeout } from '../../constants/search-timeout.constant'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'yt-header',
   standalone: true,
   imports: [
     NgOptimizedImage,
-    FormsModule,
+    ReactiveFormsModule,
     ButtonComponent,
     UserInfoComponent,
   ],
@@ -31,10 +37,17 @@ export class HeaderComponent {
   private authService = inject(AuthService)
   private router = inject(Router)
 
-  public searchValue = ''
+  public searchString = new FormControl('')
 
-  public onSearch() {
-    this.searchService.search()
+  public constructor() {
+    this.searchString.valueChanges
+      .pipe(
+        debounceTime(searchTimeout),
+        takeUntilDestroyed(),
+      )
+      .subscribe(() => {
+        this.searchService.search()
+      })
   }
 
   public onOpenFiltersButtonClick() {
