@@ -11,9 +11,11 @@ import { routes } from './app.routes'
 import { provideLogger } from './core/providers/logger/logger.provider'
 import {
   provideHttpClient,
+  withFetch,
   withInterceptors,
 } from '@angular/common/http'
 import { youtubeInterceptor } from './youtube/interceptors/youtube/youtube.interceptor'
+import { loggerInterceptor } from './core/interceptors/logger/logger.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +23,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withComponentInputBinding()),
     provideLogger(),
     provideHttpClient(
-      withInterceptors([youtubeInterceptor]),
+      withFetch(),
+      withInterceptors([
+        youtubeInterceptor,
+        loggerInterceptor,
+      ]),
     ),
   ],
 }
