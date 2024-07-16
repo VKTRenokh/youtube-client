@@ -18,6 +18,7 @@ import { debounceTime, filter, switchMap } from 'rxjs'
 import { searchTimeout } from '../../constants/search-timeout.constant'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
+import { stringIsLongerThan } from '../../../shared/utils/string-is-longer-than'
 
 @Component({
   selector: 'yt-header',
@@ -44,7 +45,7 @@ export class HeaderComponent {
     this.searchString.valueChanges
       .pipe(
         filter(isNotNullable),
-        filter(string => string.length > 3),
+        filter(stringIsLongerThan(3)),
         debounceTime(searchTimeout),
         switchMap(search =>
           this.searchService.search(search),
