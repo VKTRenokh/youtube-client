@@ -38,8 +38,9 @@ export class SearchService {
   }
 
   public getVideoById(id: string) {
-    const videos = this.videos() ?? videosMock
-
-    return videos.items.find(video => video.id === id)
+    return this.http.getVideosWithStatistics([id]).pipe(
+      map(validateSearchResponse),
+      map(videos => videos.items.at(0)),
+    )
   }
 }

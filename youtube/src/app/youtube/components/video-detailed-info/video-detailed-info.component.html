@@ -1,30 +1,30 @@
 <!-- TODO: update angular to 18.1 version and use @let to remove excalamation
            marks-->
-@if (video()) {
+@if (video) {
   <figure
     class="detailed-info"
-    [ytColoredBorder]="snippet()!.publishedAt"
+    [ytColoredBorder]="video.snippet.publishedAt"
   >
     <img
-      [ngSrc]="thumbnail()!.url"
+      [ngSrc]="getThumbnail()!.url"
       alt="Video thumbnail"
-      [width]="thumbnail()!.width"
-      [height]="thumbnail()!.height"
+      [width]="getThumbnail()!.width"
+      [height]="getThumbnail()!.height"
     />
-    <figcaption>{{ video()!.snippet.title }}</figcaption>
-    <p>Description: {{ snippet()!.description }}</p>
+    <figcaption>{{ video.snippet.title }}</figcaption>
+    <p>Description: {{ video.snippet.description }}</p>
     <span>
-      {{ snippet()!.publishedAt | date: 'fullDate' }}
+      {{ video.snippet.publishedAt | date: 'fullDate' }}
     </span>
-    <yt-video-statistics
-      [statistics]="video()!.statistics"
-    />
+    <yt-video-statistics [statistics]="video.statistics" />
   </figure>
 } @else {
   <div>
     <h2>Video Not Found</h2>
   </div>
 }
+
+{{ test }}
 <yt-button
   aria-label="Go to the main page"
   (press)="navigateToTheMainPage()"
