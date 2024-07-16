@@ -1,9 +1,8 @@
 import { Router } from '@angular/router'
-import { getCurrentRoute } from './get-current-route'
+import { createRederictToQueryParams } from './create-rederict-to-query-params'
 
 export const createLoginUrlTree = (router: Router) =>
-  router.createUrlTree(['/login'], {
-    queryParams: {
-      rederictTo: getCurrentRoute(),
-    },
-  })
+  router.createUrlTree(
+    ['/login'],
+    createRederictToQueryParams(),
+  )

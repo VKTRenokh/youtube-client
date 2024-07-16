@@ -19,6 +19,7 @@ import { searchTimeout } from '../../constants/search-timeout.constant'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { stringIsLongerThan } from '../../../shared/utils/string-is-longer-than'
+import { createRederictToQueryParams } from '../../utils/create-rederict-to-query-params'
 
 @Component({
   selector: 'yt-header',
@@ -40,6 +41,7 @@ export class HeaderComponent {
   private router = inject(Router)
 
   public searchString = new FormControl('')
+  public isAuthorized = this.authService.isLogined
 
   public constructor() {
     this.searchString.valueChanges
@@ -68,6 +70,9 @@ export class HeaderComponent {
 
   public logout() {
     this.authService.logout()
-    this.router.navigate(['/login'])
+    this.router.navigate(
+      ['/login'],
+      createRederictToQueryParams(),
+    )
   }
 }

@@ -1,1 +1,1 @@
-export const searchTimeout = 700
+export const searchTimeout = 600

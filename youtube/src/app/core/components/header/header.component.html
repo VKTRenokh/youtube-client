@@ -35,9 +35,11 @@
         height="24"
       />
     </yt-button>
-    <yt-button aria-label="Logout" (press)="logout()">
-      Logout
-    </yt-button>
+    @if (isAuthorized()) {
+      <yt-button aria-label="Logout" (press)="logout()"
+        >Logout</yt-button
+      >
+    }
   </div>
   <yt-user-info />
 </header>
