@@ -44,6 +44,7 @@ export class HeaderComponent {
     this.searchString.valueChanges
       .pipe(
         filter(isNotNullable),
+        filter(string => string.length > 3),
         debounceTime(searchTimeout),
         switchMap(search =>
           this.searchService.search(search),
