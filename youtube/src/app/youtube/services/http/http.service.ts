@@ -8,7 +8,7 @@ import { createSearchParams } from '../../utils/create-search-params'
 export class HttpService {
   private http = inject(HttpClient)
 
-  public getWithStatistics(ids: string[]) {
+  public getVideosWithStatistics(ids: string[]) {
     return this.http.get('/videos', {
       params: {
         part: 'snippet,statistics',

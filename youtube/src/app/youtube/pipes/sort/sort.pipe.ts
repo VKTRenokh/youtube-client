@@ -5,11 +5,11 @@ import {
 } from '../../../shared/models/sort-options.model'
 import { getPublishDate } from '../../utils/get-publish-date'
 import { getViewsCount } from '../../utils/get-views-count'
-import { VideoItem } from '../../models/response.model'
+import { SearchVideoItem } from '../../models/response.model'
 
 type SortMap = Record<
   SortCriteria,
-  (a: VideoItem, b: VideoItem) => number
+  (a: SearchVideoItem, b: SearchVideoItem) => number
 >
 
 // TODO: use functional lens maybe?
@@ -24,9 +24,9 @@ const sortMap: SortMap = {
 })
 export class SortPipe implements PipeTransform {
   public transform(
-    value: VideoItem[] | null,
+    value: SearchVideoItem[] | null,
     criterias: SortOptions | null,
-  ): VideoItem[] {
+  ): SearchVideoItem[] {
     return value && criterias
       ? value.sort(
           (a, b) =>

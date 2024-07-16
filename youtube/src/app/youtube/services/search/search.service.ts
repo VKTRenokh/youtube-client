@@ -22,7 +22,9 @@ export class SearchService {
       map(response =>
         response.items.map(item => item.id.videoId),
       ),
-      switchMap(ids => this.http.getWithStatistics(ids)),
+      switchMap(ids =>
+        this.http.getVideosWithStatistics(ids),
+      ),
       map(validateSearchResponse),
       tap(value => {
         this.didSearch.set(true)
