@@ -13,13 +13,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { ActivatedRoute, Router } from '@angular/router'
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
 import { VideoStatisticsComponent } from '../video-statistics/video-statistics.component'
-import {
-  Observable,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs'
+import { Observable, filter, map, switchMap } from 'rxjs'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { isString } from '../../../shared/utils/is-string'
 import { SearchVideoItem } from '../../models/response.model'

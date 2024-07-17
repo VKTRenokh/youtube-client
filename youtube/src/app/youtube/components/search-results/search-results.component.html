@@ -7,7 +7,7 @@
   }
 
   <div class="search-items">
-    @if (shouldShowVideos()) {
+    @if (videos()) {
       @for (
         video of videos()
           | word: currentWord()

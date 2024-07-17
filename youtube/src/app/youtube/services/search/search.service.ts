@@ -11,7 +11,6 @@ export class SearchService {
   private http = inject(HttpService)
 
   private videos = signal<VideosResponse | null>(null)
-  private didSearch = signal(false)
 
   public data = this.videos.asReadonly()
 
@@ -26,14 +25,9 @@ export class SearchService {
       ),
       map(validateSearchResponse),
       tap(value => {
-        this.didSearch.set(true)
         this.videos.set(value)
       }),
     )
-  }
-
-  public getDidSearch() {
-    return this.didSearch.asReadonly()
   }
 
   public getVideoById(id: string) {
