@@ -54,10 +54,7 @@ export class HeaderComponent {
         ),
         takeUntilDestroyed(),
       )
-      .subscribe({
-        next: console.log,
-        error: console.error,
-      })
+      .subscribe()
   }
 
   public onOpenFiltersButtonClick() {

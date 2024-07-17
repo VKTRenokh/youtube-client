@@ -1,5 +1,4 @@
 import { Injectable, inject, signal } from '@angular/core'
-import videosMock from '../../mock/response.json'
 import { VideosResponse } from '../../models/response.model'
 import { map, switchMap, tap } from 'rxjs'
 import { validateSearchResponse } from '../../utils/validate-search-response'
