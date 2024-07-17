@@ -39,13 +39,20 @@ export interface VideoStatistics {
   commentCount: string
 }
 
-export interface VideoItem {
+export interface VideoId {
+  kind: string
+  videoId: string
+}
+
+export interface SearchVideoItem {
   kind: string
   etag: string
-  id: string
+  id: VideoId
   snippet: VideoSnippet
   statistics: VideoStatistics
 }
+
+export type VideoItem = SearchVideoItem & { id: string }
 
 export interface PageInfo {
   totalResults: number
@@ -56,5 +63,5 @@ export interface VideosResponse {
   kind: string
   etag: string
   pageInfo: PageInfo
-  items: VideoItem[]
+  items: SearchVideoItem[]
 }

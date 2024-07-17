@@ -8,7 +8,7 @@ import {
 import { NgOptimizedImage } from '@angular/common'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
-import { VideoItem } from '../../models/response.model'
+import { SearchVideoItem } from '../../models/response.model'
 import { Router } from '@angular/router'
 import { VideoStatisticsComponent } from '../video-statistics/video-statistics.component'
 
@@ -28,7 +28,7 @@ import { VideoStatisticsComponent } from '../video-statistics/video-statistics.c
 export class SearchItemComponent {
   public router = inject(Router)
 
-  public item = input.required<VideoItem>()
+  public item = input.required<SearchVideoItem>()
 
   public snippet = computed(() => this.item().snippet)
   public smallThumbnail = computed(

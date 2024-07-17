@@ -18,18 +18,15 @@
     <input
       id="search-input"
       type="text"
-      [(ngModel)]="searchValue"
       placeholder="Enter a request"
+      [formControl]="searchString"
     />
-    <yt-button (click)="onSearch()" aria-label="search"
-      >Search</yt-button
-    >
   </div>
   <div>
     <yt-button
       aria-label="open filters"
       type="unstyled"
-      (press)="onOpenFiltersButtonClick()"
+      (press)="openFilters()"
     >
       <img
         ngSrc="/search_settings.webp"
@@ -38,9 +35,11 @@
         height="24"
       />
     </yt-button>
-    <yt-button aria-label="Logout" (press)="logout()">
-      Logout
-    </yt-button>
+    @if (isAuthorized()) {
+      <yt-button aria-label="Logout" (press)="logout()"
+        >Logout</yt-button
+      >
+    }
   </div>
   <yt-user-info />
 </header>

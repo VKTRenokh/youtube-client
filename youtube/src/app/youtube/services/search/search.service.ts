@@ -1,29 +1,34 @@
-import { Injectable, signal } from '@angular/core'
-import videosMock from '../../mock/response.json'
+import { Injectable, inject, signal } from '@angular/core'
 import { VideosResponse } from '../../models/response.model'
-
+import { map, switchMap, tap } from 'rxjs'
+import { VideosHttpService } from '../videos-http /videos-http.service'
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
+  private http = inject(VideosHttpService)
+
   private videos = signal<VideosResponse | null>(null)
+
   public data = this.videos.asReadonly()
 
-  private didSearch = signal(false)
-
-  public search() {
-    this.didSearch.set(true)
-
-    this.videos.set(videosMock)
-  }
-
-  public getDidSearch() {
-    return this.didSearch.asReadonly()
+  public search(search: string) {
+    return this.http.search(search).pipe(
+      map(response =>
+        response.items.map(item => item.id.videoId),
+      ),
+      switchMap(ids =>
+        this.http.getVideosWithStatistics(ids),
+      ),
+      tap(value => {
+        this.videos.set(value)
+      }),
+    )
   }
 
   public getVideoById(id: string) {
-    const videos = this.videos() ?? videosMock
-
-    return videos.items.find((video) => video.id === id)
+    return this.http
+      .getVideosWithStatistics([id])
+      .pipe(map(videos => videos.items.at(0)))
   }
 }

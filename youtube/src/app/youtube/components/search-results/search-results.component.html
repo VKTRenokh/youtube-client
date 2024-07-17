@@ -7,12 +7,12 @@
   }
 
   <div class="search-items">
-    @if (shouldShowVideos()) {
+    @if (videos()) {
       @for (
         video of videos()
           | word: currentWord()
           | sort: currentCriteria();
-        track video
+        track video.id
       ) {
         <yt-search-item [item]="video" />
       }
