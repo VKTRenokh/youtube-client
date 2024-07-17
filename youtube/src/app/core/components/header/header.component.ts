@@ -57,7 +57,7 @@ export class HeaderComponent {
       .subscribe()
   }
 
-  public onOpenFiltersButtonClick() {
+  public openFilters() {
     this.filterService.toggleIsFilteringShown()
   }
 
