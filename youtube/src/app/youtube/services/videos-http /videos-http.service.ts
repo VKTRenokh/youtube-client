@@ -5,7 +5,7 @@ import { createSearchParams } from '../../utils/create-search-params'
 @Injectable({
   providedIn: 'root',
 })
-export class HttpService {
+export class VideosHttpService {
   private http = inject(HttpClient)
 
   public getVideosWithStatistics(ids: string[]) {
