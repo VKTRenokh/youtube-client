@@ -1,14 +1,12 @@
 import { Injectable, inject, signal } from '@angular/core'
 import { VideosResponse } from '../../models/response.model'
 import { map, switchMap, tap } from 'rxjs'
-import { validateSearchResponse } from '../../utils/validate-search-response'
-import { HttpService } from '../http/http.service'
-
+import { VideosHttpService } from '../videos-http /videos-http.service'
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  private http = inject(HttpService)
+  private http = inject(VideosHttpService)
 
   private videos = signal<VideosResponse | null>(null)
 
@@ -16,14 +14,12 @@ export class SearchService {
 
   public search(search: string) {
     return this.http.search(search).pipe(
-      map(validateSearchResponse),
       map(response =>
         response.items.map(item => item.id.videoId),
       ),
       switchMap(ids =>
         this.http.getVideosWithStatistics(ids),
       ),
-      map(validateSearchResponse),
       tap(value => {
         this.videos.set(value)
       }),
@@ -31,9 +27,8 @@ export class SearchService {
   }
 
   public getVideoById(id: string) {
-    return this.http.getVideosWithStatistics([id]).pipe(
-      map(validateSearchResponse),
-      map(videos => videos.items.at(0)),
-    )
+    return this.http
+      .getVideosWithStatistics([id])
+      .pipe(map(videos => videos.items.at(0)))
   }
 }
