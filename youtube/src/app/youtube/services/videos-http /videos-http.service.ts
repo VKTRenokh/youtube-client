@@ -11,6 +11,7 @@ export class VideosHttpService {
 
   public getVideosWithStatistics(ids: string[]) {
     return this.http.get<VideosResponse>('/videos', {
+      // TODO: remove inconsistency here.
       params: {
         part: 'snippet,statistics',
         id: ids.join(','),

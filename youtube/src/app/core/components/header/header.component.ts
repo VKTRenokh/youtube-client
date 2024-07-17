@@ -17,7 +17,6 @@ import { AuthService } from '../../../auth/services/auth/auth.service'
 import { debounceTime, filter, switchMap } from 'rxjs'
 import { searchTimeout } from '../../constants/search-timeout.constant'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { stringIsLongerThan } from '../../../shared/utils/string-is-longer-than'
 import { createRederictToQueryParams } from '../../utils/create-rederict-to-query-params'
 
@@ -40,13 +39,14 @@ export class HeaderComponent {
   private authService = inject(AuthService)
   private router = inject(Router)
 
-  public searchString = new FormControl('')
+  public searchString = new FormControl('', {
+    nonNullable: true,
+  })
   public isAuthorized = this.authService.isLogined
 
   public constructor() {
     this.searchString.valueChanges
       .pipe(
-        filter(isNotNullable),
         filter(stringIsLongerThan(3)),
         debounceTime(searchTimeout),
         switchMap(search =>
