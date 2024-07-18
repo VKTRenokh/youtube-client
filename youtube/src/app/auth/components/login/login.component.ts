@@ -1,19 +1,19 @@
+import { FormBuilder, Validators } from '@angular/forms'
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   input,
-  signal,
 } from '@angular/core'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { AuthService } from '../../services/auth/auth.service'
-import { FormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @Component({
   selector: 'yt-login',
   standalone: true,
-  imports: [ButtonComponent, FormsModule],
+  imports: [ButtonComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,20 +21,16 @@ import { Router } from '@angular/router'
 export class LoginComponent {
   private authService = inject(AuthService)
   private router = inject(Router)
+  private formBuilder = inject(FormBuilder)
+
+  public loginForm = this.formBuilder.group({
+    email: ['', Validators.required, Validators.email],
+    password: ['', Validators.required, Validators.min(6)],
+  })
 
   public rederictTo = input.required<string>()
-  public password = signal('')
-  public email = signal('')
 
-  private isEmpty() {
-    return !this.password() && !this.email()
-  }
-
-  public login() {
-    if (this.isEmpty()) {
-      return
-    }
-
+  public onSubmit() {
     this.authService.login()
     this.router.navigate([this.rederictTo() || '/'])
   }

@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
+  input,
+  output,
 } from '@angular/core'
 
 @Component({
@@ -15,22 +14,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Output() public press = new EventEmitter<Event>()
+  public press = output<Event>()
 
-  @Input({
-    required: true,
-    alias: 'aria-label',
-  })
-  public ariaLabel!: string
+  public ariaLabel = input.required<string>()
 
-  @Input()
-  public type!: 'unstyled' | 'default'
+  public variant = input<'unstyled' | 'default'>()
+  public type = input<string>()
+  public disabled = input<boolean>()
 
   public onClick(event: Event) {
     this.press.emit(event)
   }
 
   public isStyled() {
-    return this.type !== 'unstyled'
+    return this.variant() !== 'unstyled'
   }
 }

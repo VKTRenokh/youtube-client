@@ -1,16 +1,23 @@
-<div class="login">
+<form
+  class="login"
+  [formGroup]="loginForm"
+  (ngOnSubmit)="onSubmit()"
+>
   <h2>Login</h2>
   <input
     type="email"
     placeholder="email"
-    [(ngModel)]="email"
+    formControlName="email"
   />
   <input
     type="password"
     placeholder="password"
-    [(ngModel)]="password"
+    formControlName="password"
   />
-  <yt-button aria-label="Login" (press)="login()"
+  <yt-button
+    ariaLabel="Login"
+    type="submit"
+    [disabled]="!loginForm.disabled"
     >Login</yt-button
   >
-</div>
+</form>

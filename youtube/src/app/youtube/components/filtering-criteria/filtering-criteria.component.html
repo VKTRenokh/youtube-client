@@ -2,7 +2,7 @@
   <div class="sorting">
     @for (criteria of criterias; track criteria) {
       <yt-button
-        [aria-label]="criteria.criteria"
+        [ariaLabel]="criteria.criteria"
         (press)="onCriteriaClick(criteria)"
       >
         {{
