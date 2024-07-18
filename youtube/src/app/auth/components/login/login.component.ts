@@ -37,12 +37,6 @@ export class LoginComponent {
     ],
   })
 
-  public isFormValid: Observable<boolean> =
-    this.loginForm.statusChanges.pipe(
-      map(status => status === 'VALID'),
-      tap(console.log),
-    )
-
   public rederictTo = input.required<string>()
 
   public onSubmit() {
