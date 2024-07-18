@@ -1,7 +1,7 @@
 <form
   class="login"
   [formGroup]="loginForm"
-  (ngOnSubmit)="onSubmit()"
+  (ngSubmit)="onSubmit()"
 >
   <h2>Login</h2>
   <input
@@ -14,10 +14,12 @@
     placeholder="password"
     formControlName="password"
   />
+  @let someShit = (isFormValid | async)!;
+  {{ loginForm.status }}
   <yt-button
     ariaLabel="Login"
     type="submit"
-    [disabled]="!loginForm.disabled"
+    [disabled]="loginForm.status === 'INVALID'"
     >Login</yt-button
   >
 </form>

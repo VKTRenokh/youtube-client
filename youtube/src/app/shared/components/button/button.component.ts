@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Input,
   input,
   output,
 } from '@angular/core'
@@ -20,7 +21,7 @@ export class ButtonComponent {
 
   public variant = input<'unstyled' | 'default'>()
   public type = input<string>()
-  public disabled = input<boolean>()
+  @Input() public disabled!: boolean
 
   public onClick(event: Event) {
     this.press.emit(event)
