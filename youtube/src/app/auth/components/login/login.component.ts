@@ -9,7 +9,6 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { AuthService } from '../../services/auth/auth.service'
 import { Router } from '@angular/router'
 import { ReactiveFormsModule } from '@angular/forms'
-import { Observable, map, tap } from 'rxjs'
 import { AsyncPipe } from '@angular/common'
 
 @Component({
