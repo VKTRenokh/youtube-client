@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth/auth.service'
 import { Router } from '@angular/router'
 import { ReactiveFormsModule } from '@angular/forms'
 import { AsyncPipe } from '@angular/common'
+import { passwordValidator } from '../../validators/password.validator'
+import { specialSymbols } from '../../constants/symbols.constant'
 
 @Component({
   selector: 'yt-login',
@@ -32,7 +34,11 @@ export class LoginComponent {
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
-      [Validators.required, Validators.min(6)],
+      [
+        Validators.required,
+        Validators.minLength(8),
+        passwordValidator(specialSymbols),
+      ],
     ],
   })
 
