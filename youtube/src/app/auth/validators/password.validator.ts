@@ -13,22 +13,36 @@ const hasCharacter = (
 const hasUppercaseCharacter = (string: string) =>
   /[A-Z]/.test(string)
 
+const hasNumbers = (string: string) => /[0-9]/.test(string)
+
+const createValidationErrors = (
+  control: AbstractControl,
+) => {
+  const errors: ValidationErrors = {}
+
+  return {
+    get: () => (isEmptyObject(errors) ? null : errors),
+    add: (name: string) =>
+      (errors[name] = { value: control.value }),
+  }
+}
+
 export const passwordValidator =
   (requiredCharacters: string[]) =>
   (control: AbstractControl): ValidationErrors | null => {
-    const errors: ValidationErrors = {}
+    const errors = createValidationErrors(control)
 
     if (!hasCharacter(requiredCharacters, control.value)) {
-      errors['requiredCharacters'] = {
-        value: control.value,
-      }
+      errors.add('requiredCharacters')
     }
 
     if (!hasUppercaseCharacter(control.value)) {
-      errors['uppercaseCharacter'] = {
-        value: control.value,
-      }
+      errors.add('uppercaseCharacter')
     }
 
-    return isEmptyObject(errors) ? null : errors
+    if (!hasNumbers(control.value)) {
+      errors.add('numbers')
+    }
+
+    return errors.get()
   }
