@@ -1,4 +1,8 @@
-import { FormBuilder, Validators } from '@angular/forms'
+import {
+  AbstractControl,
+  FormBuilder,
+  Validators,
+} from '@angular/forms'
 import {
   ChangeDetectionStrategy,
   Component,
@@ -50,6 +54,10 @@ export class LoginComponent {
       Numbers,
       'Password should contain at least one number',
     ],
+    [
+      'minlength',
+      'Password length should be at least 8 symbols',
+    ],
   ])
 
   public loginForm = this.formBuilder.group({
@@ -81,13 +89,17 @@ export class LoginComponent {
 
     const errors = Object.keys(this.password.errors)
 
+    console.log(errors)
+
     return errors.map(error =>
       this.passwordValidationMap.get(error),
     )
   }
 
-  public didTouch(control: any) {
-    return control.dirty || control.touched
+  public didTouch(control: AbstractControl | null) {
+    return control
+      ? control.dirty || control.touched
+      : false
   }
 
   public onSubmit() {
