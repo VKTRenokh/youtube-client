@@ -1,0 +1,9 @@
+@let errors = convertedErrors | async;
+
+@if (errors) {
+  @for (error of errors; track error) {
+    <div class="validation-errors">
+      <span class="validation-error">{{ error }}</span>
+    </div>
+  }
+}

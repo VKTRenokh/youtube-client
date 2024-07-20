@@ -13,7 +13,6 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { AuthService } from '../../services/auth/auth.service'
 import { Router } from '@angular/router'
 import { ReactiveFormsModule } from '@angular/forms'
-import { AsyncPipe } from '@angular/common'
 import {
   RequiredCharacters,
   UppercaseCharacter,
@@ -21,6 +20,7 @@ import {
 } from '../../validators/password.validator'
 import { specialSymbols } from '../../constants/symbols.constant'
 import { Numbers } from '../../validators/password.validator'
+import { ValidationErrorsComponent } from '../../../shared/components/validation-errors/validation-errors.component'
 
 @Component({
   selector: 'yt-login',
@@ -28,7 +28,7 @@ import { Numbers } from '../../validators/password.validator'
   imports: [
     ButtonComponent,
     ReactiveFormsModule,
-    AsyncPipe,
+    ValidationErrorsComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -88,8 +88,6 @@ export class LoginComponent {
     }
 
     const errors = Object.keys(this.password.errors)
-
-    console.log(errors)
 
     return errors.map(error =>
       this.passwordValidationMap.get(error),

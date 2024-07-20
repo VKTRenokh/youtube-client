@@ -15,20 +15,14 @@
       placeholder="password"
       formControlName="password"
     />
-    <div class="validation-errors">
-      @if (
-        getPasswordValidationErrors() && didTouch(password)
-      ) {
-        @for (
-          validationError of getPasswordValidationErrors();
-          track validationError
-        ) {
-          <span class="validation-error">{{
-            validationError
-          }}</span>
-        }
-      }
-    </div>
+    @if (password && passwordValidationMap) {
+      test
+
+      <yt-validation-errors
+        [control]="password"
+        [errorConversions]="passwordValidationMap"
+      />
+    }
     <yt-button
       ariaLabel="Login"
       type="submit"
