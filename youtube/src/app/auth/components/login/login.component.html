@@ -1,23 +1,39 @@
-<form
-  class="login"
-  [formGroup]="loginForm"
-  (ngSubmit)="onSubmit()"
->
-  <h2>Login</h2>
-  <input
-    type="email"
-    placeholder="email"
-    formControlName="email"
-  />
-  <input
-    type="password"
-    placeholder="password"
-    formControlName="password"
-  />
-  <yt-button
-    ariaLabel="Login"
-    type="submit"
-    [disabled]="loginForm.status === 'INVALID'"
-    >Login</yt-button
+<div class="login-page">
+  <form
+    class="login"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
   >
-</form>
+    <h2>Login</h2>
+    <input
+      type="email"
+      placeholder="email"
+      formControlName="email"
+    />
+    <input
+      type="password"
+      placeholder="password"
+      formControlName="password"
+    />
+    <div class="validation-errors">
+      @if (
+        getPasswordValidationErrors() && didTouch(password)
+      ) {
+        @for (
+          validationError of getPasswordValidationErrors();
+          track validationError
+        ) {
+          <span class="validation-error">{{
+            validationError
+          }}</span>
+        }
+      }
+    </div>
+    <yt-button
+      ariaLabel="Login"
+      type="submit"
+      [disabled]="loginForm.status === 'INVALID'"
+      >Login</yt-button
+    >
+  </form>
+</div>

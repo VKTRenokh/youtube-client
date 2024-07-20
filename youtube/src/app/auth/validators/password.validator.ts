@@ -4,6 +4,10 @@ import {
 } from '@angular/forms'
 import { isEmptyObject } from '../../shared/utils/is-empty-object'
 
+export const RequiredCharacters = 'requiredCharacters'
+export const UppercaseCharacter = 'uppercaseCharacter'
+export const Numbers = 'numbers'
+
 const hasCharacter = (
   characters: string[],
   string: string,
@@ -33,15 +37,15 @@ export const passwordValidator =
     const errors = createValidationErrors(control)
 
     if (!hasCharacter(requiredCharacters, control.value)) {
-      errors.add('requiredCharacters')
+      errors.add(RequiredCharacters)
     }
 
     if (!hasUppercaseCharacter(control.value)) {
-      errors.add('uppercaseCharacter')
+      errors.add(UppercaseCharacter)
     }
 
     if (!hasNumbers(control.value)) {
-      errors.add('numbers')
+      errors.add(Numbers)
     }
 
     return errors.get()
