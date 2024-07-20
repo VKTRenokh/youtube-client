@@ -15,14 +15,7 @@
       placeholder="password"
       formControlName="password"
     />
-    @if (password && passwordValidationMap) {
-      test
-
-      <yt-validation-errors
-        [control]="password"
-        [errorConversions]="passwordValidationMap"
-      />
-    }
+    <yt-validation-errors formControlName="password" />
     <yt-button
       ariaLabel="Login"
       type="submit"

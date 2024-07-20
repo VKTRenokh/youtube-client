@@ -45,7 +45,6 @@ export const passwordValidator =
     }
 
     if (!hasNumbers(control.value)) {
-      console.log('number addition erro')
       errors.add(Numbers)
     }
 
