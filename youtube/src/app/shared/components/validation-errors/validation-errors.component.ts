@@ -10,7 +10,7 @@ import {
   ControlValueAccessor,
   NgControl,
   StatusChangeEvent,
-  ValidationErrors,
+  ValueChangeEvent,
 } from '@angular/forms'
 import { CUSTOM_ERRORS } from '../../tokens/custom-errors.token'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
@@ -31,7 +31,9 @@ export class ValidationErrorsComponent
   private destroyRef = inject(DestroyRef, { self: true })
 
   public customErrors = inject(CUSTOM_ERRORS)
-  public validationError = signal<string | null>('')
+  public validationError = signal<
+    string | null | undefined
+  >('')
 
   public constructor() {
     this.control.valueAccessor = this
@@ -58,19 +60,17 @@ export class ValidationErrorsComponent
 
     const error = this.getCustomErrors()
 
-    if (!error) {
-      return
-    }
-
     this.validationError.set(error)
   }
 
   public ngOnInit(): void {
     this.control.control?.events
       .pipe(
-        tap(console.log),
-        filter(event => event instanceof StatusChangeEvent),
-        tap(console.log),
+        filter(
+          event =>
+            event instanceof StatusChangeEvent ||
+            event instanceof ValueChangeEvent,
+        ),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(() => {
