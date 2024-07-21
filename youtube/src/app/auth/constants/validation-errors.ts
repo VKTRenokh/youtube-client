@@ -20,4 +20,5 @@ export const validationErrors = new Map([
     'Password length should be at least 8 symbols',
   ],
   ['required', 'This field is required'],
+  ['email', 'Email should be valid'],
 ])

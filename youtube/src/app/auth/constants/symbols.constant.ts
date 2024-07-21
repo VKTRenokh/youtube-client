@@ -1,1 +1,2 @@
-export const specialSymbols = '^&*()-=[]\\`_+{}|~'.split('')
+export const specialSymbols =
+  '!@#$%^&*()-=[]\\`_+{}|~'.split('')

@@ -50,6 +50,7 @@ export class ValidationErrorsComponent
   }
 
   public getCustomError() {
+    console.log(this.errorsKeys)
     return this.customErrors.get(this.errorsKeys[0])
   }
 
