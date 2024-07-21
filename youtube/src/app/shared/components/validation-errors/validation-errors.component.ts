@@ -42,15 +42,10 @@ export class ValidationErrorsComponent
   }
 
   public shouldShowErrors() {
-    return (
-      this.control.invalid &&
-      this.control.dirty &&
-      this.control.errors
-    )
+    return this.control.dirty
   }
 
   public getCustomError() {
-    console.log(this.errorsKeys)
     return this.customErrors.get(this.errorsKeys[0])
   }
 
@@ -59,9 +54,7 @@ export class ValidationErrorsComponent
       return
     }
 
-    const error = this.getCustomError()
-
-    this.validationError.set(error)
+    this.validationError.set(this.getCustomError())
   }
 
   public ngOnInit(): void {
