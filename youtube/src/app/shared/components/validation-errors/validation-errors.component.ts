@@ -9,10 +9,12 @@ import {
 import {
   ControlValueAccessor,
   NgControl,
+  StatusChangeEvent,
   ValidationErrors,
 } from '@angular/forms'
 import { CUSTOM_ERRORS } from '../../tokens/custom-errors.token'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { filter, tap } from 'rxjs'
 
 @Component({
   selector: 'yt-validation-errors',
@@ -39,35 +41,40 @@ export class ValidationErrorsComponent
     return (
       this.control.invalid &&
       this.control.dirty &&
-      this.control.touched &&
       this.control.errors
     )
   }
 
-  public getCustomErrors(errors: ValidationErrors) {
-    return this.customErrors.get(Object.keys(errors)[0])
+  public getCustomErrors() {
+    return this.customErrors.get(
+      Object.keys(this.control.errors ?? {})[0],
+    )
+  }
+
+  public updateErrors() {
+    if (!this.shouldShowErrors()) {
+      return
+    }
+
+    const error = this.getCustomErrors()
+
+    if (!error) {
+      return
+    }
+
+    this.validationError.set(error)
   }
 
   public ngOnInit(): void {
     this.control.control?.events
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        tap(console.log),
+        filter(event => event instanceof StatusChangeEvent),
+        tap(console.log),
+        takeUntilDestroyed(this.destroyRef),
+      )
       .subscribe(() => {
-        if (
-          !this.shouldShowErrors() ||
-          !this.control.errors
-        ) {
-          return
-        }
-
-        const error = this.getCustomErrors(
-          this.control.errors,
-        )
-
-        if (!error) {
-          return
-        }
-
-        this.validationError.set(error)
+        this.updateErrors()
       })
   }
 
