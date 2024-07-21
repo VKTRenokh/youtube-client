@@ -43,14 +43,11 @@ export class LoginComponent {
       Validators.required,
       Validators.email,
     ]),
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        ...passwordValidator(specialSymbols),
-      ],
-    ],
+    password: this.formBuilder.control('', [
+      Validators.required,
+      Validators.minLength(8),
+      ...passwordValidator(specialSymbols),
+    ]),
   })
 
   public rederictTo = input.required<string>()
