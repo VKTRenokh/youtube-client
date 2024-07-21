@@ -9,16 +9,18 @@ import {
   Validators,
 } from '@angular/forms'
 import { ValidationErrorsComponent } from '../../../shared/components/validation-errors/validation-errors.component'
-import {
-  CUSTOM_ERRORS,
-  CustomErrors,
-} from '../../../shared/tokens/custom-errors.token'
+import { CUSTOM_ERRORS } from '../../../shared/tokens/custom-errors.token'
 import { validationErrors } from '../../constants/validation-errors.constant'
+import { ButtonComponent } from '../../../shared/components/button/button.component'
 
 @Component({
   selector: 'yt-card-creation-form',
   standalone: true,
-  imports: [ReactiveFormsModule, ValidationErrorsComponent],
+  imports: [
+    ReactiveFormsModule,
+    ValidationErrorsComponent,
+    ButtonComponent,
+  ],
   templateUrl: './card-creation-form.component.html',
   styleUrl: './card-creation-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -32,18 +34,18 @@ import { validationErrors } from '../../constants/validation-errors.constant'
 export class CardCreationFormComponent {
   private formBuilder = inject(FormBuilder)
 
-  public helloInputErrors: CustomErrors = {
-    minlength: 'Hello World',
-  }
-
   public cardForm = this.formBuilder.group({
-    test: this.formBuilder.control('', [
+    title: this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(3),
+      Validators.maxLength(20),
     ]),
-    hello: this.formBuilder.control('', [
+    description: this.formBuilder.control('', [
+      Validators.maxLength(255),
+    ]),
+    imageLink: this.formBuilder.control('', [
       Validators.required,
-      Validators.minLength(3),
     ]),
+    createdAt: this.formBuilder.control('', []),
   })
 }

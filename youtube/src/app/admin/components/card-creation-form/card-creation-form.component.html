@@ -1,9 +1,33 @@
-<form [formGroup]="cardForm">
-  <input type="text" formControlName="test" />
-  <yt-validation-errors formControlName="test" />
-  <input type="" formControlName="hello" />
-  <yt-validation-errors
-    formControlName="hello"
-    [errors]="helloInputErrors"
+<form class="card-creation-form" [formGroup]="cardForm">
+  <h3>Create card</h3>
+  <input
+    type="text"
+    placeholder="Enter card title"
+    formControlName="title"
   />
+  <yt-validation-errors formControlName="title" />
+  <input
+    type="text"
+    placeholder="Enter card description (optional)"
+    formControlName="description"
+  />
+  <yt-validation-errors formControlName="description" />
+  <input
+    type="text"
+    placeholder="Enter card image link"
+    formControlName="imageLink"
+  />
+  <yt-validation-errors formControlName="imageLink" />
+  <input
+    type="text"
+    placeholder="Enter card image link"
+    formControlName="createdAt"
+  />
+  <yt-validation-errors formControlName="createdAt" />
+  <yt-button
+    ariaLabel="Create card"
+    type="submit"
+    [disabled]="cardForm.invalid"
+    >Create</yt-button
+  >
 </form>
