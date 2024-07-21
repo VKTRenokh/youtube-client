@@ -48,7 +48,7 @@ export class LoginComponent {
       [
         Validators.required,
         Validators.minLength(8),
-        passwordValidator(specialSymbols),
+        ...passwordValidator(specialSymbols),
       ],
     ],
   })
