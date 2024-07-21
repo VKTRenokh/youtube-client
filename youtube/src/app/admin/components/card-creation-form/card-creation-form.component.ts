@@ -9,7 +9,10 @@ import {
   Validators,
 } from '@angular/forms'
 import { ValidationErrorsComponent } from '../../../shared/components/validation-errors/validation-errors.component'
-import { CUSTOM_ERRORS } from '../../../shared/tokens/custom-errors.token'
+import {
+  CUSTOM_ERRORS,
+  CustomErrors,
+} from '../../../shared/tokens/custom-errors.token'
 import { validationErrors } from '../../constants/validation-errors.constant'
 
 @Component({
@@ -29,8 +32,16 @@ import { validationErrors } from '../../constants/validation-errors.constant'
 export class CardCreationFormComponent {
   private formBuilder = inject(FormBuilder)
 
+  public helloInputErrors: CustomErrors = {
+    minlength: 'Hello World',
+  }
+
   public cardForm = this.formBuilder.group({
     test: this.formBuilder.control('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    hello: this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(3),
     ]),

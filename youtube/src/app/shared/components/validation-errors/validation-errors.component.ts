@@ -3,6 +3,7 @@ import {
   Component,
   DestroyRef,
   inject,
+  input,
   OnInit,
   signal,
 } from '@angular/core'
@@ -14,7 +15,10 @@ import {
 } from '@angular/forms'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { filter } from 'rxjs'
-import { CUSTOM_ERRORS } from '../../tokens/custom-errors.token'
+import {
+  CUSTOM_ERRORS,
+  type CustomErrors,
+} from '../../tokens/custom-errors.token'
 
 @Component({
   selector: 'yt-validation-errors',
@@ -31,6 +35,7 @@ export class ValidationErrorsComponent
   private destroyRef = inject(DestroyRef, { self: true })
 
   public customErrors = inject(CUSTOM_ERRORS)
+  public errors = input<CustomErrors>({})
   public validationError = signal<string | undefined>('')
 
   public constructor() {
@@ -46,7 +51,7 @@ export class ValidationErrorsComponent
   }
 
   public getCustomError() {
-    return this.customErrors.get(this.errorsKeys[0])
+    return this.customErrors[this.errorsKeys[0]]
   }
 
   public updateErrors() {
@@ -58,6 +63,11 @@ export class ValidationErrorsComponent
   }
 
   public ngOnInit(): void {
+    this.customErrors = {
+      ...this.customErrors,
+      ...this.errors(),
+    }
+
     this.control.control?.events
       .pipe(
         filter(

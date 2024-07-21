@@ -1,4 +1,9 @@
 <form [formGroup]="cardForm">
   <input type="text" formControlName="test" />
   <yt-validation-errors formControlName="test" />
+  <input type="" formControlName="hello" />
+  <yt-validation-errors
+    formControlName="hello"
+    [errors]="helloInputErrors"
+  />
 </form>
