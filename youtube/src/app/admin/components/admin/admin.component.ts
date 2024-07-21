@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core'
+import { CardCreationFormComponent } from '../card-creation-form/card-creation-form.component'
 
 @Component({
   selector: 'yt-admin',
   standalone: true,
-  imports: [],
+  imports: [CardCreationFormComponent],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminComponent {
-
-}
+export class AdminComponent {}

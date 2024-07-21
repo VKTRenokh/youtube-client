@@ -1,7 +1,8 @@
 import { InjectionToken } from '@angular/core'
 
-// TODO: Use an object to specifiy different validation messages for different
+export type CustomErrors = Map<string, string>
+
+// TODO: Use an object (or a function) to specifiy different validation messages for different
 //       formControls
-export const CUSTOM_ERRORS = new InjectionToken<
-  Map<string, string>
->('CUSTOM_ERRORS')
+export const CUSTOM_ERRORS =
+  new InjectionToken<CustomErrors>('CUSTOM_ERRORS')

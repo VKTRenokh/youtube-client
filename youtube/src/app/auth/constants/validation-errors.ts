@@ -1,20 +1,19 @@
+import { CustomErrors } from '../../shared/tokens/custom-errors.token'
 import { specialSymbols } from '../constants/symbols.constant'
-import {
-  Numbers,
-  RequiredCharacters,
-  UppercaseCharacter,
-} from '../validators/password.validator'
 
-export const validationErrors = new Map([
+export const validationErrors: CustomErrors = new Map([
   [
-    RequiredCharacters,
+    'requiredCharacters',
     `Password should contain any of the following symbols: ${specialSymbols.join(' ')}`,
   ],
   [
-    UppercaseCharacter,
+    'uppercaseCharacter',
     'Password should contain at least one uppercase character',
   ],
-  [Numbers, 'Password should contain at least one number'],
+  [
+    'numbers',
+    'Password should contain at least one number',
+  ],
   [
     'minlength',
     'Password length should be at least 8 symbols',

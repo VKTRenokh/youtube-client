@@ -9,11 +9,11 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { AuthService } from '../../services/auth/auth.service'
 import { Router } from '@angular/router'
 import { ReactiveFormsModule } from '@angular/forms'
-import { passwordValidator } from '../../validators/password.validator'
 import { specialSymbols } from '../../constants/symbols.constant'
 import { ValidationErrorsComponent } from '../../../shared/components/validation-errors/validation-errors.component'
 import { CUSTOM_ERRORS } from '../../../shared/tokens/custom-errors.token'
 import { validationErrors } from '../../constants/validation-errors'
+import { passwordValidator } from '../../validators/password/password.validator'
 
 @Component({
   selector: 'yt-login',
