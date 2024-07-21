@@ -1,20 +1,23 @@
 import { specialSymbols } from '../constants/symbols.constant'
+import {
+  Numbers,
+  RequiredCharacters,
+  UppercaseCharacter,
+} from '../validators/password.validator'
 
 export const validationErrors = new Map([
   [
-    'requiredCharacters',
+    RequiredCharacters,
     `Password should contain any of the following symbols: ${specialSymbols.join(' ')}`,
   ],
   [
-    'uppercaseCharacter',
+    UppercaseCharacter,
     'Password should contain at least one uppercase character',
   ],
-  [
-    'numbers',
-    'Password should contain at least one number',
-  ],
+  [Numbers, 'Password should contain at least one number'],
   [
     'minlength',
     'Password length should be at least 8 symbols',
   ],
+  ['required', 'This field is required'],
 ])

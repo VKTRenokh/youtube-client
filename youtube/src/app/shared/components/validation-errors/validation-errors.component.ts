@@ -12,9 +12,9 @@ import {
   StatusChangeEvent,
   ValueChangeEvent,
 } from '@angular/forms'
-import { CUSTOM_ERRORS } from '../../tokens/custom-errors.token'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
-import { filter, tap } from 'rxjs'
+import { filter } from 'rxjs'
+import { CUSTOM_ERRORS } from '../../tokens/custom-errors.token'
 
 @Component({
   selector: 'yt-validation-errors',
@@ -31,12 +31,14 @@ export class ValidationErrorsComponent
   private destroyRef = inject(DestroyRef, { self: true })
 
   public customErrors = inject(CUSTOM_ERRORS)
-  public validationError = signal<
-    string | null | undefined
-  >('')
+  public validationError = signal<string | undefined>('')
 
   public constructor() {
     this.control.valueAccessor = this
+  }
+
+  public get errorsKeys() {
+    return Object.keys(this.control.errors ?? {})
   }
 
   public shouldShowErrors() {
@@ -47,10 +49,8 @@ export class ValidationErrorsComponent
     )
   }
 
-  public getCustomErrors() {
-    return this.customErrors.get(
-      Object.keys(this.control.errors ?? {})[0],
-    )
+  public getCustomError() {
+    return this.customErrors.get(this.errorsKeys[0])
   }
 
   public updateErrors() {
@@ -58,7 +58,7 @@ export class ValidationErrorsComponent
       return
     }
 
-    const error = this.getCustomErrors()
+    const error = this.getCustomError()
 
     this.validationError.set(error)
   }
