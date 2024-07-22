@@ -27,6 +27,13 @@ export const routes: Routes = [
     canMatch: [authGuard],
   },
   {
+    path: 'admin',
+    loadComponent: () =>
+      import(
+        './admin/components/admin/admin.component.js'
+      ).then(M => M.AdminComponent),
+  },
+  {
     path: '**',
     pathMatch: 'full',
     loadComponent: () =>

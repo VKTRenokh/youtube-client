@@ -1,16 +1,28 @@
-<div class="login">
-  <h2>Login</h2>
-  <input
-    type="email"
-    placeholder="email"
-    [(ngModel)]="email"
-  />
-  <input
-    type="password"
-    placeholder="password"
-    [(ngModel)]="password"
-  />
-  <yt-button aria-label="Login" (press)="login()"
-    >Login</yt-button
+<!-- TODO: move form into separate component -->
+<div class="login-page">
+  <form
+    class="login"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
   >
+    <h2>Login</h2>
+    <input
+      type="email"
+      placeholder="email"
+      formControlName="email"
+    />
+    <yt-validation-errors formControlName="email" />
+    <input
+      type="password"
+      placeholder="password"
+      formControlName="password"
+    />
+    <yt-validation-errors formControlName="password" />
+    <yt-button
+      ariaLabel="Login"
+      type="submit"
+      [disabled]="loginForm.invalid"
+      >Login</yt-button
+    >
+  </form>
 </div>

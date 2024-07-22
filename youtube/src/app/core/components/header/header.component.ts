@@ -14,7 +14,12 @@ import { SearchService } from '../../../youtube/services/search/search.service'
 import { FilterService } from '../../../youtube/services/filter/filter.service'
 import { Router } from '@angular/router'
 import { AuthService } from '../../../auth/services/auth/auth.service'
-import { debounceTime, filter, switchMap } from 'rxjs'
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  switchMap,
+} from 'rxjs'
 import { searchTimeout } from '../../constants/search-timeout.constant'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { stringIsLongerThan } from '../../../shared/utils/string-is-longer-than'
@@ -52,6 +57,7 @@ export class HeaderComponent {
         switchMap(search =>
           this.searchService.search(search),
         ),
+        distinctUntilChanged(),
         takeUntilDestroyed(),
       )
       .subscribe()

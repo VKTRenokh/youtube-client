@@ -3,6 +3,7 @@
   "semi": false,
   "singleQuote": true,
   "arrowParens": "avoid",
+  "bracketSpacing": true,
   "overrides": [
     {
       "files": "*.html",

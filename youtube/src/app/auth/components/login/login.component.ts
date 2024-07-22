@@ -1,40 +1,58 @@
+import { FormBuilder, Validators } from '@angular/forms'
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   input,
-  signal,
 } from '@angular/core'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { AuthService } from '../../services/auth/auth.service'
-import { FormsModule } from '@angular/forms'
 import { Router } from '@angular/router'
+import { ReactiveFormsModule } from '@angular/forms'
+import { specialSymbols } from '../../constants/symbols.constant'
+import { ValidationErrorsComponent } from '../../../shared/components/validation-errors/validation-errors.component'
+import { CUSTOM_ERRORS } from '../../../shared/tokens/custom-errors.token'
+import { validationErrors } from '../../constants/validation-errors'
+import { passwordValidator } from '../../validators/password/password.validator'
 
 @Component({
   selector: 'yt-login',
   standalone: true,
-  imports: [ButtonComponent, FormsModule],
+  imports: [
+    ButtonComponent,
+    ReactiveFormsModule,
+    ValidationErrorsComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: CUSTOM_ERRORS,
+      useValue: validationErrors,
+    },
+  ],
 })
 export class LoginComponent {
   private authService = inject(AuthService)
   private router = inject(Router)
+  private formBuilder = inject(FormBuilder)
+
+  public loginForm = this.formBuilder.group({
+    email: this.formBuilder.control('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: this.formBuilder.control('', [
+      Validators.required,
+      Validators.minLength(8),
+      ...passwordValidator(specialSymbols),
+    ]),
+  })
 
   public rederictTo = input.required<string>()
-  public password = signal('')
-  public email = signal('')
 
-  private isEmpty() {
-    return !this.password() && !this.email()
-  }
-
-  public login() {
-    if (this.isEmpty()) {
-      return
-    }
-
+  public onSubmit() {
     this.authService.login()
     this.router.navigate([this.rederictTo() || '/'])
   }

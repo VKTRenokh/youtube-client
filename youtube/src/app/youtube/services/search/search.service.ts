@@ -1,7 +1,8 @@
 import { Injectable, inject, signal } from '@angular/core'
 import { VideosResponse } from '../../models/response.model'
 import { map, switchMap, tap } from 'rxjs'
-import { VideosHttpService } from '../videos-http /videos-http.service'
+import { VideosHttpService } from '../videos-http/videos-http.service'
+
 @Injectable({
   providedIn: 'root',
 })

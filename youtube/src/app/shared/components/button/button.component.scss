@@ -20,4 +20,12 @@
       background-color: var(--color-accent-darker);
     }
   }
+
+  &:disabled {
+    background-color: var(--color-light-grey-600);
+    cursor: not-allowed;
+    &:hover {
+      background-color: var(--color-light-grey-600);
+    }
+  }
 }

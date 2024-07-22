@@ -1,8 +1,8 @@
 <!-- TODO: Break this into smaller components -->
 <header class="youtube-header">
   <yt-button
-    type="unstyled"
-    aria-label="Goto main page"
+    variant="unstyled"
+    ariaLabel="Goto main page"
     (press)="navigateToMainPage()"
   >
     <img
@@ -24,8 +24,8 @@
   </div>
   <div>
     <yt-button
-      aria-label="open filters"
-      type="unstyled"
+      ariaLabel="open filters"
+      variant="unstyled"
       (press)="openFilters()"
     >
       <img
@@ -36,7 +36,7 @@
       />
     </yt-button>
     @if (isAuthorized()) {
-      <yt-button aria-label="Logout" (press)="logout()"
+      <yt-button ariaLabel="Logout" (press)="logout()"
         >Logout</yt-button
       >
     }
