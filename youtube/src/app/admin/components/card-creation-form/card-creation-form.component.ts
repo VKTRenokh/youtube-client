@@ -13,6 +13,7 @@ import { CUSTOM_ERRORS } from '../../../shared/tokens/custom-errors.token'
 import { validationErrors } from '../../constants/validation-errors.constant'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { linkValidator } from '../../../shared/validators/link/link.validator'
+import { isNotFutureDateValidator } from '../../../shared/validators/is-not-future-date/is-not-future-date.validator'
 
 @Component({
   selector: 'yt-card-creation-form',
@@ -50,6 +51,7 @@ export class CardCreationFormComponent {
     ]),
     createdAt: this.formBuilder.control('', [
       Validators.required,
+      isNotFutureDateValidator,
     ]),
     videoLink: this.formBuilder.control('', [
       Validators.required,

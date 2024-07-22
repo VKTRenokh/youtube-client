@@ -5,4 +5,5 @@ export const validationErrors: CustomErrors = {
   minlength: 'This field content is too short',
   maxlength: 'This field content is too long',
   url: 'Please enter a valid url.',
+  futureDate: 'Date should not be future',
 }
