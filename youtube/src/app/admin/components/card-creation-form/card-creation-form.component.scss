@@ -11,4 +11,9 @@
   input.ng-invalid.ng-touched {
     border: 2px solid red;
   }
+
+  .tags-form {
+    display: flex;
+    flex-direction: column;
+  }
 }

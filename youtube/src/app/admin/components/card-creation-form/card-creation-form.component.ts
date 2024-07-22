@@ -4,6 +4,7 @@ import {
   inject,
 } from '@angular/core'
 import {
+  FormArray,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
@@ -14,6 +15,8 @@ import { validationErrors } from '../../constants/validation-errors.constant'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { linkValidator } from '../../../shared/validators/link/link.validator'
 import { isNotFutureDateValidator } from '../../../shared/validators/is-not-future-date/is-not-future-date.validator'
+
+const MAX_TAGS_FORM_LENGTH = 5
 
 @Component({
   selector: 'yt-card-creation-form',
@@ -57,5 +60,26 @@ export class CardCreationFormComponent {
       Validators.required,
       linkValidator,
     ]),
+    tags: this.formBuilder.array([
+      this.createTagFormControl(),
+    ]),
   })
+
+  public get tags() {
+    return this.cardForm.get('tags') as FormArray
+  }
+
+  public createTagFormControl() {
+    return this.formBuilder.control('', [
+      Validators.required,
+    ])
+  }
+
+  public pushTagFormControl() {
+    if (this.tags.length >= MAX_TAGS_FORM_LENGTH) {
+      return
+    }
+
+    this.tags.push(this.createTagFormControl())
+  }
 }

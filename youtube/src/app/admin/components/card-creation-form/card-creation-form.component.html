@@ -30,6 +30,23 @@
     formControlName="videoLink"
   />
   <yt-validation-errors formControlName="videoLink" />
+  <form formArrayName="tags" class="tags-form">
+    <h4>Card Tags</h4>
+    <yt-button
+      (press)="pushTagFormControl()"
+      ariaLabel="create new tag"
+      type="button"
+      >Add new tag</yt-button
+    >
+    @for (tag of tags.controls; let i = $index; track i) {
+      <input
+        type="text"
+        placeholder="alias {{ i }}"
+        [formControlName]="i"
+      />
+      <yt-validation-errors [formControlName]="i" />
+    }
+  </form>
   <yt-button
     ariaLabel="Create card"
     type="submit"
