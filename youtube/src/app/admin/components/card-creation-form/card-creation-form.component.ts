@@ -12,6 +12,7 @@ import { ValidationErrorsComponent } from '../../../shared/components/validation
 import { CUSTOM_ERRORS } from '../../../shared/tokens/custom-errors.token'
 import { validationErrors } from '../../constants/validation-errors.constant'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
+import { linkValidator } from '../../../shared/validators/link/link.validator'
 
 @Component({
   selector: 'yt-card-creation-form',
@@ -45,7 +46,14 @@ export class CardCreationFormComponent {
     ]),
     imageLink: this.formBuilder.control('', [
       Validators.required,
+      linkValidator,
     ]),
-    createdAt: this.formBuilder.control('', []),
+    createdAt: this.formBuilder.control('', [
+      Validators.required,
+    ]),
+    videoLink: this.formBuilder.control('', [
+      Validators.required,
+      linkValidator,
+    ]),
   })
 }
