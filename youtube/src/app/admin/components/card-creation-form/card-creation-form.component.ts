@@ -69,6 +69,12 @@ export class CardCreationFormComponent {
     return this.cardForm.get('tags') as FormArray
   }
 
+  public resetTags() {
+    while (this.tags.length > 1) {
+      this.tags.removeAt(this.tags.length - 1)
+    }
+  }
+
   public createTagFormControl() {
     return this.formBuilder.control('', [
       Validators.required,
@@ -84,7 +90,7 @@ export class CardCreationFormComponent {
   }
 
   public reset() {
+    this.resetTags()
     this.cardForm.reset()
-    this.tags.clear()
   }
 }
