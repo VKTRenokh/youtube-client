@@ -41,12 +41,18 @@
     @for (tag of tags.controls; let i = $index; track i) {
       <input
         type="text"
-        placeholder="alias {{ i }}"
+        placeholder="Tag {{ i + 1 }}"
         [formControlName]="i"
       />
       <yt-validation-errors [formControlName]="i" />
     }
   </form>
+  <yt-button
+    ariaLabel="reset form"
+    (press)="reset()"
+    type="button"
+    >Reset</yt-button
+  >
   <yt-button
     ariaLabel="Create card"
     type="submit"

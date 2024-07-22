@@ -82,4 +82,9 @@ export class CardCreationFormComponent {
 
     this.tags.push(this.createTagFormControl())
   }
+
+  public reset() {
+    this.cardForm.reset()
+    this.tags.clear()
+  }
 }
