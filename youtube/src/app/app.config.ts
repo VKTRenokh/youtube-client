@@ -17,7 +17,9 @@ import {
 import { youtubeInterceptor } from './youtube/interceptors/youtube/youtube.interceptor'
 import { loggerInterceptor } from './core/interceptors/logger/logger.interceptor'
 import { provideStore } from '@ngrx/store'
-import { counterReducer } from './state/reducers/counter.reducer'
+import { provideEffects } from '@ngrx/effects'
+import { YoutubeEffects } from './state/effects/youtube.effect'
+import { youtubeReducer } from './state/reducers/youtube.reducer'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +33,7 @@ export const appConfig: ApplicationConfig = {
         loggerInterceptor,
       ]),
     ),
-    provideStore({ counter: counterReducer }),
+    provideStore({ youtube: youtubeReducer }),
+    provideEffects(YoutubeEffects),
   ],
 }
