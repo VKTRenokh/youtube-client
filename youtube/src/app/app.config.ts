@@ -16,6 +16,8 @@ import {
 } from '@angular/common/http'
 import { youtubeInterceptor } from './youtube/interceptors/youtube/youtube.interceptor'
 import { loggerInterceptor } from './core/interceptors/logger/logger.interceptor'
+import { provideStore } from '@ngrx/store'
+import { counterReducer } from './state/reducers/counter.reducer'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,5 +31,6 @@ export const appConfig: ApplicationConfig = {
         loggerInterceptor,
       ]),
     ),
+    provideStore({ counter: counterReducer }),
   ],
 }
