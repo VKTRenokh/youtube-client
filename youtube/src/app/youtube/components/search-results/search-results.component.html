@@ -1,3 +1,5 @@
+@let _videos = videos | async;
+
 <div class="search-results">
   @if (isFilteringShown()) {
     <yt-filtering-criteria
@@ -7,9 +9,9 @@
   }
 
   <div class="search-items">
-    @if (videos()) {
+    @if (_videos) {
       @for (
-        video of videos()
+        video of _videos
           | word: currentWord()
           | sort: currentCriteria();
         track video.id

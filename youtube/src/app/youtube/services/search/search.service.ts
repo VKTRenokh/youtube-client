@@ -1,6 +1,5 @@
-import { Injectable, inject, signal } from '@angular/core'
-import { VideosResponse } from '../../models/response.model'
-import { map, switchMap, tap } from 'rxjs'
+import { Injectable, inject } from '@angular/core'
+import { map, switchMap } from 'rxjs'
 import { VideosHttpService } from '../videos-http/videos-http.service'
 
 @Injectable({
@@ -8,10 +7,6 @@ import { VideosHttpService } from '../videos-http/videos-http.service'
 })
 export class SearchService {
   private http = inject(VideosHttpService)
-
-  private videos = signal<VideosResponse | null>(null)
-
-  public data = this.videos.asReadonly()
 
   public search(search: string) {
     return this.http.search(search).pipe(
@@ -21,9 +16,6 @@ export class SearchService {
       switchMap(ids =>
         this.http.getVideosWithStatistics(ids),
       ),
-      tap(value => {
-        this.videos.set(value)
-      }),
     )
   }
 
