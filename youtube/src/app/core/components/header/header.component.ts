@@ -72,6 +72,10 @@ export class HeaderComponent {
     this.router.navigate(['/'])
   }
 
+  public navigateToAdminPage() {
+    this.router.navigate(['/admin'])
+  }
+
   public logout() {
     this.authService.logout()
     this.router.navigate(

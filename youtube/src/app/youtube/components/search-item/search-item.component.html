@@ -1,20 +1,24 @@
-<figure
-  class="youtube-video"
-  [ytColoredBorder]="snippet().publishedAt"
->
-  <div>
-    <img
-      [src]="smallThumbnail().url"
-      alt="Video Thumbnail"
-      [width]="smallThumbnail().width"
-      [height]="smallThumbnail().height"
-    />
-    <h4>{{ snippet().title }}</h4>
-  </div>
-  <yt-video-statistics [statistics]="item().statistics" />
-  <yt-button
-    ariaLabel="More button"
-    (press)="navigateToDetailedPage()"
-    >more</yt-button
+@if (!isCustomCard()) {
+  <figure
+    class="youtube-video"
+    [ytColoredBorder]="snippet().publishedAt"
   >
-</figure>
+    <div>
+      <img
+        [src]="smallThumbnail().url"
+        alt="Video Thumbnail"
+        [width]="smallThumbnail().width"
+        [height]="smallThumbnail().height"
+      />
+      <h4>{{ snippet().title }}</h4>
+    </div>
+    <yt-video-statistics [statistics]="item().statistics" />
+    <yt-button
+      ariaLabel="More button"
+      (press)="navigateToDetailedPage()"
+      >more</yt-button
+    >
+  </figure>
+} @else {
+  <span>i am a custom card what do you want from me</span>
+}
