@@ -105,7 +105,6 @@ export class CardCreationFormComponent {
   }
 
   public submit() {
-    console.log('console log submit ng submit')
     const rawValue = this.cardForm.getRawValue()
 
     this.store.dispatch(
