@@ -104,19 +104,23 @@ export class CardCreationFormComponent {
     this.cardForm.reset()
   }
 
-  public submit() {
-    const rawValue = this.cardForm.getRawValue()
+  public getCardInfo() {
+    const raw = this.cardForm.getRawValue()
 
+    return {
+      tags: this.tags.value,
+      title: raw.title,
+      createdAt: raw.createdAt,
+      videoLink: raw.videoLink,
+      imageLink: raw.imageLink,
+      description: raw.description,
+    }
+  }
+
+  public submit() {
     this.store.dispatch(
       YoutubeActions.createCustomCard({
-        card: {
-          tags: this.tags.value,
-          title: rawValue.title,
-          createdAt: rawValue.createdAt,
-          videoLink: rawValue.videoLink,
-          imageLink: rawValue.imageLink,
-          description: rawValue.description,
-        },
+        card: this.getCardInfo(),
       }),
     )
   }

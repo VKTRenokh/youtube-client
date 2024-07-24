@@ -6,7 +6,13 @@ import { SortPipe } from '../../pipes/sort/sort.pipe'
 import { WordPipe } from '../../pipes/word/word.pipe'
 import { FilterService } from '../../services/filter/filter.service'
 import { Store, select } from '@ngrx/store'
-import { Observable, filter, map } from 'rxjs'
+import {
+  Observable,
+  filter,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { VideoItem } from '../../models/response.model'
 import { AsyncPipe } from '@angular/common'
@@ -27,6 +33,9 @@ import { AsyncPipe } from '@angular/common'
 export class SearchResultsComponent {
   private filterService = inject(FilterService)
   private store = inject(Store)
+  private customCards = this.store.pipe(
+    select(state => state.youtube.customCards),
+  )
 
   public currentCriteria = signal<SortOptions | null>(null)
   public currentWord = signal<string>('')
@@ -37,6 +46,12 @@ export class SearchResultsComponent {
     select(state => state.youtube.data),
     filter(isNotNullable),
     map(data => data.items),
+    switchMap(items =>
+      this.customCards.pipe(
+        map(customCards => customCards.concat(items)),
+      ),
+    ),
+    tap(console.log),
   )
 
   public updateSortingCriteria(newCriteria: SortOptions) {
