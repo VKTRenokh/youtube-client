@@ -114,6 +114,7 @@ export class CardCreationFormComponent {
       videoLink: raw.videoLink,
       imageLink: raw.imageLink,
       description: raw.description,
+      id: crypto.randomUUID(),
       isCustom: true,
     }
   }

@@ -16,7 +16,13 @@
           | sort: currentCriteria();
         track video.id
       ) {
-        <yt-search-item [item]="video" />
+        @if (!isCustomCard(video)) {
+          <yt-search-item [item]="video" />
+        } @else {
+          <yt-custom-search-item
+            [item]="video"
+          ></yt-custom-search-item>
+        }
       }
     }
   </div>

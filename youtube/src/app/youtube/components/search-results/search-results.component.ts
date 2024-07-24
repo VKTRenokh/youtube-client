@@ -16,12 +16,18 @@ import {
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { VideoItem } from '../../models/response.model'
 import { AsyncPipe } from '@angular/common'
+import { CustomSearchItemComponent } from '../custom-search-item/custom-search-item.component'
+import {
+  CustomCard,
+  isCustomCard,
+} from '../../../admin/models/custom-card.model'
 
 @Component({
   selector: 'yt-search-results',
   standalone: true,
   imports: [
     SearchItemComponent,
+    CustomSearchItemComponent,
     FilteringCriteriaComponent,
     WordPipe,
     SortPipe,
@@ -42,17 +48,17 @@ export class SearchResultsComponent {
   public isFilteringShown =
     this.filterService.getIsFilteringShown()
 
-  public videos: Observable<VideoItem[]> = this.store.pipe(
-    select(state => state.youtube.data),
-    filter(isNotNullable),
-    map(data => data.items),
-    switchMap(items =>
-      this.customCards.pipe(
-        map(customCards => customCards.concat(items)),
+  public videos: Observable<(VideoItem | CustomCard)[]> =
+    this.store.pipe(
+      select(state => state.youtube.data),
+      filter(isNotNullable),
+      map(data => data.items),
+      switchMap(items =>
+        this.customCards.pipe(
+          map(customCards => customCards.concat(items)),
+        ),
       ),
-    ),
-    tap(console.log),
-  )
+    )
 
   public updateSortingCriteria(newCriteria: SortOptions) {
     this.currentCriteria.set(newCriteria)
@@ -60,5 +66,9 @@ export class SearchResultsComponent {
 
   public updateByWordFilter(newWord: string) {
     this.currentWord.set(newWord)
+  }
+
+  public isCustomCard(card: unknown): card is CustomCard {
+    return isCustomCard(card)
   }
 }

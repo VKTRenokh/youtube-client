@@ -1,4 +1,12 @@
-import { SearchVideoItem } from '../models/response.model'
+import { isCustomCard } from '../../admin/models/custom-card.model'
+import { Item } from '../models/item.model'
 
-export const getViewsCount = (video: SearchVideoItem) =>
-  video.statistics.viewCount
+const MAX_RANDOM_VIEWS_COUNT = 100_000
+
+export const createRandomViewCount = () =>
+  Math.floor(Math.random() * MAX_RANDOM_VIEWS_COUNT)
+
+export const getViewsCount = (video: Item) =>
+  isCustomCard(video)
+    ? createRandomViewCount()
+    : video.statistics.viewCount

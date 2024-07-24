@@ -5,8 +5,16 @@ import {
   ofType,
 } from '@ngrx/effects'
 import { YoutubeActions } from '../actions/youtube.actions'
-import { catchError, exhaustMap, map, of } from 'rxjs'
+import {
+  catchError,
+  exhaustAll,
+  exhaustMap,
+  map,
+  of,
+  tap,
+} from 'rxjs'
 import { SearchService } from '../../youtube/services/search/search.service'
+import { CustomCardService } from '../../admin/services/custom-card/custom-card.service'
 
 export const searchEffect = createEffect(
   (
@@ -28,6 +36,22 @@ export const searchEffect = createEffect(
             ),
           ),
         ),
+      ),
+    ),
+  { functional: true },
+)
+
+export const cardCreationEffect = createEffect(
+  (
+    customCardService = inject(CustomCardService),
+    actions = inject(Actions),
+  ) =>
+    actions.pipe(
+      ofType(YoutubeActions.createCustomCard),
+      map(action =>
+        YoutubeActions.createCustomCardSucces({
+          card: customCardService.createCard(action.card),
+        }),
       ),
     ),
   { functional: true },

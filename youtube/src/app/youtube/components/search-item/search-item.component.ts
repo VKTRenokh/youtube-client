@@ -11,7 +11,6 @@ import { ColoredBorderDirective } from '../../directives/colored-border.directiv
 import { SearchVideoItem } from '../../models/response.model'
 import { Router } from '@angular/router'
 import { VideoStatisticsComponent } from '../video-statistics/video-statistics.component'
-import { isCustomCard } from '../../../admin/models/custom-card.model'
 
 @Component({
   selector: 'yt-search-item',
@@ -38,9 +37,5 @@ export class SearchItemComponent {
 
   public navigateToDetailedPage() {
     this.router.navigate(['/video', this.item().id])
-  }
-
-  public isCustomCard() {
-    return isCustomCard(this.item())
   }
 }

@@ -1,11 +1,15 @@
-export interface CustomCard {
+export interface CustomCardInfo {
   description: string
   imageLink: string
   createdAt: string
   videoLink: string
   tags: string[]
   title: string
+}
+
+export interface CustomCard extends CustomCardInfo {
   isCustom: boolean
+  id: string
 }
 
 export const isCustomCard = (

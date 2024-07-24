@@ -39,8 +39,17 @@ export const youtubeReducer = createReducer(
       error: action.error,
     }),
   ),
-  on(YoutubeActions.createCustomCard, (state, action) => ({
+  on(
+    YoutubeActions.createCustomCardSucces,
+    (state, action) => ({
+      ...state,
+      customCards: [...state.customCards, action.card],
+    }),
+  ),
+  on(YoutubeActions.removeCustomCard, (state, action) => ({
     ...state,
-    customCards: [...state.customCards, action.card],
+    customCards: state.customCards.filter(
+      card => card.id === action.id,
+    ),
   })),
 )
