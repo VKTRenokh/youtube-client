@@ -5,7 +5,7 @@ import {
 } from '@angular/core'
 import {
   FormArray,
-  FormBuilder,
+  NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
@@ -15,6 +15,8 @@ import { validationErrors } from '../../constants/validation-errors.constant'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { linkValidator } from '../../../shared/validators/link/link.validator'
 import { isNotFutureDateValidator } from '../../../shared/validators/is-not-future-date/is-not-future-date.validator'
+import { Store, select } from '@ngrx/store'
+import { YoutubeActions } from '../../../state/actions/youtube.actions'
 
 const MAX_TAGS_FORM_LENGTH = 5
 
@@ -37,7 +39,11 @@ const MAX_TAGS_FORM_LENGTH = 5
   ],
 })
 export class CardCreationFormComponent {
-  private formBuilder = inject(FormBuilder)
+  private formBuilder = inject(NonNullableFormBuilder)
+  private store = inject(Store)
+  private customCards = this.store.pipe(
+    select(state => state.youtube.customCards),
+  )
 
   public cardForm = this.formBuilder.group({
     title: this.formBuilder.control('', [
@@ -64,6 +70,10 @@ export class CardCreationFormComponent {
       this.createTagFormControl(),
     ]),
   })
+
+  public constructor() {
+    this.customCards.subscribe(console.log)
+  }
 
   public get tags() {
     return this.cardForm.get('tags') as FormArray
@@ -92,5 +102,23 @@ export class CardCreationFormComponent {
   public reset() {
     this.resetTags()
     this.cardForm.reset()
+  }
+
+  public submit() {
+    console.log('console log submit ng submit')
+    const rawValue = this.cardForm.getRawValue()
+
+    this.store.dispatch(
+      YoutubeActions.createCustomCard({
+        card: {
+          tags: this.tags.value,
+          title: rawValue.title,
+          createdAt: rawValue.createdAt,
+          videoLink: rawValue.videoLink,
+          imageLink: rawValue.imageLink,
+          description: rawValue.description,
+        },
+      }),
+    )
   }
 }
