@@ -33,22 +33,24 @@ export class SearchService {
     )
   }
 
+  private getStatistics(ids: string[]) {
+    return this.http.getVideosWithStatistics(ids)
+  }
+
   public search(
     search: string,
     pageToken = '',
   ): Observable<VideosResponse> {
     return this.fetchSearchResults(search, pageToken).pipe(
       switchMap(({ ids, nextPageToken, prevPageToken }) =>
-        this.http
-          .getVideosWithStatistics(ids)
-          .pipe(
-            map(
-              this.combineResults(
-                nextPageToken,
-                prevPageToken,
-              ),
+        this.getStatistics(ids).pipe(
+          map(
+            this.combineResults(
+              nextPageToken,
+              prevPageToken,
             ),
           ),
+        ),
       ),
     )
   }
