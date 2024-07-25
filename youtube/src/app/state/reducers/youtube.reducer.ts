@@ -12,7 +12,19 @@ export interface State {
 
 export const initialState: State = {
   data: null,
-  customCards: [],
+  customCards: [
+    {
+      id: 'hello',
+      tags: ['Hello'],
+      title: 'Super Useful Title',
+      isCustom: true,
+      createdAt: new Date().toString(),
+      imageLink:
+        'https://preview.redd.it/my-second-build-and-first-serious-one-v0-amqmch968ked1.jpeg?width=320&crop=smart&auto=webp&s=b1ef735b323b1fc8202928f5117d1cea9b646f14',
+      videoLink: 'Tetst',
+      description: 'Description',
+    },
+  ],
   loading: false,
   error: null,
 }

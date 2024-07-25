@@ -1,4 +1,22 @@
 @let info = item();
-<figure>
+<figure
+  class="custom-youtube-video"
+  [ytColoredBorder]="info.createdAt"
+>
+  <div class="custom-thumbnail">
+    <img
+      [ngSrc]="info.imageLink"
+      alt="Video thumbnail"
+      class="custom-video-thumbnail"
+      fill
+    />
+  </div>
   <figcaption>{{ info.title }}</figcaption>
+  <p>{{ info.description }}</p>
+
+  <yt-button
+    ariaLabel="remove custom card"
+    (press)="delete()"
+    >Delete</yt-button
+  >
 </figure>
