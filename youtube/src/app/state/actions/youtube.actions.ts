@@ -1,4 +1,8 @@
-import { createActionGroup, props } from '@ngrx/store'
+import {
+  createActionGroup,
+  emptyProps,
+  props,
+} from '@ngrx/store'
 import { VideosResponse } from '../../youtube/models/response.model'
 import {
   CustomCard,
@@ -19,5 +23,10 @@ export const YoutubeActions = createActionGroup({
       card: CustomCard
     }>(),
     removeCustomCard: props<{ id: string }>(),
+
+    nextPage: emptyProps(),
+    nextPageSuccess: emptyProps(),
+
+    prevPage: emptyProps(),
   },
 })

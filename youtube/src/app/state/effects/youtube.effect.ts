@@ -5,14 +5,7 @@ import {
   ofType,
 } from '@ngrx/effects'
 import { YoutubeActions } from '../actions/youtube.actions'
-import {
-  catchError,
-  exhaustAll,
-  exhaustMap,
-  map,
-  of,
-  tap,
-} from 'rxjs'
+import { catchError, exhaustMap, map, of } from 'rxjs'
 import { SearchService } from '../../youtube/services/search/search.service'
 import { CustomCardService } from '../../admin/services/custom-card/custom-card.service'
 

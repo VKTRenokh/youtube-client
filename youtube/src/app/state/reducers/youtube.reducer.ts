@@ -8,6 +8,8 @@ export interface State {
   customCards: CustomCard[]
   loading: boolean
   error: null | Error
+  nextPage: string | null
+  prevPage: string | null
 }
 
 export const initialState: State = {
@@ -27,6 +29,8 @@ export const initialState: State = {
   ],
   loading: false,
   error: null,
+  prevPage: null,
+  nextPage: null,
 }
 
 export const youtubeReducer = createReducer(
@@ -37,31 +41,41 @@ export const youtubeReducer = createReducer(
   })),
   on(
     YoutubeActions.searchVideosSuccess,
-    (state, action) => ({
+    (state, { data }) => ({
       ...state,
-      data: action.data,
+      data: data,
+      prevPage: data.prevPageToken,
+      nextPage: data.nextPageToken,
       loading: false,
     }),
   ),
   on(
     YoutubeActions.searchVideosFailure,
-    (state, action) => ({
+    (state, { error }) => ({
       ...state,
       loading: false,
-      error: action.error,
+      error,
     }),
   ),
   on(
     YoutubeActions.createCustomCardSucces,
-    (state, action) => ({
+    (state, { card }) => ({
       ...state,
-      customCards: [...state.customCards, action.card],
+      customCards: [...state.customCards, card],
     }),
   ),
-  on(YoutubeActions.removeCustomCard, (state, action) => ({
+  on(YoutubeActions.removeCustomCard, (state, { id }) => ({
     ...state,
     customCards: state.customCards.filter(
-      card => card.id === action.id,
+      card => card.id === id,
     ),
+  })),
+  on(YoutubeActions.nextPage, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(YoutubeActions.nextPageSuccess, state => ({
+    ...state,
+    isLoading: false,
   })),
 )

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core'
-import { map, switchMap } from 'rxjs'
+import { Observable, map, switchMap } from 'rxjs'
 import { VideosHttpService } from '../videos-http/videos-http.service'
+import { VideosResponse } from '../../models/response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -8,13 +9,23 @@ import { VideosHttpService } from '../videos-http/videos-http.service'
 export class SearchService {
   private http = inject(VideosHttpService)
 
-  public search(search: string) {
+  public search(
+    search: string,
+  ): Observable<VideosResponse> {
     return this.http.search(search).pipe(
-      map(response =>
-        response.items.map(item => item.id.videoId),
-      ),
-      switchMap(ids =>
-        this.http.getVideosWithStatistics(ids),
+      map(response => ({
+        ids: response.items.map(item => item.id.videoId),
+        nextPageToken: response.nextPageToken,
+        prevPageToken: response.prevPageToken,
+      })),
+      switchMap(({ ids, nextPageToken, prevPageToken }) =>
+        this.http.getVideosWithStatistics(ids).pipe(
+          map(videos => ({
+            ...videos,
+            nextPageToken,
+            prevPageToken,
+          })),
+        ),
       ),
     )
   }

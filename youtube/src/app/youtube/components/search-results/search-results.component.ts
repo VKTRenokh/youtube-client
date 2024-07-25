@@ -6,13 +6,7 @@ import { SortPipe } from '../../pipes/sort/sort.pipe'
 import { WordPipe } from '../../pipes/word/word.pipe'
 import { FilterService } from '../../services/filter/filter.service'
 import { Store, select } from '@ngrx/store'
-import {
-  Observable,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs'
+import { Observable, filter, map, switchMap } from 'rxjs'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { VideoItem } from '../../models/response.model'
 import { AsyncPipe } from '@angular/common'
@@ -21,6 +15,7 @@ import {
   CustomCard,
   isCustomCard,
 } from '../../../admin/models/custom-card.model'
+import { YoutubeActions } from '../../../state/actions/youtube.actions'
 
 @Component({
   selector: 'yt-search-results',
@@ -48,6 +43,10 @@ export class SearchResultsComponent {
   public isFilteringShown =
     this.filterService.getIsFilteringShown()
 
+  public nigga = this.store
+    .pipe(select(state => state.youtube.nextPage))
+    .subscribe(console.log)
+
   public videos: Observable<(VideoItem | CustomCard)[]> =
     this.store.pipe(
       select(state => state.youtube.data),
@@ -70,5 +69,13 @@ export class SearchResultsComponent {
 
   public isCustomCard(card: unknown): card is CustomCard {
     return isCustomCard(card)
+  }
+
+  public nextPage() {
+    this.store.dispatch(YoutubeActions.nextPage())
+  }
+
+  public prevPage() {
+    this.store.dispatch(YoutubeActions.prevPage())
   }
 }

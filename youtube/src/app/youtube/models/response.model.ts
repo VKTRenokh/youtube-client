@@ -64,4 +64,6 @@ export interface VideosResponse {
   etag: string
   pageInfo: PageInfo
   items: SearchVideoItem[]
+  nextPageToken: string | null
+  prevPageToken: string | null
 }
