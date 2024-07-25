@@ -43,7 +43,7 @@ export const youtubeReducer = createReducer(
     YoutubeActions.searchVideosSuccess,
     (state, { data }) => ({
       ...state,
-      data: data,
+      data,
       prevPage: data.prevPageToken,
       nextPage: data.nextPageToken,
       loading: false,
@@ -74,8 +74,10 @@ export const youtubeReducer = createReducer(
     ...state,
     isLoading: true,
   })),
-  on(YoutubeActions.nextPageSuccess, state => ({
+  on(YoutubeActions.nextPageSuccess, (state, { data }) => ({
     ...state,
+    data,
+    nextPage: data.nextPageToken,
     isLoading: false,
   })),
 )

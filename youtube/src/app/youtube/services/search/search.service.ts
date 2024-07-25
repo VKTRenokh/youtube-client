@@ -11,8 +11,9 @@ export class SearchService {
 
   public search(
     search: string,
+    pageToken = '',
   ): Observable<VideosResponse> {
-    return this.http.search(search).pipe(
+    return this.http.search(search, pageToken).pipe(
       map(response => ({
         ids: response.items.map(item => item.id.videoId),
         nextPageToken: response.nextPageToken,

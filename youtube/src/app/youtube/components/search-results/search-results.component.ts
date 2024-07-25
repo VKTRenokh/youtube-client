@@ -16,6 +16,7 @@ import {
   isCustomCard,
 } from '../../../admin/models/custom-card.model'
 import { YoutubeActions } from '../../../state/actions/youtube.actions'
+import { ButtonComponent } from '../../../shared/components/button/button.component'
 
 @Component({
   selector: 'yt-search-results',
@@ -24,6 +25,7 @@ import { YoutubeActions } from '../../../state/actions/youtube.actions'
     SearchItemComponent,
     CustomSearchItemComponent,
     FilteringCriteriaComponent,
+    ButtonComponent,
     WordPipe,
     SortPipe,
     AsyncPipe,
@@ -72,10 +74,12 @@ export class SearchResultsComponent {
   }
 
   public nextPage() {
+    console.log('work')
     this.store.dispatch(YoutubeActions.nextPage())
   }
 
   public prevPage() {
+    console.log('work, hello')
     this.store.dispatch(YoutubeActions.prevPage())
   }
 }

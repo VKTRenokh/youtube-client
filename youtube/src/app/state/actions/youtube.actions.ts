@@ -25,7 +25,7 @@ export const YoutubeActions = createActionGroup({
     removeCustomCard: props<{ id: string }>(),
 
     nextPage: emptyProps(),
-    nextPageSuccess: emptyProps(),
+    nextPageSuccess: props<{ data: VideosResponse }>(),
 
     prevPage: emptyProps(),
   },

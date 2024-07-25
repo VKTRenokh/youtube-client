@@ -19,9 +19,9 @@ export class VideosHttpService {
     })
   }
 
-  public search(search: string) {
+  public search(search: string, pageToken: string) {
     return this.http.get<VideosResponse>('/search', {
-      params: createSearchParams(search),
+      params: createSearchParams(search, pageToken),
     })
   }
 }

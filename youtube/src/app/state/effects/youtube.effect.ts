@@ -5,9 +5,22 @@ import {
   ofType,
 } from '@ngrx/effects'
 import { YoutubeActions } from '../actions/youtube.actions'
-import { catchError, exhaustMap, map, of } from 'rxjs'
+import {
+  catchError,
+  exhaustMap,
+  filter,
+  map,
+  mergeMap,
+  of,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs'
 import { SearchService } from '../../youtube/services/search/search.service'
 import { CustomCardService } from '../../admin/services/custom-card/custom-card.service'
+import { Store, select } from '@ngrx/store'
+import { State } from '../reducers/youtube.reducer'
+import { isNotNullable } from '../../shared/utils/is-not-nullable'
 
 export const searchEffect = createEffect(
   (
@@ -45,6 +58,33 @@ export const cardCreationEffect = createEffect(
         YoutubeActions.createCustomCardSucces({
           card: customCardService.createCard(action.card),
         }),
+      ),
+    ),
+  { functional: true },
+)
+
+export const nextPageEffect = createEffect(
+  (
+    searchService = inject(SearchService),
+    actions = inject(Actions),
+    store: Store<{ youtube: State }> = inject(Store),
+  ) =>
+    actions.pipe(
+      ofType(YoutubeActions.nextPage),
+      exhaustMap(() =>
+        store.select('youtube', 'nextPage').pipe(
+          take(1),
+          filter(isNotNullable),
+          mergeMap(token =>
+            searchService.search('', token).pipe(
+              map(data =>
+                YoutubeActions.nextPageSuccess({
+                  data,
+                }),
+              ),
+            ),
+          ),
+        ),
       ),
     ),
   { functional: true },

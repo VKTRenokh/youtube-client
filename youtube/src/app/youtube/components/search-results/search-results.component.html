@@ -8,6 +8,17 @@
     />
   }
 
+  <yt-button
+    ariaLabel="Previous videos page"
+    (press)="prevPage()"
+    >Prev</yt-button
+  >
+  <yt-button
+    ariaLabel="Next videos page"
+    (press)="nextPage()"
+    >Next</yt-button
+  >
+
   <div class="search-items">
     @if (_videos) {
       @for (
