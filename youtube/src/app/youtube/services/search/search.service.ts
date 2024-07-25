@@ -56,8 +56,8 @@ export class SearchService {
   }
 
   public getVideoById(id: string) {
-    return this.http
-      .getVideosWithStatistics([id])
-      .pipe(map(videos => videos.items.at(0)))
+    return this.getStatistics([id]).pipe(
+      map(videos => videos.items.at(0)),
+    )
   }
 }
