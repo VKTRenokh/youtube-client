@@ -9,24 +9,46 @@ import { VideosResponse } from '../../models/response.model'
 export class SearchService {
   private http = inject(VideosHttpService)
 
-  public search(
+  private combineResults(
+    nextPageToken: string | null,
+    prevPageToken: string | null,
+  ) {
+    return (videos: VideosResponse) => ({
+      ...videos,
+      nextPageToken,
+      prevPageToken,
+    })
+  }
+
+  private fetchSearchResults(
     search: string,
-    pageToken = '',
-  ): Observable<VideosResponse> {
+    pageToken: string,
+  ) {
     return this.http.search(search, pageToken).pipe(
       map(response => ({
         ids: response.items.map(item => item.id.videoId),
         nextPageToken: response.nextPageToken,
         prevPageToken: response.prevPageToken,
       })),
+    )
+  }
+
+  public search(
+    search: string,
+    pageToken = '',
+  ): Observable<VideosResponse> {
+    return this.fetchSearchResults(search, pageToken).pipe(
       switchMap(({ ids, nextPageToken, prevPageToken }) =>
-        this.http.getVideosWithStatistics(ids).pipe(
-          map(videos => ({
-            ...videos,
-            nextPageToken,
-            prevPageToken,
-          })),
-        ),
+        this.http
+          .getVideosWithStatistics(ids)
+          .pipe(
+            map(
+              this.combineResults(
+                nextPageToken,
+                prevPageToken,
+              ),
+            ),
+          ),
       ),
     )
   }
