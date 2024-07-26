@@ -45,7 +45,7 @@ export class SearchResultsComponent {
   public isFilteringShown =
     this.filterService.getIsFilteringShown()
 
-  public nigga = this.store
+  public thing = this.store
     .pipe(select(state => state.youtube.nextPage))
     .subscribe(console.log)
 
@@ -74,12 +74,10 @@ export class SearchResultsComponent {
   }
 
   public nextPage() {
-    console.log('work')
     this.store.dispatch(YoutubeActions.nextPage())
   }
 
   public prevPage() {
-    console.log('work, hello')
     this.store.dispatch(YoutubeActions.prevPage())
   }
 }
