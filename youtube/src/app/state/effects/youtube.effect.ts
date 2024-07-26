@@ -61,6 +61,8 @@ export const cardCreationEffect = createEffect(
   { functional: true },
 )
 
+// TODO: repeating logic in these two effects
+
 export const nextPageEffect = createEffect(
   (
     searchService = inject(SearchService),
