@@ -5,20 +5,12 @@ import {
   ofType,
 } from '@ngrx/effects'
 import { YoutubeActions } from '../actions/youtube.actions'
-import {
-  catchError,
-  exhaustMap,
-  filter,
-  map,
-  mergeMap,
-  of,
-  take,
-} from 'rxjs'
+import { catchError, exhaustMap, map, of } from 'rxjs'
 import { SearchService } from '../../youtube/services/search/search.service'
 import { CustomCardService } from '../../admin/services/custom-card/custom-card.service'
 import { Store } from '@ngrx/store'
 import { State } from '../reducers/youtube.reducer'
-import { isNotNullable } from '../../shared/utils/is-not-nullable'
+import { createPaginationHandler } from '../utils/create-pagination-handler'
 
 export const searchEffect = createEffect(
   (
@@ -61,8 +53,6 @@ export const cardCreationEffect = createEffect(
   { functional: true },
 )
 
-// TODO: repeating logic in these two effects
-
 export const nextPageEffect = createEffect(
   (
     searchService = inject(SearchService),
@@ -71,20 +61,11 @@ export const nextPageEffect = createEffect(
   ) =>
     actions.pipe(
       ofType(YoutubeActions.nextPage),
-      exhaustMap(() =>
-        store.select('youtube', 'nextPage').pipe(
-          take(1),
-          filter(isNotNullable),
-          mergeMap(token =>
-            searchService.search('', token).pipe(
-              map(data =>
-                YoutubeActions.nextPageSuccess({
-                  data,
-                }),
-              ),
-            ),
-          ),
-        ),
+      createPaginationHandler(
+        YoutubeActions.nextPageSuccess,
+        store,
+        searchService,
+        'nextPage',
       ),
     ),
   { functional: true },
@@ -98,20 +79,11 @@ export const prevPageEffect = createEffect(
   ) =>
     actions.pipe(
       ofType(YoutubeActions.prevPage),
-      exhaustMap(() =>
-        store.select('youtube', 'prevPage').pipe(
-          take(1),
-          filter(isNotNullable),
-          mergeMap(token =>
-            searchService
-              .search('', token)
-              .pipe(
-                map(data =>
-                  YoutubeActions.nextPageSuccess({ data }),
-                ),
-              ),
-          ),
-        ),
+      createPaginationHandler(
+        YoutubeActions.prevPageSuccess,
+        store,
+        searchService,
+        'prevPage',
       ),
     ),
   { functional: true },
