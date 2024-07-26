@@ -10,7 +10,10 @@ import { SearchService } from '../../youtube/services/search/search.service'
 import { CustomCardService } from '../../admin/services/custom-card/custom-card.service'
 import { Store } from '@ngrx/store'
 import { State } from '../reducers/youtube.reducer'
-import { createPaginationHandler } from '../utils/create-pagination-handler'
+import {
+  nextPagePagination,
+  previousPagePagination,
+} from '../utils/create-pagination-handler'
 
 export const searchEffect = createEffect(
   (
@@ -61,11 +64,10 @@ export const nextPageEffect = createEffect(
   ) =>
     actions.pipe(
       ofType(YoutubeActions.nextPage),
-      createPaginationHandler(
+      nextPagePagination(
         YoutubeActions.nextPageSuccess,
         store,
         searchService,
-        'nextPage',
       ),
     ),
   { functional: true },
@@ -79,11 +81,10 @@ export const prevPageEffect = createEffect(
   ) =>
     actions.pipe(
       ofType(YoutubeActions.prevPage),
-      createPaginationHandler(
+      previousPagePagination(
         YoutubeActions.prevPageSuccess,
         store,
         searchService,
-        'prevPage',
       ),
     ),
   { functional: true },
