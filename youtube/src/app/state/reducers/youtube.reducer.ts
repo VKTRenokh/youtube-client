@@ -4,6 +4,7 @@ import { YoutubeActions } from '../actions/youtube.actions'
 import { CustomCard } from '../../admin/models/custom-card.model'
 
 export interface State {
+  // TODO: use `VideoItem[]` instead of VideosResponse
   data: VideosResponse | null
   customCards: CustomCard[]
   loading: boolean
@@ -78,6 +79,18 @@ export const youtubeReducer = createReducer(
     ...state,
     data,
     nextPage: data.nextPageToken,
+    prevPage: data.prevPageToken,
     isLoading: false,
+  })),
+  on(YoutubeActions.prevPage, state => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(YoutubeActions.prevPageSuccess, (state, { data }) => ({
+    ...state,
+    isLoading: false,
+    nextPage: data.nextPageToken,
+    prevPage: data.prevPageToken,
+    data,
   })),
 )

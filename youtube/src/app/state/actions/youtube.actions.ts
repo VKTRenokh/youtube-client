@@ -28,5 +28,6 @@ export const YoutubeActions = createActionGroup({
     nextPageSuccess: props<{ data: VideosResponse }>(),
 
     prevPage: emptyProps(),
+    prevPageSuccess: props<{ data: VideosResponse }>(),
   },
 })
