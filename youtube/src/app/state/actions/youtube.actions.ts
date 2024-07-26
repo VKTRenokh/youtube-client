@@ -9,11 +9,15 @@ import {
   CustomCardInfo,
 } from '../../admin/models/custom-card.model'
 
+export interface VideosResponseData {
+  data: VideosResponse
+}
+
 export const YoutubeActions = createActionGroup({
   source: 'Youtube',
   events: {
     searchVideos: props<{ query: string }>(),
-    searchVideosSuccess: props<{ data: VideosResponse }>(),
+    searchVideosSuccess: props<VideosResponseData>(),
     searchVideosFailure: props<{
       error: Error
     }>(),
@@ -25,9 +29,9 @@ export const YoutubeActions = createActionGroup({
     removeCustomCard: props<{ id: string }>(),
 
     nextPage: emptyProps(),
-    nextPageSuccess: props<{ data: VideosResponse }>(),
+    nextPageSuccess: props<VideosResponseData>(),
 
     prevPage: emptyProps(),
-    prevPageSuccess: props<{ data: VideosResponse }>(),
+    prevPageSuccess: props<VideosResponseData>(),
   },
 })

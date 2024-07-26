@@ -1,5 +1,4 @@
 import { Action, Store } from '@ngrx/store'
-import { VideosResponse } from '../../youtube/models/response.model'
 import { SearchService } from '../../youtube/services/search/search.service'
 import {
   exhaustMap,
@@ -10,13 +9,14 @@ import {
 } from 'rxjs'
 import { isNotNullable } from '../../shared/utils/is-not-nullable'
 import { State } from '../reducers/youtube.reducer'
+import { VideosResponseData } from '../actions/youtube.actions'
 
 const createPaginationHandler =
   (direction: 'nextPage' | 'prevPage') =>
   (
-    successAction: (props: {
-      data: VideosResponse
-    }) => { data: VideosResponse } & Action<string>,
+    successAction: (
+      props: VideosResponseData,
+    ) => VideosResponseData & Action<string>,
     store: Store<{ youtube: State }>,
     searchService: SearchService,
   ) =>
