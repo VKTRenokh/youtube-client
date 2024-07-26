@@ -12,7 +12,7 @@ import { isNotNullable } from '../../shared/utils/is-not-nullable'
 import { State } from '../reducers/youtube.reducer'
 
 export const createPaginationHandler = (
-  pageSuccessAction: (props: {
+  successAction: (props: {
     data: VideosResponse
   }) => { data: VideosResponse } & Action<string>,
   store: Store<{ youtube: State }>,
@@ -26,7 +26,7 @@ export const createPaginationHandler = (
       mergeMap(token =>
         searchService
           .search('', token)
-          .pipe(map(data => pageSuccessAction({ data }))),
+          .pipe(map(data => successAction({ data }))),
       ),
     ),
   )
