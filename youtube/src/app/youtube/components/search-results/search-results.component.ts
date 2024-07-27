@@ -17,6 +17,7 @@ import {
 } from '../../../admin/models/custom-card.model'
 import { YoutubeActions } from '../../../state/actions/youtube.actions'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
+import { State } from '../../../state/reducers/youtube.reducer'
 
 @Component({
   selector: 'yt-search-results',
@@ -35,7 +36,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 })
 export class SearchResultsComponent {
   private filterService = inject(FilterService)
-  private store = inject(Store)
+  private store: Store<{ youtube: State }> = inject(Store)
   private customCards = this.store.pipe(
     select(state => state.youtube.customCards),
   )
@@ -45,18 +46,13 @@ export class SearchResultsComponent {
   public isFilteringShown =
     this.filterService.getIsFilteringShown()
 
-  public thing = this.store
-    .pipe(select(state => state.youtube.nextPage))
-    .subscribe(console.log)
-
   public videos: Observable<(VideoItem | CustomCard)[]> =
     this.store.pipe(
       select(state => state.youtube.data),
       filter(isNotNullable),
-      map(data => data.items),
       switchMap(items =>
         this.customCards.pipe(
-          map(customCards => customCards.concat(items)),
+          map(customCards => [...customCards, ...items]),
         ),
       ),
     )

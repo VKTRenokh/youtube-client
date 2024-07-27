@@ -8,6 +8,7 @@ import { VideosResponse } from '../../models/response.model'
 })
 export class SearchService {
   private http = inject(VideosHttpService)
+  private lastSearch: string | null = null
 
   private combineResults(
     nextPageToken: string | null,
@@ -37,11 +38,24 @@ export class SearchService {
     return this.http.getVideosWithStatistics(ids)
   }
 
+  private getSearchString(search: string, token: string) {
+    if (search) {
+      this.lastSearch = search
+    }
+
+    return !search && token
+      ? (this.lastSearch ?? '')
+      : search
+  }
+
   public search(
     search: string,
     pageToken = '',
   ): Observable<VideosResponse> {
-    return this.fetchSearchResults(search, pageToken).pipe(
+    return this.fetchSearchResults(
+      this.getSearchString(search, pageToken),
+      pageToken,
+    ).pipe(
       switchMap(({ ids, nextPageToken, prevPageToken }) =>
         this.getStatistics(ids).pipe(
           map(

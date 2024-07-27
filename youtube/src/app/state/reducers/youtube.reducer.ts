@@ -1,11 +1,12 @@
 import { createReducer, on } from '@ngrx/store'
-import { VideosResponse } from '../../youtube/models/response.model'
+import { VideoItem } from '../../youtube/models/response.model'
 import { YoutubeActions } from '../actions/youtube.actions'
 import { CustomCard } from '../../admin/models/custom-card.model'
+import { extractPageTokens } from '../utils/extract-page-tokens'
+import { extractItems } from '../utils/extract-items'
 
 export interface State {
-  // TODO: use `VideoItem[]` instead of VideosResponse
-  data: VideosResponse | null
+  data: VideoItem[] | null
   customCards: CustomCard[]
   loading: boolean
   error: null | Error
@@ -44,9 +45,8 @@ export const youtubeReducer = createReducer(
     YoutubeActions.searchVideosSuccess,
     (state, { data }) => ({
       ...state,
-      data,
-      prevPage: data.prevPageToken,
-      nextPage: data.nextPageToken,
+      data: extractItems(data),
+      ...extractPageTokens(data),
       loading: false,
     }),
   ),
@@ -77,9 +77,8 @@ export const youtubeReducer = createReducer(
   })),
   on(YoutubeActions.nextPageSuccess, (state, { data }) => ({
     ...state,
-    data,
-    nextPage: data.nextPageToken,
-    prevPage: data.prevPageToken,
+    data: extractItems(data),
+    ...extractPageTokens(data),
     isLoading: false,
   })),
   on(YoutubeActions.prevPage, state => ({
@@ -89,8 +88,7 @@ export const youtubeReducer = createReducer(
   on(YoutubeActions.prevPageSuccess, (state, { data }) => ({
     ...state,
     isLoading: false,
-    nextPage: data.nextPageToken,
-    prevPage: data.prevPageToken,
-    data,
+    ...extractPageTokens(data),
+    data: extractItems(data),
   })),
 )

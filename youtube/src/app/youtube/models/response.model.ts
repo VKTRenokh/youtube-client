@@ -59,11 +59,21 @@ export interface PageInfo {
   resultsPerPage: number
 }
 
-export interface VideosResponse {
+export interface PageTokens {
+  nextPageToken: string | null
+  prevPageToken: string | null
+}
+
+export interface VideosResponse extends PageTokens {
+  kind: string
+  etag: string
+  pageInfo: PageInfo
+  items: VideoItem[]
+}
+
+export interface SearchResponse extends PageTokens {
   kind: string
   etag: string
   pageInfo: PageInfo
   items: SearchVideoItem[]
-  nextPageToken: string | null
-  prevPageToken: string | null
 }

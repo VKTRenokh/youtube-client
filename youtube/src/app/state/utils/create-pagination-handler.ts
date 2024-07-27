@@ -4,7 +4,7 @@ import {
   exhaustMap,
   filter,
   map,
-  mergeMap,
+  switchMap,
   take,
 } from 'rxjs'
 import { isNotNullable } from '../../shared/utils/is-not-nullable'
@@ -24,7 +24,7 @@ const createPaginationHandler =
       store.select('youtube', direction).pipe(
         take(1),
         filter(isNotNullable),
-        mergeMap(token =>
+        switchMap(token =>
           searchService
             .search('', token)
             .pipe(map(data => successAction({ data }))),
