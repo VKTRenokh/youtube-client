@@ -41,6 +41,7 @@ export class SearchResultsComponent {
     select(state => state.youtube.customCards),
   )
 
+  public isLoading = this.store.select('youtube', 'loading')
   public currentCriteria = signal<SortOptions | null>(null)
   public currentWord = signal<string>('')
   public isFilteringShown =

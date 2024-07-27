@@ -36,6 +36,8 @@ export const initialState: State = {
   nextPage: null,
 }
 
+// TODO: make use of selectors in every component and effect that uses store.
+
 export const youtubeReducer = createReducer(
   initialState,
   on(YoutubeActions.searchVideos, state => ({

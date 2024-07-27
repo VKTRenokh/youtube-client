@@ -1,4 +1,5 @@
 @let _videos = videos | async;
+@let loading = isLoading | async;
 
 <div class="search-results">
   @if (isFilteringShown()) {
@@ -20,7 +21,7 @@
   >
 
   <div class="search-items">
-    @if (_videos) {
+    @if (_videos && !loading) {
       @for (
         video of _videos
           | word: currentWord()
@@ -35,4 +36,8 @@
       }
     }
   </div>
+
+  @if (loading) {
+    <div>Loading...</div>
+  }
 </div>
