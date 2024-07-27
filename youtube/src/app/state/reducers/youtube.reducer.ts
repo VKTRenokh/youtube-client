@@ -4,6 +4,7 @@ import { YoutubeActions } from '../actions/youtube.actions'
 import { CustomCard } from '../../admin/models/custom-card.model'
 import { extractPageTokens } from '../utils/extract-page-tokens'
 import { extractItems } from '../utils/extract-items'
+import { isCardMatchingId } from '../utils/is-card-matching-id'
 
 export interface State {
   data: VideoItem[] | null
@@ -68,7 +69,7 @@ export const youtubeReducer = createReducer(
   on(YoutubeActions.removeCustomCard, (state, { id }) => ({
     ...state,
     customCards: state.customCards.filter(
-      card => card.id === id,
+      isCardMatchingId(id),
     ),
   })),
   on(YoutubeActions.nextPage, state => ({
