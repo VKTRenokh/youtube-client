@@ -38,4 +38,8 @@ export class SearchItemComponent {
   public navigateToDetailedPage() {
     this.router.navigate(['/video', this.item().id])
   }
+
+  public onFavorite() {
+    console.log('i am favorite nwo')
+  }
 }
