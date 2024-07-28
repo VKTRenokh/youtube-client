@@ -76,6 +76,10 @@ export class HeaderComponent {
     this.router.navigate(['/admin'])
   }
 
+  public navigateToFavoritesPage() {
+    this.router.navigate(['/favorites'])
+  }
+
   public logout() {
     this.authService.logout()
     this.router.navigate(
