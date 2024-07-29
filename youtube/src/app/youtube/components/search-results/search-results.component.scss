@@ -1,6 +1,17 @@
 .search-results {
+  height: 100%;
+
   .search-items {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    font-size: 60px;
   }
 }
