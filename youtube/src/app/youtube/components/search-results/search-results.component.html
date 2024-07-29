@@ -9,16 +9,12 @@
     />
   }
 
-  <yt-button
-    ariaLabel="Previous videos page"
-    (press)="prevPage()"
-    >Prev</yt-button
-  >
-  <yt-button
-    ariaLabel="Next videos page"
-    (press)="nextPage()"
-    >Next</yt-button
-  >
+  @if (_videos) {
+    <yt-pagination
+      (next)="nextPage()"
+      (prev)="prevPage()"
+    />
+  }
 
   <div class="search-items">
     @if (_videos && !loading) {
@@ -38,6 +34,6 @@
   </div>
 
   @if (loading) {
-    <div>Loading...</div>
+    <div class="loader">Loading...</div>
   }
 </div>

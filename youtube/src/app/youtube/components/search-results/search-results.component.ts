@@ -18,12 +18,14 @@ import {
 import { YoutubeActions } from '../../../state/actions/youtube.actions'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { State } from '../../../state/reducers/youtube.reducer'
+import { PaginationComponent } from '../../../shared/components/pagination/pagination.component'
 
 @Component({
   selector: 'yt-search-results',
   standalone: true,
   imports: [
     SearchItemComponent,
+    PaginationComponent,
     CustomSearchItemComponent,
     FilteringCriteriaComponent,
     ButtonComponent,
@@ -71,10 +73,12 @@ export class SearchResultsComponent {
   }
 
   public nextPage() {
+    console.log('next page pagination emit')
     this.store.dispatch(YoutubeActions.nextPage())
   }
 
   public prevPage() {
+    console.log('prev page pagination emit')
     this.store.dispatch(YoutubeActions.prevPage())
   }
 }
