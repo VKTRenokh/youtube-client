@@ -73,12 +73,10 @@ export class SearchResultsComponent {
   }
 
   public nextPage() {
-    console.log('next page pagination emit')
     this.store.dispatch(YoutubeActions.nextPage())
   }
 
   public prevPage() {
-    console.log('prev page pagination emit')
     this.store.dispatch(YoutubeActions.prevPage())
   }
 }
