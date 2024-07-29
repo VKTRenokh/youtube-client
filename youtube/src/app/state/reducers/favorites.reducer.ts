@@ -1,4 +1,6 @@
-import { createReducer } from '@ngrx/store'
+import { createReducer, on } from '@ngrx/store'
+import { FavoriteActions } from '../actions/favorite.actions'
+import { concatSome } from '../../shared/utils/concat-some'
 
 export interface State {
   data: string[] | null
@@ -8,4 +10,10 @@ export const initialState: State = {
   data: null,
 }
 
-export const favoritesReducer = createReducer(initialState)
+export const favoritesReducer = createReducer(
+  initialState,
+  on(FavoriteActions.add, (state, { id }) => ({
+    ...state,
+    data: concatSome(state.data, id),
+  })),
+)
