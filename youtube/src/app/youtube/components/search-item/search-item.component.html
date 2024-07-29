@@ -12,14 +12,17 @@
     <h4>{{ snippet().title }}</h4>
   </div>
   <yt-video-statistics [statistics]="item().statistics" />
-  <yt-button
-    ariaLabel="More button"
-    (press)="navigateToDetailedPage()"
-    >more</yt-button
-  >
-  <yt-button
-    ariaLabel="make card favorite"
-    (press)="onFavorite()"
-    >favorite</yt-button
-  >
+  <div class="video-buttons">
+    <yt-button
+      ariaLabel="More button"
+      (press)="navigateToDetailedPage()"
+      >more</yt-button
+    >
+    <yt-button
+      ariaLabel="make card favorite"
+      (press)="onFavorite()"
+      title="Make this card favorite"
+      >&lt;3</yt-button
+    >
+  </div>
 </figure>
