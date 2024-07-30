@@ -20,7 +20,7 @@ import { VideoStatisticsComponent } from '../video-statistics/video-statistics.c
 import { Store } from '@ngrx/store'
 import { FavoriteActions } from '../../../state/actions/favorite.actions'
 import { selectFavoriteIds } from '../../../state/selectors/favorite.selector'
-import { map, tap } from 'rxjs'
+import { map } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
@@ -45,6 +45,7 @@ export class SearchItemComponent implements OnInit {
 
   public isFavorite = signal(false)
   public item = input.required<VideoItem>()
+  public id = computed(() => this.item().id)
 
   public snippet = computed(() => this.item().snippet)
   public smallThumbnail = computed(
@@ -52,18 +53,18 @@ export class SearchItemComponent implements OnInit {
   )
 
   public navigateToDetailedPage() {
-    this.router.navigate(['/video', this.item().id])
+    this.router.navigate(['/video', this.id()])
   }
 
   private addToFavorites() {
     this.store.dispatch(
-      FavoriteActions.add({ id: this.item().id }),
+      FavoriteActions.add({ id: this.id() }),
     )
   }
 
   private removeFromFavorites() {
     this.store.dispatch(
-      FavoriteActions.remove({ id: this.item().id }),
+      FavoriteActions.remove({ id: this.id() }),
     )
   }
 
@@ -76,7 +77,7 @@ export class SearchItemComponent implements OnInit {
   public ngOnInit(): void {
     this.ids
       .pipe(
-        map(ids => ids.includes(this.item().id)),
+        map(ids => ids.includes(this.id())),
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe(isFavorite =>
