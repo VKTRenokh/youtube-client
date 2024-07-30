@@ -20,8 +20,9 @@
     >
     <yt-button
       ariaLabel="make card favorite"
-      (press)="onFavorite()"
+      (press)="toggleFavorite()"
       title="Make this card favorite"
+      [class.is-favorite]="isFavorite()"
       >&lt;3</yt-button
     >
   </div>
