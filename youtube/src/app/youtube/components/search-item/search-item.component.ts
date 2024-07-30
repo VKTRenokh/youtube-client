@@ -46,6 +46,5 @@ export class SearchItemComponent {
     this.store.dispatch(
       FavoriteActions.add({ id: this.item().id }),
     )
-    console.log('dispatched')
   }
 }
