@@ -18,12 +18,9 @@
       (press)="navigateToDetailedPage()"
       >more</yt-button
     >
-    <yt-button
-      ariaLabel="make card favorite"
-      (press)="toggleFavorite()"
-      title="Make this card favorite"
-      [class.is-favorite]="isFavorite()"
-      >&lt;3</yt-button
-    >
+    <yt-favorite-button
+      (favorite)="toggleFavorite()"
+      [isFavorite]="isFavorite()"
+    />
   </div>
 </figure>

@@ -22,6 +22,7 @@ import { FavoriteActions } from '../../../state/actions/favorite.actions'
 import { selectFavoriteIds } from '../../../state/selectors/favorite.selector'
 import { map } from 'rxjs'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import { FavoriteButtonComponent } from '../../../shared/components/favorite-button/favorite-button.component'
 
 @Component({
   selector: 'yt-search-item',
@@ -30,6 +31,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
     NgOptimizedImage,
     ButtonComponent,
     ColoredBorderDirective,
+    FavoriteButtonComponent,
     VideoStatisticsComponent,
     AsyncPipe,
   ],

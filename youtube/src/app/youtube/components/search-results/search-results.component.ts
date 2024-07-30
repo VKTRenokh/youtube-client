@@ -16,9 +16,9 @@ import {
   isCustomCard,
 } from '../../../admin/models/custom-card.model'
 import { YoutubeActions } from '../../../state/actions/youtube.actions'
-import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { State } from '../../../state/reducers/youtube.reducer'
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component'
+import { FavoriteButtonComponent } from '../../../shared/components/favorite-button/favorite-button.component'
 
 @Component({
   selector: 'yt-search-results',
@@ -28,7 +28,7 @@ import { PaginationComponent } from '../../../shared/components/pagination/pagin
     PaginationComponent,
     CustomSearchItemComponent,
     FilteringCriteriaComponent,
-    ButtonComponent,
+    FavoriteButtonComponent,
     WordPipe,
     SortPipe,
     AsyncPipe,

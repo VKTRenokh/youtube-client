@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  input,
+  output,
 } from '@angular/core'
 import { ButtonComponent } from '../button/button.component'
 
@@ -12,4 +14,7 @@ import { ButtonComponent } from '../button/button.component'
   styleUrl: './favorite-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FavoriteButtonComponent {}
+export class FavoriteButtonComponent {
+  public favorite = output()
+  public isFavorite = input()
+}

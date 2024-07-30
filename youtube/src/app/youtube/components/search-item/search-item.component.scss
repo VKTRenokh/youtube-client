@@ -11,13 +11,5 @@
 
   .video-buttons {
     display: flex;
-
-    ::ng-deep {
-      .is-favorite {
-        button {
-          background: goldenrod;
-        }
-      }
-    }
   }
 }
