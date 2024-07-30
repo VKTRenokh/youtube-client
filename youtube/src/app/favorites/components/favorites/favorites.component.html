@@ -1,1 +1,3 @@
-<p>favorites works!</p>
+@for (favorite of favorites | async; track favorite) {
+  <span>{{ favorite }}</span> <br />
+}

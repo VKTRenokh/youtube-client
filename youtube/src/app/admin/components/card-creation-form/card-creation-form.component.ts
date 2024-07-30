@@ -71,10 +71,6 @@ export class CardCreationFormComponent {
     ]),
   })
 
-  public constructor() {
-    this.customCards.subscribe(console.log)
-  }
-
   public get tags() {
     return this.cardForm.get('tags') as FormArray
   }
