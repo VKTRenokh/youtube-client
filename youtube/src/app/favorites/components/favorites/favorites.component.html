@@ -1,4 +1,8 @@
 <h2>Favorites page</h2>
-@for (favorite of favorites | async; track favorite) {
-  <p>{{ favorite }}</p>
+@let _videos = videos | async;
+
+@if (_videos) {
+  @for (video of _videos; track video.id) {
+    <yt-search-item [item]="video" />
+  }
 }
