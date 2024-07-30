@@ -12,8 +12,11 @@ export const initialState: State = {
 
 export const favoritesReducer = createReducer(
   initialState,
-  on(FavoriteActions.add, (state, { id }) => ({
-    ...state,
-    data: concatSome(state.data, id),
-  })),
+  on(FavoriteActions.add, (state, { id }) => {
+    console.log(state, {
+      ...state,
+      data: concatSome(state.data, id),
+    })
+    return { ...state, data: concatSome(state.data, id) }
+  }),
 )

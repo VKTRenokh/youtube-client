@@ -8,9 +8,11 @@ import {
 import { NgOptimizedImage } from '@angular/common'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { ColoredBorderDirective } from '../../directives/colored-border.directive'
-import { SearchVideoItem } from '../../models/response.model'
+import { VideoItem } from '../../models/response.model'
 import { Router } from '@angular/router'
 import { VideoStatisticsComponent } from '../video-statistics/video-statistics.component'
+import { Store } from '@ngrx/store'
+import { FavoriteActions } from '../../../state/actions/favorite.actions'
 
 @Component({
   selector: 'yt-search-item',
@@ -26,9 +28,10 @@ import { VideoStatisticsComponent } from '../video-statistics/video-statistics.c
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchItemComponent {
-  public router = inject(Router)
+  private router = inject(Router)
+  private store = inject(Store)
 
-  public item = input.required<SearchVideoItem>()
+  public item = input.required<VideoItem>()
 
   public snippet = computed(() => this.item().snippet)
   public smallThumbnail = computed(
@@ -40,6 +43,9 @@ export class SearchItemComponent {
   }
 
   public onFavorite() {
-    console.log('i am favorite nwo')
+    this.store.dispatch(
+      FavoriteActions.add({ id: this.item().id }),
+    )
+    console.log('dispatched')
   }
 }

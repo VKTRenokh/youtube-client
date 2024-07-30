@@ -20,6 +20,7 @@ import { provideStore } from '@ngrx/store'
 import { provideEffects } from '@ngrx/effects'
 import { youtubeReducer } from './state/reducers/youtube.reducer'
 import * as YoutubeEffects from './state/effects/youtube.effect'
+import { favoritesReducer } from './state/reducers/favorites.reducer'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,7 +34,10 @@ export const appConfig: ApplicationConfig = {
         loggerInterceptor,
       ]),
     ),
-    provideStore({ youtube: youtubeReducer }),
+    provideStore({
+      youtube: youtubeReducer,
+      favorites: favoritesReducer,
+    }),
     provideEffects(YoutubeEffects),
   ],
 }
