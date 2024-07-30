@@ -5,7 +5,10 @@ import {
   inject,
 } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { selectFavoriteIds } from '../../../state/selectors/favorite.selector'
+import {
+  selectFavoriteIds,
+  selectFavoriteVideos,
+} from '../../../state/selectors/favorite.selector'
 
 @Component({
   selector: 'yt-favorites',
@@ -18,4 +21,7 @@ import { selectFavoriteIds } from '../../../state/selectors/favorite.selector'
 export class FavoritesComponent {
   private store = inject(Store)
   public favorites = this.store.select(selectFavoriteIds)
+  public test = this.store
+    .select(selectFavoriteVideos)
+    .subscribe(console.log)
 }
