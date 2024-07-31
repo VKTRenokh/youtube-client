@@ -10,7 +10,6 @@ import {
 } from '@angular/forms'
 import { ButtonComponent } from '../../../shared/components/button/button.component'
 import { UserInfoComponent } from '../user-info/user-info.component'
-import { SearchService } from '../../../youtube/services/search/search.service'
 import { FilterService } from '../../../youtube/services/filter/filter.service'
 import { Router } from '@angular/router'
 import { AuthService } from '../../../auth/services/auth/auth.service'
@@ -18,12 +17,13 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  switchMap,
 } from 'rxjs'
 import { searchTimeout } from '../../constants/search-timeout.constant'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 import { stringIsLongerThan } from '../../../shared/utils/string-is-longer-than'
 import { createRederictToQueryParams } from '../../utils/create-rederict-to-query-params'
+import { Store } from '@ngrx/store'
+import { YoutubeActions } from '../../../state/actions/youtube.actions'
 
 @Component({
   selector: 'yt-header',
@@ -39,10 +39,10 @@ import { createRederictToQueryParams } from '../../utils/create-rederict-to-quer
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private searchService = inject(SearchService)
   private filterService = inject(FilterService)
   private authService = inject(AuthService)
   private router = inject(Router)
+  private store = inject(Store)
 
   public searchString = new FormControl('', {
     nonNullable: true,
@@ -54,13 +54,14 @@ export class HeaderComponent {
       .pipe(
         filter(stringIsLongerThan(3)),
         debounceTime(searchTimeout),
-        switchMap(search =>
-          this.searchService.search(search),
-        ),
         distinctUntilChanged(),
         takeUntilDestroyed(),
       )
-      .subscribe()
+      .subscribe(query => {
+        this.store.dispatch(
+          YoutubeActions.searchVideos({ query }),
+        )
+      })
   }
 
   public openFilters() {
@@ -69,6 +70,14 @@ export class HeaderComponent {
 
   public navigateToMainPage() {
     this.router.navigate(['/'])
+  }
+
+  public navigateToAdminPage() {
+    this.router.navigate(['/admin'])
+  }
+
+  public navigateToFavoritesPage() {
+    this.router.navigate(['/favorites'])
   }
 
   public logout() {

@@ -17,6 +17,7 @@
       {{ data.snippet.publishedAt | date: 'fullDate' }}
     </span>
     <yt-video-statistics [statistics]="data.statistics" />
+    <yt-favorite-button [id]="data.id" />
   </figure>
 } @else {
   <div>

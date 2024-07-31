@@ -43,7 +43,6 @@ export class FilteringCriteriaComponent {
     },
   ]
   public onCriteriaClick(criteria: SortOptions) {
-    console.log('criteria')
     this.onCriteriaUpdate.emit(criteria)
   }
 

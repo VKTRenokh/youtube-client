@@ -16,7 +16,8 @@ import { VideoStatisticsComponent } from '../video-statistics/video-statistics.c
 import { Observable, filter, map, switchMap } from 'rxjs'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { isString } from '../../../shared/utils/is-string'
-import { SearchVideoItem } from '../../models/response.model'
+import { VideoItem } from '../../models/response.model'
+import { FavoriteButtonComponent } from '../../../shared/components/favorite-button/favorite-button.component'
 
 @Component({
   selector: 'yt-video-detailed-info',
@@ -27,6 +28,7 @@ import { SearchVideoItem } from '../../models/response.model'
     ColoredBorderDirective,
     DatePipe,
     VideoStatisticsComponent,
+    FavoriteButtonComponent,
     AsyncPipe,
   ],
   templateUrl: './video-detailed-info.component.html',
@@ -37,8 +39,7 @@ export class VideoDetailedInfoComponent {
   private searchService = inject(SearchService)
   private router = inject(Router)
   private route = inject(ActivatedRoute)
-
-  public video: Observable<SearchVideoItem> =
+  public video: Observable<VideoItem> =
     this.route.params.pipe(
       map(params => params['id']),
       filter(isString),

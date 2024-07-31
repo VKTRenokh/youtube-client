@@ -1,6 +1,12 @@
-export const createSearchParams = (search: string) => ({
+import { maxResults } from '../constants/max-results.constant'
+
+export const createSearchParams = (
+  search: string,
+  pageToken: string,
+) => ({
   type: 'video',
   part: 'snippet',
-  maxResults: 15,
+  maxResults,
   q: search,
+  pageToken,
 })

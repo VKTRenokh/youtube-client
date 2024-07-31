@@ -1,4 +1,8 @@
-<form class="card-creation-form" [formGroup]="cardForm">
+<form
+  class="card-creation-form"
+  [formGroup]="cardForm"
+  (ngSubmit)="submit()"
+>
   <h3>Create card</h3>
   <input
     type="text"

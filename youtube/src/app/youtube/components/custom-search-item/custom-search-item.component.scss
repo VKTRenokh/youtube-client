@@ -1,0 +1,24 @@
+.custom-youtube-video {
+  border: var(--color-light-grey-600) solid 2px;
+  padding: 10px 10px;
+  max-width: 263px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  .custom-thumbnail {
+    display: flex;
+    position: relative;
+    width: 200px;
+    height: 200px;
+
+    overflow: hidden;
+
+    .custom-video-thumbnail {
+      object-fit: cover;
+    }
+  }
+}

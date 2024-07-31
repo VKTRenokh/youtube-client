@@ -1,3 +1,6 @@
+@let _videos = videos | async;
+@let loading = isLoading | async;
+
 <div class="search-results">
   @if (isFilteringShown()) {
     <yt-filtering-criteria
@@ -6,16 +9,31 @@
     />
   }
 
+  @if (_videos) {
+    <yt-pagination
+      (next)="nextPage()"
+      (prev)="prevPage()"
+    />
+  }
+
   <div class="search-items">
-    @if (videos()) {
+    @if (_videos && !loading) {
       @for (
-        video of videos()
+        video of _videos
           | word: currentWord()
           | sort: currentCriteria();
         track video.id
       ) {
-        <yt-search-item [item]="video" />
+        @if (!isCustomCard(video)) {
+          <yt-search-item [item]="video" />
+        } @else {
+          <yt-custom-search-item [item]="video" />
+        }
       }
     }
   </div>
+
+  @if (loading) {
+    <div class="loader">Loading...</div>
+  }
 </div>

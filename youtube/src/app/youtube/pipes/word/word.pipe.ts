@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { SearchVideoItem } from '../../models/response.model'
 import { getTitle } from '../../utils/get-title'
+import { Item } from '../../models/item.model'
 
 @Pipe({
   name: 'word',
@@ -8,14 +8,14 @@ import { getTitle } from '../../utils/get-title'
 })
 export class WordPipe implements PipeTransform {
   private createFilter(word: string | null) {
-    return (item: SearchVideoItem) =>
+    return (item: Item) =>
       getTitle(item).includes(word ?? '')
   }
 
   public transform(
-    items: SearchVideoItem[] | null,
+    items: Item[] | null,
     filterWord: string | null,
-  ): SearchVideoItem[] {
+  ): Item[] {
     return items
       ? items.filter(this.createFilter(filterWord))
       : []

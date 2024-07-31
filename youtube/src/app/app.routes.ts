@@ -19,6 +19,13 @@ export const routes: Routes = [
       ).then(M => M.LoginComponent),
   },
   {
+    path: 'favorites',
+    loadComponent: () =>
+      import(
+        './favorites/components/favorites/favorites.component.js'
+      ).then(M => M.FavoritesComponent),
+  },
+  {
     path: 'video/:id',
     loadComponent: () =>
       import(
