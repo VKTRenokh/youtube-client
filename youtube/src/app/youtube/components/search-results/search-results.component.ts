@@ -6,7 +6,13 @@ import { SortPipe } from '../../pipes/sort/sort.pipe'
 import { WordPipe } from '../../pipes/word/word.pipe'
 import { FilterService } from '../../services/filter/filter.service'
 import { Store, select } from '@ngrx/store'
-import { Observable, filter, map, switchMap } from 'rxjs'
+import {
+  Observable,
+  filter,
+  map,
+  switchMap,
+  withLatestFrom,
+} from 'rxjs'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { VideoItem } from '../../models/response.model'
 import { AsyncPipe } from '@angular/common'
@@ -19,6 +25,7 @@ import { YoutubeActions } from '../../../state/actions/youtube.actions'
 import { State } from '../../../state/reducers/youtube.reducer'
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component'
 import { FavoriteButtonComponent } from '../../../shared/components/favorite-button/favorite-button.component'
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'yt-search-results',
@@ -53,11 +60,12 @@ export class SearchResultsComponent {
     this.store.pipe(
       select(state => state.youtube.data),
       filter(isNotNullable),
-      switchMap(items =>
-        this.customCards.pipe(
-          map(customCards => [...customCards, ...items]),
-        ),
-      ),
+      withLatestFrom(this.customCards),
+      map(([data, customCards]) => [
+        ...customCards,
+        ...data,
+      ]),
+      takeUntilDestroyed(),
     )
 
   public updateSortingCriteria(newCriteria: SortOptions) {
