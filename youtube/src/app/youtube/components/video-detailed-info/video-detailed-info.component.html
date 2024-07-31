@@ -1,5 +1,4 @@
 @let data = video | async;
-@let _id = id | async;
 
 @if (data) {
   <figure
@@ -18,9 +17,7 @@
       {{ data.snippet.publishedAt | date: 'fullDate' }}
     </span>
     <yt-video-statistics [statistics]="data.statistics" />
-    @if (_id) {
-      <yt-favorite-button [id]="_id" />
-    }
+    <yt-favorite-button [id]="data.id" />
   </figure>
 } @else {
   <div>
