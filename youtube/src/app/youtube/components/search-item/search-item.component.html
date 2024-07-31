@@ -18,9 +18,6 @@
       (press)="navigateToDetailedPage()"
       >more</yt-button
     >
-    <yt-favorite-button
-      (favorite)="toggleFavorite()"
-      [isFavorite]="isFavorite()"
-    />
+    <yt-favorite-button [id]="id()" />
   </div>
 </figure>

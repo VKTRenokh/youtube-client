@@ -17,6 +17,7 @@ import { Observable, filter, map, switchMap } from 'rxjs'
 import { isNotNullable } from '../../../shared/utils/is-not-nullable'
 import { isString } from '../../../shared/utils/is-string'
 import { SearchVideoItem } from '../../models/response.model'
+import { FavoriteButtonComponent } from '../../../shared/components/favorite-button/favorite-button.component'
 
 @Component({
   selector: 'yt-video-detailed-info',
@@ -27,6 +28,7 @@ import { SearchVideoItem } from '../../models/response.model'
     ColoredBorderDirective,
     DatePipe,
     VideoStatisticsComponent,
+    FavoriteButtonComponent,
     AsyncPipe,
   ],
   templateUrl: './video-detailed-info.component.html',

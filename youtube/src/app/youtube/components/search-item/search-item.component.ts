@@ -39,11 +39,8 @@ import { FavoriteButtonComponent } from '../../../shared/components/favorite-but
   styleUrl: './search-item.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchItemComponent implements OnInit {
+export class SearchItemComponent {
   private router = inject(Router)
-  private store = inject(Store)
-  private ids = this.store.select(selectFavoriteIds)
-  private destroyRef = inject(DestroyRef)
 
   public isFavorite = signal(false)
   public item = input.required<VideoItem>()
@@ -56,34 +53,5 @@ export class SearchItemComponent implements OnInit {
 
   public navigateToDetailedPage() {
     this.router.navigate(['/video', this.id()])
-  }
-
-  private addToFavorites() {
-    this.store.dispatch(
-      FavoriteActions.add({ id: this.id() }),
-    )
-  }
-
-  private removeFromFavorites() {
-    this.store.dispatch(
-      FavoriteActions.remove({ id: this.id() }),
-    )
-  }
-
-  public toggleFavorite() {
-    return this.isFavorite()
-      ? this.removeFromFavorites()
-      : this.addToFavorites()
-  }
-
-  public ngOnInit(): void {
-    this.ids
-      .pipe(
-        map(ids => ids.includes(this.id())),
-        takeUntilDestroyed(this.destroyRef),
-      )
-      .subscribe(isFavorite =>
-        this.isFavorite.set(isFavorite),
-      )
   }
 }
