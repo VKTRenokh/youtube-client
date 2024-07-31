@@ -39,14 +39,15 @@ export class VideoDetailedInfoComponent {
   private searchService = inject(SearchService)
   private router = inject(Router)
   private route = inject(ActivatedRoute)
+  public id = this.route.params.pipe(
+    map(params => params['id']),
+    filter(isString),
+  )
 
-  public video: Observable<SearchVideoItem> =
-    this.route.params.pipe(
-      map(params => params['id']),
-      filter(isString),
-      switchMap(id => this.searchService.getVideoById(id)),
-      filter(isNotNullable),
-    )
+  public video: Observable<SearchVideoItem> = this.id.pipe(
+    switchMap(id => this.searchService.getVideoById(id)),
+    filter(isNotNullable),
+  )
 
   public navigateToTheMainPage() {
     this.router.navigate(['/'])
