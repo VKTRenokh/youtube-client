@@ -25,7 +25,10 @@ import { YoutubeActions } from '../../../state/actions/youtube.actions'
 import { State } from '../../../state/reducers/youtube.reducer'
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component'
 import { FavoriteButtonComponent } from '../../../shared/components/favorite-button/favorite-button.component'
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop'
+import {
+  takeUntilDestroyed,
+  toSignal,
+} from '@angular/core/rxjs-interop'
 
 @Component({
   selector: 'yt-search-results',
@@ -50,7 +53,9 @@ export class SearchResultsComponent {
     select(state => state.youtube.customCards),
   )
 
-  public isLoading = this.store.select('youtube', 'loading')
+  public isLoading = toSignal(
+    this.store.select('youtube', 'loading'),
+  )
   public currentCriteria = signal<SortOptions | null>(null)
   public currentWord = signal<string>('')
   public isFilteringShown =

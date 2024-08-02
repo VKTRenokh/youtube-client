@@ -1,5 +1,5 @@
 @let _videos = videos | async;
-@let loading = isLoading | async;
+@let loading = isLoading();
 
 <div class="search-results">
   @if (isFilteringShown()) {
