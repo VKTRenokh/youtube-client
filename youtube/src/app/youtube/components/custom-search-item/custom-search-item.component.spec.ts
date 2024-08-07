@@ -5,11 +5,8 @@ import {
 
 import { CustomSearchItemComponent } from './custom-search-item.component'
 import { provideMockStore } from '@ngrx/store/testing'
-import { InputSignal, signal } from '@angular/core'
 import { CustomCard } from '../../../admin/models/custom-card.model'
-
-const inputSignal = <T>(value: T) =>
-  signal(value) as unknown as InputSignal<T>
+import { inputSignal } from '../../../utils/input-signal'
 
 describe('CustomSearchItemComponent', () => {
   let component: CustomSearchItemComponent

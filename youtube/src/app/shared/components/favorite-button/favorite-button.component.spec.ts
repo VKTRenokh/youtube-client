@@ -8,6 +8,7 @@ import {
   MockStore,
   provideMockStore,
 } from '@ngrx/store/testing'
+import { inputSignal } from '../../../utils/input-signal'
 
 describe('FavoriteButtonComponent', () => {
   const id = 'daedalus37'
@@ -31,6 +32,7 @@ describe('FavoriteButtonComponent', () => {
       FavoriteButtonComponent,
     )
     component = fixture.componentInstance
+    component.id = inputSignal(id)
     fixture.detectChanges()
     store = TestBed.inject(MockStore)
   })
