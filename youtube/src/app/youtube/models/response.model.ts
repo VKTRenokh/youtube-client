@@ -52,7 +52,9 @@ export interface SearchVideoItem {
   statistics: VideoStatistics
 }
 
-export type VideoItem = SearchVideoItem & { id: string }
+export type VideoItem = Omit<SearchVideoItem, 'id'> & {
+  id: string
+}
 
 export interface PageInfo {
   totalResults: number

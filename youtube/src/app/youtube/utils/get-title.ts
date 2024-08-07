@@ -1,9 +1,5 @@
-import {
-  CustomCard,
-  isCustomCard,
-} from '../../admin/models/custom-card.model'
-import { SearchVideoItem } from '../models/response.model'
+import { isCustomCard } from '../../admin/models/custom-card.model'
+import { Item } from '../models/item.model'
 
-export const getTitle = (
-  item: SearchVideoItem | CustomCard,
-) => (isCustomCard(item) ? item.title : item.snippet.title)
+export const getTitle = (item: Item) =>
+  isCustomCard(item) ? item.title : item.snippet.title
