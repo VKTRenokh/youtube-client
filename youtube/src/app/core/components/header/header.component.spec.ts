@@ -4,6 +4,7 @@ import {
 } from '@angular/core/testing'
 
 import { HeaderComponent } from './header.component'
+import { provideLogger } from '../../providers/logger/logger.provider'
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent
@@ -12,6 +13,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
+      providers: [provideLogger()],
     }).compileComponents()
 
     fixture = TestBed.createComponent(HeaderComponent)

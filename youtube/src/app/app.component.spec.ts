@@ -1,10 +1,12 @@
 import { TestBed } from '@angular/core/testing'
 import { AppComponent } from './app.component'
+import { provideLogger } from './core/providers/logger/logger.provider'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [provideLogger()],
     }).compileComponents()
   })
 

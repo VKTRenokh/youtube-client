@@ -4,6 +4,10 @@ import {
 } from '@angular/core/testing'
 
 import { ButtonComponent } from './button.component'
+import { InputSignal, signal } from '@angular/core'
+
+const inputSignal = <T>(value: T) =>
+  signal(value) as unknown as InputSignal<T>
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent
@@ -16,6 +20,7 @@ describe('ButtonComponent', () => {
 
     fixture = TestBed.createComponent(ButtonComponent)
     component = fixture.componentInstance
+    component.ariaLabel = inputSignal('button')
     fixture.detectChanges()
   })
 
