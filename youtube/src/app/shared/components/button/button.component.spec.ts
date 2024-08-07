@@ -4,10 +4,7 @@ import {
 } from '@angular/core/testing'
 
 import { ButtonComponent } from './button.component'
-import { InputSignal, signal } from '@angular/core'
-
-const inputSignal = <T>(value: T) =>
-  signal(value) as unknown as InputSignal<T>
+import { inputSignal } from '../../../utils/input-signal'
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent
