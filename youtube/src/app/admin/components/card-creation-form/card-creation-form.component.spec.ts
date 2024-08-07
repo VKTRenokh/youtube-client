@@ -1,23 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing'
 
-import { CardCreationFormComponent } from './card-creation-form.component';
+import { CardCreationFormComponent } from './card-creation-form.component'
 
 describe('CardCreationFormComponent', () => {
-  let component: CardCreationFormComponent;
-  let fixture: ComponentFixture<CardCreationFormComponent>;
+  let component: CardCreationFormComponent
+  let fixture: ComponentFixture<CardCreationFormComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CardCreationFormComponent]
-    })
-    .compileComponents();
+      imports: [CardCreationFormComponent],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(CardCreationFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(
+      CardCreationFormComponent,
+    )
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

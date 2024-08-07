@@ -18,7 +18,7 @@ describe('LocalStorageService', () => {
     const key = 'alalalallala'
     const value = '10'
 
-    expect(service.get(key)).toBeUndefined()
+    expect(service.get(key)).toBeNull()
 
     service.set(key, value)
 

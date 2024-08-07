@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { CustomCardService } from './custom-card.service';
+import { CustomCardService } from './custom-card.service'
 
 describe('CustomCardService', () => {
-  let service: CustomCardService;
+  let service: CustomCardService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(CustomCardService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(CustomCardService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})

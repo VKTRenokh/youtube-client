@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing'
 
-import { VideosHttpService } from './http.service'
+import { VideosHttpService } from './videos-http.service'
 
-describe('HttpService', () => {
+describe('VideosHttpService', () => {
   let service: VideosHttpService
 
   beforeEach(() => {
