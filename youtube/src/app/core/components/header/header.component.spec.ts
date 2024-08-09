@@ -5,15 +5,20 @@ import {
 
 import { HeaderComponent } from './header.component'
 import { provideLogger } from '../../providers/logger/logger.provider'
+import { provideMockStore } from '@ngrx/store/testing'
 
 describe('HeaderComponent', () => {
+  const initialState = {}
   let component: HeaderComponent
   let fixture: ComponentFixture<HeaderComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [provideLogger()],
+      providers: [
+        provideLogger(),
+        provideMockStore({ initialState }),
+      ],
     }).compileComponents()
 
     fixture = TestBed.createComponent(HeaderComponent)
