@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing'
 
 import { StorageService } from './storage.service'
 
-describe('LocalStorageService', () => {
+describe('Storage Service', () => {
   let service: StorageService
 
   beforeEach(() => {
@@ -23,5 +23,18 @@ describe('LocalStorageService', () => {
     service.set(key, value)
 
     expect(service.get(key)).toBe(value)
+  })
+
+  it('should remove things', () => {
+    const key = 'adfsadf'
+    const value = 'asfasdf'
+
+    const getValue = () => service.get(key)
+
+    service.set(key, value)
+    expect(getValue()).toBe(value)
+
+    service.remove(key)
+    expect(getValue()).toBeFalsy()
   })
 })
