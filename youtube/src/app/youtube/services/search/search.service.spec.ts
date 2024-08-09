@@ -6,6 +6,7 @@ import {
 
 import { SearchService } from './search.service'
 import { provideHttpClient } from '@angular/common/http'
+import { firstValueFrom } from 'rxjs'
 
 describe('SearchService', () => {
   let service: SearchService
@@ -24,18 +25,25 @@ describe('SearchService', () => {
     expect(service).toBeTruthy()
   })
 
-  it('should search', () => {
+  it('should search', async () => {
+    const search = 'How to test angular application'
+
     const testingController = TestBed.inject(
       HttpTestingController,
     )
 
-    service.search('How to test angular in depth')
-
-    const req = testingController.expectOne(
-      '/search',
-      'Request to search videos',
+    const searchRequest = firstValueFrom(
+      service.search(search),
     )
 
-    req.flush([])
-  })
+    const req = testingController.expectOne(
+      req =>
+        req.url === '/search' &&
+        req.params.get('q') === search,
+    )
+
+    req.flush({})
+
+    expect(await searchRequest).toBeTruthy()
+  }, 10000)
 })
