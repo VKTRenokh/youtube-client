@@ -29,4 +29,12 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy()
   })
+
+  it('should not show logout button by default', () => {
+    const element: HTMLElement = fixture.nativeElement
+
+    expect(
+      element.querySelector('.logout-button'),
+    ).toBeFalsy()
+  })
 })

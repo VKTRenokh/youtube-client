@@ -36,7 +36,10 @@
       />
     </yt-button>
     @if (isAuthorized()) {
-      <yt-button ariaLabel="Logout" (press)="logout()"
+      <yt-button
+        ariaLabel="Logout"
+        (press)="logout()"
+        class="logout-button"
         >Logout</yt-button
       >
       <yt-button
