@@ -26,24 +26,38 @@ describe('SearchService', () => {
   })
 
   it('should search', async () => {
-    const search = 'How to test angular application'
+    const query = 'How to test angular application'
 
     const testingController = TestBed.inject(
       HttpTestingController,
     )
 
-    const searchRequest = firstValueFrom(
-      service.search(search),
-    )
+    const search = firstValueFrom(service.search(query))
 
-    const req = testingController.expectOne(
+    const searchReq = testingController.expectOne(
       req =>
         req.url === '/search' &&
-        req.params.get('q') === search,
+        req.params.get('q') === query,
     )
 
-    req.flush({})
+    const videoId = 'hjkl'
 
-    expect(await searchRequest).toBeTruthy()
-  }, 10000)
+    searchReq.flush({
+      items: [{ id: { videoId } }],
+    })
+
+    const videosReq = testingController.expectOne(
+      req =>
+        req.url === '/videos' &&
+        req.params.get('id') === videoId,
+    )
+
+    videosReq.flush({
+      items: [{ id: videoId, statistics: {} }],
+    })
+
+    const response = await search
+    expect(response.items[0].id).toBe(videoId)
+    expect(response.items[0].statistics).toBeTruthy()
+  })
 })
