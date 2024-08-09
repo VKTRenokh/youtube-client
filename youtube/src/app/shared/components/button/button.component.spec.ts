@@ -17,7 +17,7 @@ describe('ButtonComponent', () => {
 
     fixture = TestBed.createComponent(ButtonComponent)
     component = fixture.componentInstance
-    component.ariaLabel = inputSignal('button')
+    component.ariaLabel = inputSignal('asdf')
     fixture.detectChanges()
   })
 

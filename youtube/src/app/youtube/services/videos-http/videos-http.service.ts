@@ -17,7 +17,7 @@ export class VideosHttpService {
       // TODO: remove inconsistency here.
       params: {
         part: 'snippet,statistics',
-        id: ids.join(','),
+        id: ids,
       },
     })
   }
