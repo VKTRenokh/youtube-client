@@ -16,4 +16,18 @@ describe('AuthService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy()
   })
+
+  it('should not be logined by default', () => {
+    expect(service.isLogined()).toBeFalsy()
+  })
+
+  it('should login', () => {
+    service.login()
+    expect(service.isLogined()).toBeTruthy()
+  })
+
+  it('should logout', () => {
+    service.logout()
+    expect(service.isLogined()).toBeFalsy()
+  })
 })
