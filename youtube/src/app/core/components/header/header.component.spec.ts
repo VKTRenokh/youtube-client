@@ -1,8 +1,6 @@
 import {
   ComponentFixture,
   TestBed,
-  fakeAsync,
-  tick,
 } from '@angular/core/testing'
 
 import { HeaderComponent } from './header.component'
