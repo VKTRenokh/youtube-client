@@ -1,6 +1,8 @@
 import {
   ComponentFixture,
   TestBed,
+  fakeAsync,
+  tick,
 } from '@angular/core/testing'
 
 import { HeaderComponent } from './header.component'
@@ -11,13 +13,14 @@ import {
 } from '@ngrx/store/testing'
 import { By } from '@angular/platform-browser'
 import { AuthService } from '../../../auth/services/auth/auth.service'
-import { lastValueFrom } from 'rxjs'
+import { FilterService } from '../../../youtube/services/filter/filter.service'
 
 describe('HeaderComponent', () => {
   const initialState = {}
   let component: HeaderComponent
   let fixture: ComponentFixture<HeaderComponent>
   let authService: AuthService
+  let filteringService: FilterService
   let store: MockStore
 
   const buttons = [
@@ -40,6 +43,7 @@ describe('HeaderComponent', () => {
 
     authService = TestBed.inject(AuthService)
     store = TestBed.inject(MockStore)
+    filteringService = TestBed.inject(FilterService)
 
     fixture = TestBed.createComponent(HeaderComponent)
     component = fixture.componentInstance
@@ -74,5 +78,18 @@ describe('HeaderComponent', () => {
     searchInput.dispatchEvent(new Event('input'))
     await fixture.whenStable()
     expect(component.searchString.value).toBe(search)
+  })
+
+  it('filtering button should work correctly', () => {
+    const isShown = filteringService.getIsFilteringShown()
+    expect(isShown()).toBeFalsy()
+
+    const button = select('.open-filters-button button')
+
+    expect(button).toBeTruthy()
+
+    button.triggerEventHandler('click', null)
+
+    expect(isShown()).toBeTruthy()
   })
 })
