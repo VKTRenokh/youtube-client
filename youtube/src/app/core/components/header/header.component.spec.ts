@@ -6,11 +6,22 @@ import {
 import { HeaderComponent } from './header.component'
 import { provideLogger } from '../../providers/logger/logger.provider'
 import { provideMockStore } from '@ngrx/store/testing'
+import { By } from '@angular/platform-browser'
+import { signal } from '@angular/core'
 
 describe('HeaderComponent', () => {
   const initialState = {}
   let component: HeaderComponent
   let fixture: ComponentFixture<HeaderComponent>
+
+  const buttons = [
+    '.logout-button',
+    '.admin-page-button',
+    '.favorite-page-button',
+  ]
+
+  const select = (query: string) =>
+    fixture.debugElement.query(By.css(query))
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,11 +41,18 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should not show logout button by default', () => {
-    const element: HTMLElement = fixture.nativeElement
+  it('Should not show button that require registration by default', () => {
+    expect(buttons.every(select)).toBeFalsy()
+  })
+
+  it('Should show buttons that require registration if registrated', async () => {
+    component.isAuthorized = signal(true)
+
+    fixture.detectChanges()
+    await fixture.whenStable()
 
     expect(
-      element.querySelector('.logout-button'),
-    ).toBeFalsy()
+      buttons.every(button => !select(button)),
+    ).toBeTruthy()
   })
 })
