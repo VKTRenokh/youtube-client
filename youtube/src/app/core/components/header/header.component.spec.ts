@@ -7,12 +7,13 @@ import { HeaderComponent } from './header.component'
 import { provideLogger } from '../../providers/logger/logger.provider'
 import { provideMockStore } from '@ngrx/store/testing'
 import { By } from '@angular/platform-browser'
-import { signal } from '@angular/core'
+import { AuthService } from '../../../auth/services/auth/auth.service'
 
 describe('HeaderComponent', () => {
   const initialState = {}
   let component: HeaderComponent
   let fixture: ComponentFixture<HeaderComponent>
+  let authService: AuthService
 
   const buttons = [
     '.logout-button',
@@ -32,6 +33,7 @@ describe('HeaderComponent', () => {
       ],
     }).compileComponents()
 
+    authService = TestBed.inject(AuthService)
     fixture = TestBed.createComponent(HeaderComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
@@ -46,13 +48,11 @@ describe('HeaderComponent', () => {
   })
 
   it('Should show buttons that require registration if registrated', async () => {
-    component.isAuthorized = signal(true)
+    authService.login()
 
     fixture.detectChanges()
     await fixture.whenStable()
 
-    expect(
-      buttons.every(button => !select(button)),
-    ).toBeTruthy()
+    expect(buttons.every(select)).toBeTruthy()
   })
 })
