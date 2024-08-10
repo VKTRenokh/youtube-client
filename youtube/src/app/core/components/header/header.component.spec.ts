@@ -5,15 +5,20 @@ import {
 
 import { HeaderComponent } from './header.component'
 import { provideLogger } from '../../providers/logger/logger.provider'
-import { provideMockStore } from '@ngrx/store/testing'
+import {
+  MockStore,
+  provideMockStore,
+} from '@ngrx/store/testing'
 import { By } from '@angular/platform-browser'
 import { AuthService } from '../../../auth/services/auth/auth.service'
+import { lastValueFrom } from 'rxjs'
 
 describe('HeaderComponent', () => {
   const initialState = {}
   let component: HeaderComponent
   let fixture: ComponentFixture<HeaderComponent>
   let authService: AuthService
+  let store: MockStore
 
   const buttons = [
     '.logout-button',
@@ -34,6 +39,8 @@ describe('HeaderComponent', () => {
     }).compileComponents()
 
     authService = TestBed.inject(AuthService)
+    store = TestBed.inject(MockStore)
+
     fixture = TestBed.createComponent(HeaderComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
@@ -43,16 +50,29 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('Should not show button that require registration by default', () => {
+  it('should not show button that require registration by default', () => {
     expect(buttons.every(select)).toBeFalsy()
   })
 
-  it('Should show buttons that require registration if registrated', async () => {
+  it('should show buttons that require registration if registrated', async () => {
     authService.login()
 
     fixture.detectChanges()
     await fixture.whenStable()
 
     expect(buttons.every(select)).toBeTruthy()
+  })
+
+  it('should search correctly', async () => {
+    const search = 'Search'
+
+    const searchInput: HTMLInputElement =
+      select('#search-input').nativeElement
+
+    searchInput.value = search
+
+    searchInput.dispatchEvent(new Event('input'))
+    await fixture.whenStable()
+    expect(component.searchString.value).toBe(search)
   })
 })
