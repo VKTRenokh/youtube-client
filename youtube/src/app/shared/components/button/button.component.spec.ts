@@ -3,10 +3,7 @@ import {
   TestBed,
 } from '@angular/core/testing'
 
-import {
-  ButtonComponent,
-  ButtonVariant,
-} from './button.component'
+import { ButtonComponent } from './button.component'
 import { inputSignal } from '../../../utils/input-signal'
 import { By } from '@angular/platform-browser'
 
