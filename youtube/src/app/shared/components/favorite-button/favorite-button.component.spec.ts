@@ -10,7 +10,6 @@ import {
 } from '@ngrx/store/testing'
 import { By } from '@angular/platform-browser'
 import { DebugElement } from '@angular/core'
-import { firstValueFrom } from 'rxjs'
 import { FavoriteActions } from '../../../state/actions/favorite.actions'
 
 describe('FavoriteButtonComponent', () => {
