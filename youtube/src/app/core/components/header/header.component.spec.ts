@@ -19,7 +19,6 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>
   let authService: AuthService
   let filteringService: FilterService
-  let store: MockStore
 
   const buttons = [
     '.logout-button',
@@ -40,7 +39,6 @@ describe('HeaderComponent', () => {
     }).compileComponents()
 
     authService = TestBed.inject(AuthService)
-    store = TestBed.inject(MockStore)
     filteringService = TestBed.inject(FilterService)
 
     fixture = TestBed.createComponent(HeaderComponent)

@@ -53,7 +53,10 @@ describe('ButtonComponent', () => {
   })
 
   it('should not handle clicks if button is disabled', async () => {
-    fixture.componentRef.setInput('disabled', false)
+    fixture.componentRef.setInput('disabled', true)
+
+    fixture.detectChanges()
+    await fixture.whenStable()
 
     button.nativeElement.click()
 
