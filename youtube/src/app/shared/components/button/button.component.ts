@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
   computed,
   input,
   output,
@@ -30,7 +29,7 @@ export class ButtonComponent {
   public isStyled = computed(
     () => this.variant() !== 'unstyled',
   )
-  @Input() public disabled!: boolean
+  public disabled = input<boolean>()
 
   public onClick(event: Event) {
     this.press.emit(event)
