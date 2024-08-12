@@ -11,4 +11,13 @@ describe('Youtube Reducer', () => {
       ).loading,
     ).toBeTruthy()
   })
+
+  it('should set loading to true on nextPage action', () => {
+    expect(
+      youtubeReducer(
+        initialState.youtube,
+        YoutubeActions.nextPage,
+      ).loading,
+    ).toBeTruthy()
+  })
 })

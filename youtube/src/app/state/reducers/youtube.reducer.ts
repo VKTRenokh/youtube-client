@@ -76,21 +76,21 @@ export const youtubeReducer = createReducer(
   })),
   on(YoutubeActions.nextPage, state => ({
     ...state,
-    isLoading: true,
+    loading: true,
   })),
   on(YoutubeActions.nextPageSuccess, (state, { data }) => ({
     ...state,
     data: extractItems(data),
     ...extractPageTokens(data),
-    isLoading: false,
+    loading: false,
   })),
   on(YoutubeActions.prevPage, state => ({
     ...state,
-    isLoading: true,
+    loading: true,
   })),
   on(YoutubeActions.prevPageSuccess, (state, { data }) => ({
     ...state,
-    isLoading: false,
+    loading: false,
     ...extractPageTokens(data),
     data: extractItems(data),
   })),
