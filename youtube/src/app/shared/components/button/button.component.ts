@@ -1,10 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
+  computed,
   input,
   output,
 } from '@angular/core'
+
+export type ButtonVariant =
+  | 'unstyled'
+  | 'default'
+  | undefined
 
 @Component({
   selector: 'yt-button',
@@ -19,15 +24,14 @@ export class ButtonComponent {
 
   public ariaLabel = input.required<string>()
 
-  public variant = input<'unstyled' | 'default'>()
+  public variant = input<ButtonVariant>()
   public type = input<string>()
-  @Input() public disabled!: boolean
+  public isStyled = computed(
+    () => this.variant() !== 'unstyled',
+  )
+  public disabled = input<boolean>()
 
   public onClick(event: Event) {
     this.press.emit(event)
-  }
-
-  public isStyled() {
-    return this.variant() !== 'unstyled'
   }
 }

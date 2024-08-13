@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable, inject } from '@angular/core'
 import { createSearchParams } from '../../utils/create-search-params'
-import { VideosResponse } from '../../models/response.model'
+import {
+  SearchResponse,
+  VideosResponse,
+} from '../../models/response.model'
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +17,13 @@ export class VideosHttpService {
       // TODO: remove inconsistency here.
       params: {
         part: 'snippet,statistics',
-        id: ids.join(','),
+        id: ids,
       },
     })
   }
 
   public search(search: string, pageToken: string) {
-    return this.http.get<VideosResponse>('/search', {
+    return this.http.get<SearchResponse>('/search', {
       params: createSearchParams(search, pageToken),
     })
   }
