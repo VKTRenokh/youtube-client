@@ -1,0 +1,22 @@
+<div class="filtering-criteria">
+  <div class="sorting">
+    @for (criteria of criterias; track criteria) {
+      <yt-button
+        [ariaLabel]="criteria.criteria"
+        (press)="onCriteriaClick(criteria)"
+      >
+        {{
+          criteria.criteria +
+            ' ' +
+            (criteria.direction === -1 ? 'desc' : 'asc')
+        }}
+      </yt-button>
+    }
+  </div>
+  <input
+    type="text"
+    placeholder="type to filter"
+    [(ngModel)]="word"
+    (change)="onChange()"
+  />
+</div>

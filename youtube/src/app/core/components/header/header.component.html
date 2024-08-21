@@ -1,0 +1,61 @@
+<!-- TODO: Break this into smaller components -->
+<header class="youtube-header">
+  <yt-button
+    variant="unstyled"
+    ariaLabel="Goto main page"
+    (press)="navigateToMainPage()"
+  >
+    <img
+      ngSrc="/logo.webp"
+      alt="youtube logo"
+      width="50"
+      height="50"
+      class="logo"
+      priority
+    />
+  </yt-button>
+  <div class="youtube-header-search">
+    <input
+      id="search-input"
+      type="text"
+      placeholder="Enter a request"
+      [formControl]="searchString"
+    />
+  </div>
+  <div>
+    <yt-button
+      ariaLabel="open filters"
+      class="open-filters-button"
+      variant="unstyled"
+      (press)="openFilters()"
+    >
+      <img
+        ngSrc="/search_settings.webp"
+        alt="parameters icon"
+        width="24"
+        height="24"
+      />
+    </yt-button>
+    @if (isAuthorized()) {
+      <yt-button
+        ariaLabel="Logout"
+        (press)="logout()"
+        class="logout-button"
+        >Logout</yt-button
+      >
+      <yt-button
+        ariaLabel="Go to the admin page"
+        (press)="navigateToAdminPage()"
+        class="admin-page-button"
+        >Admin</yt-button
+      >
+      <yt-button
+        ariaLabel="Go to the favorite page"
+        class="favorite-page-button"
+        (press)="navigateToFavoritesPage()"
+        >&lt;3</yt-button
+      >
+    }
+  </div>
+  <yt-user-info />
+</header>

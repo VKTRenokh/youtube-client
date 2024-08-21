@@ -1,0 +1,10 @@
+<button
+  class="youtube-button"
+  [class.styled]="isStyled()"
+  (click)="onClick($event)"
+  [attr.aria-label]="ariaLabel()"
+  [type]="type()"
+  [disabled]="disabled()"
+>
+  <ng-content></ng-content>
+</button>

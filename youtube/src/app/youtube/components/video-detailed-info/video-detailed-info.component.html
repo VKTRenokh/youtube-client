@@ -1,0 +1,32 @@
+@let data = video | async;
+
+@if (data) {
+  <figure
+    class="detailed-info"
+    [ytColoredBorder]="data.snippet.publishedAt"
+  >
+    <img
+      [ngSrc]="data.snippet.thumbnails.high.url"
+      alt="Video thumbnail"
+      [width]="data.snippet.thumbnails.high.width"
+      [height]="data.snippet.thumbnails.high.height"
+    />
+    <figcaption>{{ data.snippet.title }}</figcaption>
+    <p>Description: {{ data.snippet.description }}</p>
+    <span>
+      {{ data.snippet.publishedAt | date: 'fullDate' }}
+    </span>
+    <yt-video-statistics [statistics]="data.statistics" />
+    <yt-favorite-button [id]="data.id" />
+  </figure>
+} @else {
+  <div>
+    <h2>data Not Found</h2>
+  </div>
+}
+
+<yt-button
+  ariaLabel="Go to the main page"
+  (press)="navigateToTheMainPage()"
+  >Go To The Main Page</yt-button
+>

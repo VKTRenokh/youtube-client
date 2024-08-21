@@ -1,0 +1,66 @@
+<form
+  class="card-creation-form"
+  [formGroup]="cardForm"
+  (ngSubmit)="submit()"
+>
+  <h3>Create card</h3>
+  <input
+    type="text"
+    placeholder="Enter card title"
+    formControlName="title"
+  />
+  <yt-validation-errors formControlName="title" />
+  <input
+    type="text"
+    placeholder="Enter card description (optional)"
+    formControlName="description"
+  />
+  <yt-validation-errors formControlName="description" />
+  <input
+    type="text"
+    placeholder="Enter card image link"
+    formControlName="imageLink"
+  />
+  <yt-validation-errors formControlName="imageLink" />
+  <input
+    type="date"
+    placeholder="Enter video creation date"
+    formControlName="createdAt"
+  />
+  <yt-validation-errors formControlName="createdAt" />
+  <input
+    type="text"
+    placeholder="Enter video link"
+    formControlName="videoLink"
+  />
+  <yt-validation-errors formControlName="videoLink" />
+  <form formArrayName="tags" class="tags-form">
+    <h4>Card Tags</h4>
+    <yt-button
+      (press)="pushTagFormControl()"
+      ariaLabel="create new tag"
+      type="button"
+      >Add new tag</yt-button
+    >
+    @for (tag of tags.controls; let i = $index; track i) {
+      <input
+        type="text"
+        placeholder="Tag {{ i + 1 }}"
+        [formControlName]="i"
+      />
+      <yt-validation-errors [formControlName]="i" />
+    }
+  </form>
+  <yt-button
+    ariaLabel="reset form"
+    (press)="reset()"
+    type="button"
+    >Reset</yt-button
+  >
+  <yt-button
+    ariaLabel="Create card"
+    type="submit"
+    [disabled]="cardForm.invalid"
+    >Create</yt-button
+  >
+</form>
